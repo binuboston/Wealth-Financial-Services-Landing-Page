@@ -1,0 +1,41 @@
+import * as React from "react";
+import { Badge } from "./badge";
+
+export interface SectionHeaderProps {
+  badge?: string;
+  badgeVariant?: "primary" | "secondary" | "accent";
+  title: string;
+  description?: string;
+  align?: "left" | "center";
+  className?: string;
+}
+
+export function SectionHeader({
+  badge,
+  badgeVariant = "secondary",
+  title,
+  description,
+  align = "center",
+  className = "",
+}: SectionHeaderProps) {
+  const alignClasses = {
+    left: "text-left",
+    center: "text-center",
+  };
+
+  return (
+    <div className={`mb-12 xl:mb-16 ${alignClasses[align]} ${className}`}>
+      {badge && (
+        <Badge variant={badgeVariant} className="mb-6 xl:mb-8">
+          <span className="text-[var(--color-brand-primary)] text-sm xl:text-base">{badge}</span>
+        </Badge>
+      )}
+      <h2 className="text-[var(--color-brand-primary)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl">{title}</h2>
+      {description && (
+        <p className="text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto text-base xl:text-lg">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}

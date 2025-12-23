@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Typography */
+  --font-size: 16px;
+  --font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Brand Colors */
+  --color-brand-primary: #003448;
+  --color-brand-secondary: #68c0ae;
+  --color-brand-accent: #9ece6c;
+  
+  /* Extended Palette */
+  --color-brand-primary-dark: #004d6b;
+  --color-brand-secondary-light: #8dd4c0;
+  --color-brand-accent-light: #b3e698;
+  
+  /* Semantic Colors */
+  --background: #ffffff;
+  --foreground: var(--color-brand-primary);
+  --card: #ffffff;
+  --card-foreground: var(--color-brand-primary);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-brand-primary);
+  --primary: var(--color-brand-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-brand-secondary);
+  --secondary-foreground: var(--color-brand-primary);
+  --accent: var(--color-brand-accent);
+  --accent-foreground: var(--color-brand-primary);
+  --muted: #f0f9f6;
+  --muted-foreground: var(--color-brand-primary);
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 52, 72, 0.1);
+  --input: transparent;
+  --input-background: #f0f9f6;
+  --ring: var(--color-brand-secondary);
+  
+  /* Opacity Tokens */
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-30: 0.3;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  
+  /* Spacing Scale */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+  --spacing-40: 10rem;
+  
+  /* Container Widths for 1440px */
+  --container-narrow: 960px;
+  --container-default: 1280px;
+  --container-wide: 1360px;
+  --container-full: 1440px;
+  --spacing-40: 10rem;
+  
+  /* Container Widths */
+  --container-narrow: 800px;
+  --container-default: 1280px;
+  --container-wide: 1400px;
+  --container-full: 1440px;
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 52, 72, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 52, 72, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 52, 72, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 52, 72, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-base: 250ms;
+  --transition-slow: 350ms;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Z-index Scale */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal: 40;
+  --z-popover: 50;
+  --z-tooltip: 60;
+}
+
+.dark {
+  --background: var(--color-brand-primary);
+  --foreground: #ffffff;
+  --card: var(--color-brand-primary);
+  --card-foreground: #ffffff;
+  --popover: var(--color-brand-primary);
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: var(--color-brand-primary);
+  --secondary: var(--color-brand-secondary);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.1);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: var(--color-brand-accent);
+  --accent-foreground: var(--color-brand-primary);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: var(--color-brand-secondary);
+}
+
+@theme inline {
+  /* Brand Colors */
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-secondary: var(--color-brand-secondary);
+  --color-brand-accent: var(--color-brand-accent);
+  --color-brand-primary-dark: var(--color-brand-primary-dark);
+  --color-brand-secondary-light: var(--color-brand-secondary-light);
+  --color-brand-accent-light: var(--color-brand-accent-light);
+  
+  /* Semantic Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-family);
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Utility Classes for Design Tokens */
+@layer utilities {
+  .text-primary {
+    color: var(--color-brand-primary);
+  }
+  
+  .text-secondary {
+    color: var(--color-brand-secondary);
+  }
+  
+  .text-accent {
+    color: var(--color-brand-accent);
+  }
+  
+  .bg-primary {
+    background-color: var(--color-brand-primary);
+  }
+  
+  .bg-secondary {
+    background-color: var(--color-brand-secondary);
+  }
+  
+  .bg-accent {
+    background-color: var(--color-brand-accent);
+  }
+  
+  .border-primary {
+    border-color: var(--color-brand-primary);
+  }
+  
+  .gradient-primary {
+    background: linear-gradient(to bottom right, var(--color-brand-primary), var(--color-brand-primary-dark));
+  }
+  
+  .gradient-secondary {
+    background: linear-gradient(to bottom right, var(--color-brand-secondary), var(--color-brand-secondary-light));
+  }
+  
+  .gradient-accent {
+    background: linear-gradient(to bottom right, var(--color-brand-accent), var(--color-brand-accent-light));
+  }
+}

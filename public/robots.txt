@@ -1,0 +1,15 @@
+# robots.txt for Dhanovaa Financial Services
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes (if any in future)
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap location (update with your domain)
+Sitemap: https://dhanovaa.com/sitemap.xml
+
+# Crawl-delay (optional, for heavy crawlers)
+# Crawl-delay: 10

@@ -1,0 +1,16 @@
+import { Gallery } from '@/components/Gallery';
+import { Footer } from '@/components/Footer';
+
+export const metadata = {
+  title: 'Gallery - Dhanovaa Financial Services',
+  description: 'Explore our gallery showcasing our journey, events, and client success stories at Dhanovaa Financial Services.',
+};
+
+export default function GalleryPage() {
+  return (
+    <div className="pt-16 sm:pt-20">
+      <Gallery />
+      <Footer />
+    </div>
+  );
+}
