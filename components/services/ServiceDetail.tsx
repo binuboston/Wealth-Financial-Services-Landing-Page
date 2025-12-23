@@ -1,16 +1,16 @@
 import { motion } from 'motion/react';
 import { LucideIcon, ArrowRight, Check, TrendingUp } from 'lucide-react';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from './ui/accordion';
+} from '../ui/accordion';
 
 // Types for service detail data structure
 export interface ServiceFeature {

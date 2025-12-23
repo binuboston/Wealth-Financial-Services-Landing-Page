@@ -1,5 +1,5 @@
-import { Gallery } from '@/components/Gallery';
-import { Footer } from '@/components/Footer';
+import { Gallery } from '@/components/features/Gallery';
+import { Footer } from '@/components/layout/Footer';
 
 export const metadata = {
   title: 'Gallery - Dhanovaa Financial Services',

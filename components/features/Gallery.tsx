@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, X } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 interface GalleryItem {
   id: number;

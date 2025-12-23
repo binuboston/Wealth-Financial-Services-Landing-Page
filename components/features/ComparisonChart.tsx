@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
-import { SectionHeader } from './ui/section-header';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
+import { SectionHeader } from '../ui/section-header';
 
 const comparisonData = [
   {

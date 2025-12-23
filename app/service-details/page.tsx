@@ -1,5 +1,5 @@
-import { ServiceDetailDemo } from '@/components/ServiceDetailDemo';
-import { Footer } from '@/components/Footer';
+import { ServiceDetailDemo } from '@/components/services/ServiceDetailDemo';
+import { Footer } from '@/components/layout/Footer';
 
 export const metadata = {
   title: 'Service Details - Dhanovaa Financial Services',

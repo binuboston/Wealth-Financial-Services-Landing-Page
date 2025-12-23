@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Smartphone, Apple } from 'lucide-react';
-import { PhoneMockupWithCalculator } from './PhoneMockupWithCalculator';
+import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
 
 export function AppDownload() {
   return (

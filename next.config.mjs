@@ -2,7 +2,7 @@
 const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
-  
+
   // TypeScript: Don't fail build on type errors (type checking still runs separately)
   typescript: {
     ignoreBuildErrors: false,

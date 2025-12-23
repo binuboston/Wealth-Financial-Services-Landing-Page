@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
 
 const headlines = [
   'Designed for those who build legacies.',

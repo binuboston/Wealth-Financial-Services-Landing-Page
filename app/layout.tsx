@@ -1,22 +1,24 @@
 import type { Metadata } from 'next';
 import '../styles/globals.css';
-import { Navigation } from '@/components/Navigation';
+import { Navigation } from '@/components/layout/Navigation';
+import { siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Dhanovaa Financial Services - Your Growth Architect',
-  description: 'Trusted financial partner for wealth advisory, SIP investments, mutual funds, and financial planning across Kerala and India. Building lasting financial growth for over three decades.',
+  title: `${siteConfig.name} - ${siteConfig.tagline}`,
+  description: siteConfig.description,
   keywords: ['financial services', 'wealth advisory', 'SIP', 'mutual funds', 'financial planning', 'Kerala', 'India'],
-  authors: [{ name: 'Dhanovaa Financial Services' }],
+  authors: [{ name: siteConfig.name }],
   openGraph: {
-    title: 'Dhanovaa Financial Services - Your Growth Architect',
-    description: 'Trusted financial partner for wealth advisory and financial planning',
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
+    description: siteConfig.description,
     type: 'website',
     locale: 'en_IN',
+    url: siteConfig.url,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dhanovaa Financial Services',
-    description: 'Your Growth Architect - Building lasting financial growth',
+    title: siteConfig.name,
+    description: siteConfig.tagline,
   },
   viewport: {
     width: 'device-width',

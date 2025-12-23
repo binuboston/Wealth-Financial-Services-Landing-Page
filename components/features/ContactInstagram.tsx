@@ -3,10 +3,10 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, Send, Instagram as InstagramIcon, Heart, MessageCircle, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useState, FormEvent } from 'react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
 
 const instagramPosts = [
   {

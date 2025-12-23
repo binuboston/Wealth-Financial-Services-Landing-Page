@@ -2,9 +2,9 @@
 
 import { motion } from 'motion/react';
 import { Star, Quote } from 'lucide-react';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
-import { SectionHeader } from './ui/section-header';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
+import { SectionHeader } from '../ui/section-header';
 
 const testimonials = [
   {

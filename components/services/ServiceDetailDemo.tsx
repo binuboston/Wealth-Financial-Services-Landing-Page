@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { ServiceDetail } from './ServiceDetail';
 import { mutualFundsData, equitiesData, pmsData, insuranceData } from '@/lib/service-details-data';
-import { Container } from './ui/container';
-import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Container } from '../ui/container';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Wallet, TrendingUp, LineChart, Shield, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

@@ -2,9 +2,9 @@
 
 import { motion } from 'motion/react';
 import { TrendingUp, Wallet, LineChart, Building2, Globe2, BarChart3, DollarSign, Coins, PiggyBank, Shield } from 'lucide-react';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
-import { SectionHeader } from './ui/section-header';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
+import { SectionHeader } from '../ui/section-header';
 
 const services = [
   {

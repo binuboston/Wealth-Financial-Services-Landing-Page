@@ -2,10 +2,10 @@
 
 import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { Section } from './ui/section';
-import { Container } from './ui/container';
-import { SectionHeader } from './ui/section-header';
+import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
+import { Section } from '../ui/section';
+import { Container } from '../ui/container';
+import { SectionHeader } from '../ui/section-header';
 
 const blogPosts = [
   {

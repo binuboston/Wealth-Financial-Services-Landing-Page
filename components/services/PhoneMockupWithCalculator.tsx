@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Calculator, TrendingUp, PiggyBank, Wallet } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabs';
 
 // ============================================================================
 // Types & Interfaces
