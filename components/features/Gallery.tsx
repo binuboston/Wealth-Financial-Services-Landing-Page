@@ -118,7 +118,7 @@ export function Gallery() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--color-surface)] to-white py-12 lg:py-20">
-      <div className="max-w-[1440px] mx-auto px-6 xl:px-12">
+      <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -71,7 +71,7 @@ export function ServiceDetailDemo() {
     return (
       <div className="min-h-screen">
         {/* Back button - positioned below navigation */}
-        <div className="sticky top-24 left-6 z-40 max-w-[1440px] mx-auto px-6">
+        <div className="sticky top-24 left-0 right-0 z-40 w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6">
           <Button
             onClick={() => setSelectedService(null)}
             variant="secondary"
@@ -108,19 +108,19 @@ export function ServiceDetailDemo() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 xl:mb-20"
           >
-            <div className="inline-block px-4 py-2 rounded-full bg-[var(--color-brand-secondary)]/10 border border-[var(--color-brand-secondary)]/20 text-[var(--color-brand-secondary)] mb-6">
+            <div className="inline-block px-4 py-2 rounded-full bg-[var(--color-brand-secondary)]/10 border border-[var(--color-brand-secondary)]/20 text-[var(--foreground)] mb-6">
               Service Detail Pages Demo
             </div>
             
-            <h1 className="text-4xl xl:text-5xl 2xl:text-6xl text-[var(--color-brand-primary)] mb-6">
+            <h1 className="text-4xl xl:text-5xl 2xl:text-6xl text-[var(--foreground)] mb-6">
               Reusable Service Detail Pages
             </h1>
             
-            <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto mb-4">
+            <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto mb-4">
               Click any service below to view its comprehensive detail page with hero, features, process, benefits, pricing tiers, related services, and FAQs.
             </p>
             
-            <p className="text-base xl:text-lg text-[var(--color-brand-primary)]/60 max-w-2xl mx-auto">
+            <p className="text-base xl:text-lg text-[var(--foreground)]/60 max-w-2xl mx-auto">
               Each page is data-driven and fully customizable—perfect for showcasing different financial services with consistent design and user experience.
             </p>
           </motion.div>
@@ -149,7 +149,7 @@ export function ServiceDetailDemo() {
                       <CardDescription className="text-base xl:text-lg mb-4">
                         {service.description}
                       </CardDescription>
-                      <div className="flex items-center text-[var(--color-brand-secondary)] group-hover:translate-x-1 transition-transform">
+                      <div className="flex items-center text-[var(--foreground)] group-hover:translate-x-1 transition-transform">
                         <span className="text-sm">View Details</span>
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -171,7 +171,7 @@ export function ServiceDetailDemo() {
           >
             <Card className="border-2 border-[var(--color-brand-accent)]/30 bg-gradient-to-br from-white to-[var(--color-muted)]">
               <CardHeader>
-                <CardTitle className="text-2xl xl:text-3xl text-center text-[var(--color-brand-primary)]">
+                <CardTitle className="text-2xl xl:text-3xl text-center text-[var(--foreground)]">
                   What&apos;s Included in Each Service Page
                 </CardTitle>
               </CardHeader>
@@ -181,8 +181,8 @@ export function ServiceDetailDemo() {
                     <div className="w-12 h-12 xl:w-14 xl:h-14 bg-[var(--color-brand-primary)] rounded-2xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-white text-xl xl:text-2xl">1</span>
                     </div>
-                    <h4 className="text-[var(--color-brand-primary)] mb-2">Hero Section</h4>
-                    <p className="text-sm text-[var(--color-brand-primary)]/70">
+                    <h4 className="text-[var(--foreground)] mb-2">Hero Section</h4>
+                    <p className="text-sm text-[var(--foreground)]/70">
                       Engaging intro with glassmorphism effects
                     </p>
                   </div>
@@ -191,8 +191,8 @@ export function ServiceDetailDemo() {
                     <div className="w-12 h-12 xl:w-14 xl:h-14 bg-[var(--color-brand-secondary)] rounded-2xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-white text-xl xl:text-2xl">2</span>
                     </div>
-                    <h4 className="text-[var(--color-brand-primary)] mb-2">Features & Process</h4>
-                    <p className="text-sm text-[var(--color-brand-primary)]/70">
+                    <h4 className="text-[var(--foreground)] mb-2">Features & Process</h4>
+                    <p className="text-sm text-[var(--foreground)]/70">
                       Key features grid and step-by-step timeline
                     </p>
                   </div>
@@ -201,8 +201,8 @@ export function ServiceDetailDemo() {
                     <div className="w-12 h-12 xl:w-14 xl:h-14 bg-[var(--color-brand-accent)] rounded-2xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-white text-xl xl:text-2xl">3</span>
                     </div>
-                    <h4 className="text-[var(--color-brand-primary)] mb-2">Pricing Tiers</h4>
-                    <p className="text-sm text-[var(--color-brand-primary)]/70">
+                    <h4 className="text-[var(--foreground)] mb-2">Pricing Tiers</h4>
+                    <p className="text-sm text-[var(--foreground)]/70">
                       Flexible investment options comparison
                     </p>
                   </div>
@@ -211,8 +211,8 @@ export function ServiceDetailDemo() {
                     <div className="w-12 h-12 xl:w-14 xl:h-14 bg-gradient-to-br from-[var(--color-brand-secondary)] to-[var(--color-brand-accent)] rounded-2xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-white text-xl xl:text-2xl">4</span>
                     </div>
-                    <h4 className="text-[var(--color-brand-primary)] mb-2">FAQs & CTAs</h4>
-                    <p className="text-sm text-[var(--color-brand-primary)]/70">
+                    <h4 className="text-[var(--foreground)] mb-2">FAQs & CTAs</h4>
+                    <p className="text-sm text-[var(--foreground)]/70">
                       Common questions and conversion sections
                     </p>
                   </div>
@@ -228,15 +228,15 @@ export function ServiceDetailDemo() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-12 p-6 xl:p-8 bg-[var(--color-brand-primary)]/5 border border-[var(--color-brand-primary)]/10 rounded-2xl"
           >
-            <h3 className="text-xl xl:text-2xl text-[var(--color-brand-primary)] mb-4">
+            <h3 className="text-xl xl:text-2xl text-[var(--foreground)] mb-4">
               Implementation Guide
             </h3>
-            <div className="space-y-3 text-[var(--color-brand-primary)]/80 text-sm xl:text-base">
+            <div className="space-y-3 text-[var(--foreground)]/80 text-sm xl:text-base">
               <p>
-                <strong>• Component Location:</strong> <code className="px-2 py-1 bg-white rounded text-[var(--color-brand-secondary)]">/components/ServiceDetail.tsx</code>
+                <strong>• Component Location:</strong> <code className="px-2 py-1 bg-white rounded text-[var(--foreground)]">/components/ServiceDetail.tsx</code>
               </p>
               <p>
-                <strong>• Data Structure:</strong> <code className="px-2 py-1 bg-white rounded text-[var(--color-brand-secondary)]">/lib/service-details-data.ts</code>
+                <strong>• Data Structure:</strong> <code className="px-2 py-1 bg-white rounded text-[var(--foreground)]">/lib/service-details-data.ts</code>
               </p>
               <p>
                 <strong>• Usage:</strong> Import the component and pass the appropriate service data object as props

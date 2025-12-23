@@ -7,7 +7,9 @@ export interface NavLink {
 
 export const navigationConfig: NavLink[] = [
   { label: 'Home', href: '/' },
-  { label: 'Service Details', href: '/service-details' },
+  { label: 'Services', href: '/#services' },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
 ] as const;
 

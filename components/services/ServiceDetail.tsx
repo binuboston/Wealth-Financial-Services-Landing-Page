@@ -144,7 +144,7 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                 {/* Glassmorphic card */}
                 <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl xl:rounded-[2.5rem] p-12 xl:p-16 shadow-2xl">
                   <div className="w-48 h-48 xl:w-64 xl:h-64 bg-white rounded-3xl xl:rounded-[2rem] flex items-center justify-center shadow-xl">
-                    <HeroIcon className="w-24 h-24 xl:w-32 xl:h-32 text-[var(--color-brand-primary)]" />
+                    <HeroIcon className="w-24 h-24 xl:w-32 xl:h-32 text-[var(--foreground)]" />
                   </div>
                 </div>
                 
@@ -183,10 +183,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
             <Badge variant="outline" className="mb-4">
               Key Features
             </Badge>
-            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
               What Makes This Different
             </h2>
-            <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+            <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
               Designed with precision, powered by expertise.
             </p>
           </motion.div>
@@ -235,10 +235,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
             <Badge variant="outline" className="mb-4">
               Process
             </Badge>
-            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
               How It Works
             </h2>
-            <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+            <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
               A clear, structured approach to your financial goals.
             </p>
           </motion.div>
@@ -305,10 +305,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
             <Badge variant="outline" className="mb-4">
               Benefits
             </Badge>
-            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
               Why Choose This Service
             </h2>
-            <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+            <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
               Built to deliver measurable value and lasting impact.
             </p>
           </motion.div>
@@ -329,10 +329,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                   <div className="w-12 h-12 xl:w-14 xl:h-14 bg-[var(--color-brand-accent)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <BenefitIcon className="w-6 h-6 xl:w-7 xl:h-7 text-white" />
                   </div>
-                  <h3 className="text-lg xl:text-xl text-[var(--color-brand-primary)] mb-3">
+                  <h3 className="text-lg xl:text-xl text-[var(--foreground)] mb-3">
                     {benefit.title}
                   </h3>
-                  <p className="text-[var(--color-brand-primary)]/70 text-sm xl:text-base">
+                  <p className="text-[var(--foreground)]/70 text-sm xl:text-base">
                     {benefit.description}
                   </p>
                 </motion.div>
@@ -356,10 +356,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
               <Badge variant="outline" className="mb-4">
                 Investment Options
               </Badge>
-              <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+              <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
                 Choose Your Path
               </h2>
-              <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+              <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
                 Flexible options designed for different goals and capacities.
               </p>
             </motion.div>
@@ -389,7 +389,7 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                       : 'border-2 hover:border-[var(--color-brand-secondary)]'
                   } transition-all`}>
                     <CardHeader className="pb-8">
-                      <CardTitle className="text-2xl xl:text-3xl text-[var(--color-brand-primary)]">
+                      <CardTitle className="text-2xl xl:text-3xl text-[var(--foreground)]">
                         {tier.name}
                       </CardTitle>
                       <CardDescription className="text-base xl:text-lg mt-2">
@@ -397,10 +397,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                       </CardDescription>
                       {tier.minInvestment && (
                         <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
-                          <p className="text-sm text-[var(--color-brand-primary)]/60">
+                          <p className="text-sm text-[var(--foreground)]/60">
                             Minimum Investment
                           </p>
-                          <p className="text-2xl xl:text-3xl text-[var(--color-brand-primary)] mt-1">
+                          <p className="text-2xl xl:text-3xl text-[var(--foreground)] mt-1">
                             {tier.minInvestment}
                           </p>
                         </div>
@@ -411,7 +411,7 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                         {tier.features.map((feature, fIndex) => (
                           <li key={fIndex} className="flex items-start gap-3">
                             <Check className="w-5 h-5 text-[var(--color-brand-secondary)] flex-shrink-0 mt-0.5" />
-                            <span className="text-[var(--color-brand-primary)]/80 text-sm xl:text-base">
+                            <span className="text-[var(--foreground)]/80 text-sm xl:text-base">
                               {feature}
                             </span>
                           </li>
@@ -449,10 +449,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
               <Badge variant="outline" className="mb-4">
                 Related Services
               </Badge>
-              <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+              <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
                 Explore More Solutions
               </h2>
-              <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+              <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
                 Complete your financial strategy with complementary services.
               </p>
             </motion.div>
@@ -474,10 +474,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                     <div className="w-14 h-14 xl:w-16 xl:h-16 bg-[var(--color-brand-primary)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <ServiceIcon className="w-7 h-7 xl:w-8 xl:h-8 text-white" />
                     </div>
-                    <h3 className="text-lg xl:text-xl text-[var(--color-brand-primary)] mb-2">
+                    <h3 className="text-lg xl:text-xl text-[var(--foreground)] mb-2">
                       {service.title}
                     </h3>
-                    <p className="text-[var(--color-brand-primary)]/70 text-sm xl:text-base mb-4">
+                    <p className="text-[var(--foreground)]/70 text-sm xl:text-base mb-4">
                       {service.description}
                     </p>
                     <div className="flex items-center text-[var(--color-brand-secondary)] group-hover:translate-x-1 transition-transform">
@@ -505,10 +505,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
             <Badge variant="outline" className="mb-4">
               FAQ
             </Badge>
-            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--color-brand-primary)] mb-4">
+            <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
               Common Questions
             </h2>
-            <p className="text-lg xl:text-xl text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto">
+            <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
               Everything you need to know about this service.
             </p>
           </motion.div>
@@ -538,10 +538,10 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                       index % 2 === 0 ? 'bg-white' : 'bg-[#f0f9f6]/30'
                     }`}
                   >
-                    <AccordionTrigger className="text-[var(--color-brand-primary)] hover:text-[var(--color-brand-secondary)] text-left py-4 xl:py-5 text-base xl:text-lg">
+                    <AccordionTrigger className="text-[var(--foreground)] hover:text-[var(--foreground)]/80 text-left py-4 xl:py-5 text-base xl:text-lg">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[var(--color-brand-primary)]/70 pb-4 xl:pb-5 text-sm xl:text-base">
+                    <AccordionContent className="text-[var(--foreground)]/70 pb-4 xl:pb-5 text-sm xl:text-base">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

@@ -1,20 +1,20 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
 import Logo from './Logo';
 import { Button } from '../ui/button';
-import { navigationConfig, heroConfig } from '@/lib/config';
+import { navigationConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
 
-interface NavigationProps {
+interface HeroNavigationProps {
   isVisible: boolean;
 }
 
-export function Navigation({ isVisible }: NavigationProps) {
+export function HeroNavigation({ isVisible }: HeroNavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -66,25 +66,27 @@ export function Navigation({ isVisible }: NavigationProps) {
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -100 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{ 
         opacity: isVisible ? 1 : 0,
-        y: isVisible ? 0 : -100,
+        y: isVisible ? 0 : -20,
       }}
       transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b shadow-lg"
+      className="absolute top-0 left-0 right-0 z-50 pt-4 sm:pt-6"
       style={{ 
-        background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}dd, ${heroConfig.backgroundGradient.via}dd 50%, ${heroConfig.backgroundGradient.to}dd)`,
-        borderColor: 'rgba(255, 255, 255, 0.1)',
-        zIndex: designTokens.zIndex.fixed,
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
     >
       <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div 
+          className="flex items-center justify-between h-16 sm:h-20 backdrop-blur-xl rounded-2xl px-6 shadow-lg"
+          style={{
+            background: 'linear-gradient(to top, #013447, #184f59)',
+          }}
+        >
           {/* Logo */}
           <Link href="/" className="flex-shrink-0" aria-label="Home">
-            <Logo  className="h-8 sm:h-10" />
+            <Logo className="h-8 sm:h-10" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -99,8 +101,8 @@ export function Navigation({ isVisible }: NavigationProps) {
                   variant={isActive(link.href) ? 'default' : 'ghost'}
                   size="default"
                   className={`transition-all ${
-                    isActive(link.href)
-                      ? 'bg-white/20 backdrop-blur-md border-white/30 text-white shadow-md'
+                    isActive(link.href) 
+                      ? 'bg-white/20 backdrop-blur-md border-white/30 text-white shadow-md' 
                       : 'bg-transparent border-transparent text-white/90 hover:bg-white/10 hover:text-white'
                   }`}
                   style={{ transitionDuration: designTokens.transitions.base }}
@@ -137,10 +139,12 @@ export function Navigation({ isVisible }: NavigationProps) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t py-4 backdrop-blur-md bg-white/5"
-            style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
+            className="md:hidden mt-2 rounded-xl py-4 backdrop-blur-xl"
+            style={{
+              background: 'linear-gradient(to top, #013447, #184f59)',
+            }}
           >
-            <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
+            <nav className="flex flex-col gap-2 px-2" aria-label="Mobile navigation">
               {navigationConfig.map((link) => (
                 <Link 
                   key={link.href} 
@@ -169,3 +173,4 @@ export function Navigation({ isVisible }: NavigationProps) {
     </motion.nav>
   );
 }
+

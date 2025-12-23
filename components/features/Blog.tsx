@@ -6,47 +6,24 @@ import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
 import { SectionHeader } from '../ui/section-header';
+import { blogPosts } from '@/lib/config/blog.config';
 
-const blogPosts = [
-  {
-    title: '5 Strategies to Maximize Your Retirement Savings',
-    excerpt: 'Discover proven techniques to accelerate your retirement planning and secure your financial future.',
-    date: 'Nov 20, 2025',
-    readTime: '5 min read',
-    category: 'Retirement',
-    imageQuery: 'retirement planning',
-  },
-  {
-    title: 'Understanding Market Volatility in 2025',
-    excerpt: 'Learn how to navigate uncertain markets and make informed investment decisions during economic changes.',
-    date: 'Nov 15, 2025',
-    readTime: '7 min read',
-    category: 'Investing',
-    imageQuery: 'stock market',
-  },
-  {
-    title: 'Estate Planning Essentials for Young Families',
-    excerpt: 'Essential estate planning steps every young family should take to protect their loved ones and assets.',
-    date: 'Nov 10, 2025',
-    readTime: '6 min read',
-    category: 'Estate Planning',
-    imageQuery: 'family planning',
-  },
-];
+// Show only first 3 posts on homepage
+const homepagePosts = blogPosts.slice(0, 3);
 
 export function Blog() {
   return (
     <Section id="blog" background="gradient">
       <Container size="wide">
         <SectionHeader
-          badge="Latest Insights"
-          badgeVariant="secondary"
+          badge="Blog"
+          badgeVariant="primary"
           title="Financial Insights & Resources"
           description="Stay informed with our latest articles on wealth management, investment strategies, and financial planning."
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-          {blogPosts.map((post, index) => (
+          {homepagePosts.map((post, index) => (
             <motion.article
               key={post.title}
               initial={{ opacity: 0, y: 20 }}

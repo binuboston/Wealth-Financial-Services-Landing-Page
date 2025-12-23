@@ -2,11 +2,13 @@
 export const designTokens = {
   colors: {
     brand: {
-      primary: '#003448',
-      secondary: '#68c0ae',
+      primary: '#68C0AE',
+      secondary: '#605095',
       accent: '#9ece6c',
-      primaryDark: '#004d6b',
-      secondaryLight: '#8dd4c0',
+      primaryDark: '#5aad9d',
+      primaryLight: '#8dd4c0',
+      secondaryDark: '#4d3f7a',
+      secondaryLight: '#8a7bb0',
       accentLight: '#b3e698',
     },
     semantic: {

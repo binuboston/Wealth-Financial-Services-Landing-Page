@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, FormEvent } from 'react';
 import Logo from './Logo';
-import { footerConfig, siteConfig } from '@/lib/config';
+import { footerConfig, siteConfig, heroConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
 
 export function Footer() {
@@ -29,7 +29,9 @@ export function Footer() {
   return (
     <footer 
       className="text-white py-12 relative overflow-hidden"
-      style={{ backgroundColor: designTokens.colors.brand.primary }}
+      style={{
+        background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}, ${heroConfig.backgroundGradient.via} 50%, ${heroConfig.backgroundGradient.to})`,
+      }}
     >
       {/* Organic Pattern Background */}
       <div className="absolute inset-0 overflow-hidden opacity-5">

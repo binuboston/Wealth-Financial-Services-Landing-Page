@@ -12,7 +12,7 @@ import { Footer } from '@/components/layout/Footer';
 
 export default function HomePage() {
   return (
-    <div className="pt-16 sm:pt-20">
+    <div>
       <Hero />
       <BannerHeadlines />
       <About />

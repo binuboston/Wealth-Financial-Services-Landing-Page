@@ -76,8 +76,8 @@ export function ComparisonChart() {
     <Section id="comparison" background="white" withPattern patternColor="accent">
       <Container size="full">
         <SectionHeader
-          badge="Compare"
-          badgeVariant="accent"
+          badge="Insights"
+          badgeVariant="primary"
           title="Equities vs Mutual Funds vs PMS vs AIF"
           description="Understanding the differences to make informed investment decisions."
         />

@@ -1,11 +1,12 @@
 // About section configuration
 import type { LucideIcon } from 'lucide-react';
-import { Award, Target, Eye, TrendingUp } from 'lucide-react';
+import { BookOpen, Target, Eye, TrendingUp } from 'lucide-react';
 
 export interface AboutFeature {
   icon: LucideIcon;
   title: string;
   description: string;
+  bgColor: string; // Background color for the card
 }
 
 export const aboutConfig = {
@@ -18,34 +19,44 @@ export const aboutConfig = {
   ],
   features: [
     {
-      icon: Award,
+      icon: BookOpen,
       title: 'Our Story',
       description: 'True growth is never accidental. For generations, Dhanovaa has guided families and businesses with clarity and conviction.',
+      bgColor: '#003448', // Dark blue
     },
     {
       icon: Target,
       title: 'Mission',
       description: 'To guide clients toward long-term financial growth by designing disciplined, insight-driven strategies that adapt, endure, and create lasting value.',
+      bgColor: '#68C0AE', // Teal/Primary
     },
     {
       icon: Eye,
       title: 'Vision',
       description: 'To be the trusted architect of enduring prosperity for individuals, families, and institutions, creating futures defined by clarity, stability, and growth.',
+      bgColor: '#8dd4c0', // Light green (primary light)
     },
     {
       icon: TrendingUp,
       title: 'What Sets Us Apart',
       description: 'Great futures are built, not found. Solid strategies for shifting markets. Progress with purpose, not chance.',
+      bgColor: '#605095', // Purple/Secondary
     },
   ] as AboutFeature[],
   journey: {
-    title: 'Our Journey',
-    milestones: [
-      { year: '1990', event: 'Founded with a vision' },
-      { year: '2000', event: 'Expanded services' },
-      { year: '2010', event: 'Digital transformation' },
-      { year: '2020', event: 'Market leadership' },
+    title: 'Our Journey So Far',
+    founder: 'Sreenath Prabhu',
+    description: 'What began as Dhanasree Wealth Financial Services founded by, a seasoned expert with decades of capital market experience has steadily grown from a small proprietorship into a trusted financial advisory serving clients across Kerala and India. Dhanovaa is the natural evolution of that journey, a future-ready identity built on legacy, principled decision-making, and the architecture of long-term financial growth.',
+  },
+  foundersMessage: {
+    header: "FOUNDER'S MESSAGE",
+    paragraphs: [
+      "For over three decades, my work in the capital markets has reinforced a simple truth: lasting financial growth is built, not found. Dhanovaa was founded on that belief. What began as a small wealth advisory firm has grown into a trusted financial partner for hundreds of families, professionals, and businesses across Kerala and India.",
+      "As Your Growth Architect, we turn complexity into clarity and structure into confidence, helping every client build progress that stands strong across cycles.",
     ],
+    founderName: 'Sreenath Prabhu',
+    founderTitle: 'Founder & Director, Dhanovaa',
+    imageUrl: '/media/sreenath.png',
   },
 } as const;
 

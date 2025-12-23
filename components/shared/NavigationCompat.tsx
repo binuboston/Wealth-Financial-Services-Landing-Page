@@ -66,7 +66,7 @@ export function NavigationCompat({ currentPage, onPageChange }: NavigationCompat
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-[var(--color-border)] shadow-sm"
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+      <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <button onClick={handleLogoClick} className="flex-shrink-0 cursor-pointer">

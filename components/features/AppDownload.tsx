@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Smartphone, Apple } from 'lucide-react';
+import { Badge } from '../ui/badge';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
 
 export function AppDownload() {
@@ -26,15 +27,16 @@ export function AppDownload() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20">
-              <Smartphone className="w-4 h-4 text-white" />
-              <span className="text-white">Download Our App</span>
+            <div className="mb-6 xl:mb-8">
+              <Badge variant="primary" className="text-sm xl:text-base bg-white/10 border-white/20 text-white">
+                Contact Us
+              </Badge>
             </div>
             
-            <h2 className="text-white mb-4">
-              Manage Your Wealth On The Go
+            <h2 className="text-white mb-4 text-3xl xl:text-4xl 2xl:text-5xl font-bold">
+              Let's Build Your Legacy Together
             </h2>
-            <p className="text-white/90 mb-8 max-w-xl">
+            <p className="text-white/90 mb-8 max-w-xl text-base xl:text-lg">
               Access your portfolio, track investments, calculate SIP returns, and get real-time market insights 
               with our mobile app. Available on iOS and Android.
             </p>

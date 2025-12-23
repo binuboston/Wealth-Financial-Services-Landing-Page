@@ -19,6 +19,7 @@ import {
   PieChart,
   Building2,
   Globe2,
+  Coins,
 } from 'lucide-react';
 import { ServiceDetailData } from '@/components/services/ServiceDetail';
 
@@ -920,3 +921,253 @@ export const insuranceData: ServiceDetailData = {
     },
   ],
 };
+
+// Generic service data generator for services without specific data
+function createGenericServiceData(
+  title: string,
+  subtitle: string,
+  description: string,
+  heroIcon: typeof Building2,
+  badge: string = 'Financial Services'
+): ServiceDetailData {
+  return {
+    badge,
+    title,
+    subtitle,
+    description,
+    heroIcon,
+    ctaText: 'Get Started',
+    features: [
+      {
+        icon: Target,
+        title: 'Expert Guidance',
+        description: 'Access professional advice tailored to your financial goals and risk profile.',
+      },
+      {
+        icon: Shield,
+        title: 'Regulatory Compliance',
+        description: 'All services are provided in compliance with SEBI and other regulatory requirements.',
+      },
+      {
+        icon: TrendingUp,
+        title: 'Long-Term Growth',
+        description: 'Strategies designed for sustainable wealth creation over time.',
+      },
+      {
+        icon: Eye,
+        title: 'Transparent Process',
+        description: 'Clear communication and regular updates on your investments and portfolio performance.',
+      },
+      {
+        icon: Users,
+        title: 'Personalized Approach',
+        description: 'Customized solutions based on your unique financial situation and objectives.',
+      },
+      {
+        icon: FileText,
+        title: 'Comprehensive Support',
+        description: 'End-to-end assistance from onboarding to ongoing portfolio management.',
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: 'Initial Consultation',
+        description: 'We start by understanding your financial goals, risk tolerance, and investment horizon.',
+      },
+      {
+        step: 2,
+        title: 'Strategy Design',
+        description: 'Our experts create a customized strategy aligned with your objectives.',
+      },
+      {
+        step: 3,
+        title: 'Implementation',
+        description: 'Seamless onboarding and execution of your investment plan.',
+      },
+      {
+        step: 4,
+        title: 'Ongoing Monitoring',
+        description: 'Regular reviews and adjustments to keep your portfolio on track.',
+      },
+    ],
+    benefits: [
+      {
+        icon: CheckCircle2,
+        title: 'Professional Management',
+        description: 'Benefit from experienced advisors with proven track records.',
+      },
+      {
+        icon: TrendingUp,
+        title: 'Growth Potential',
+        description: 'Access opportunities designed for long-term wealth creation.',
+      },
+      {
+        icon: Lock,
+        title: 'Risk Management',
+        description: 'Structured approach to managing and mitigating investment risks.',
+      },
+      {
+        icon: FileText,
+        title: 'Tax Efficiency',
+        description: 'Strategies optimized for tax benefits and compliance.',
+      },
+      {
+        icon: Calendar,
+        title: 'Flexibility',
+        description: 'Adaptable solutions that evolve with your changing needs.',
+      },
+      {
+        icon: Sparkles,
+        title: 'Comprehensive Service',
+        description: 'Complete support throughout your investment journey.',
+      },
+    ],
+    pricingTiers: [
+      {
+        name: 'Starter',
+        description: 'Perfect for getting started with your investment journey.',
+        minInvestment: '₹10,000',
+        features: [
+          'Basic advisory support',
+          'Quarterly portfolio reviews',
+          'Email and chat support',
+          'Access to educational resources',
+        ],
+      },
+      {
+        name: 'Growth',
+        description: 'For investors seeking comprehensive support.',
+        minInvestment: '₹1,00,000',
+        recommended: true,
+        features: [
+          'All Starter features',
+          'Dedicated relationship manager',
+          'Monthly portfolio reviews',
+          'Priority support',
+          'Advanced analytics',
+          'Tax optimization guidance',
+        ],
+      },
+      {
+        name: 'Wealth',
+        description: 'Premium service for high net worth individuals.',
+        minInvestment: '₹10,00,000',
+        features: [
+          'All Growth features',
+          'Personalized strategy design',
+          'Bi-weekly reviews',
+          '24/7 priority support',
+          'Exclusive investment opportunities',
+          'Estate planning support',
+        ],
+      },
+    ],
+    relatedServices: [
+      {
+        icon: Wallet,
+        title: 'Mutual Funds',
+        description: 'Diversified portfolios with professional management.',
+        link: '/service-details?service=mutual-funds',
+      },
+      {
+        icon: TrendingUp,
+        title: 'Equities',
+        description: 'Direct equity investments for growth.',
+        link: '/service-details?service=equities',
+      },
+      {
+        icon: LineChart,
+        title: 'PMS',
+        description: 'Personalized portfolio management services.',
+        link: '/service-details?service=pms',
+      },
+      {
+        icon: Shield,
+        title: 'Insurance',
+        description: 'Comprehensive protection solutions.',
+        link: '/service-details?service=insurance',
+      },
+    ],
+    faqs: [
+      {
+        question: `What is ${title}?`,
+        answer: description,
+      },
+      {
+        question: 'What is the minimum investment required?',
+        answer: 'Minimum investment varies based on the service tier. Please contact us for specific requirements tailored to your needs.',
+      },
+      {
+        question: 'How is this service different from others?',
+        answer: 'We provide personalized, research-backed strategies with transparent communication and ongoing support throughout your investment journey.',
+      },
+      {
+        question: 'What kind of returns can I expect?',
+        answer: 'Returns vary based on market conditions, investment horizon, and risk profile. We focus on long-term wealth creation with disciplined risk management.',
+      },
+      {
+        question: 'How often will I receive updates?',
+        answer: 'Update frequency depends on your service tier, ranging from quarterly reviews for starter plans to bi-weekly reviews for premium plans.',
+      },
+      {
+        question: 'Can I modify my investment strategy?',
+        answer: 'Yes, we regularly review and adjust strategies based on your changing goals, market conditions, and performance.',
+      },
+    ],
+  };
+}
+
+// Service mapping function
+export function getServiceData(serviceId: string): ServiceDetailData | null {
+  const serviceMap: Record<string, ServiceDetailData> = {
+    'equities': equitiesData,
+    'mutual-funds': mutualFundsData,
+    'pms': pmsData,
+    'insurance': insuranceData,
+    'aif': createGenericServiceData(
+      'Alternative Investment Funds (AIF)',
+      'Diversify beyond traditional assets with sophisticated investment structures.',
+      'Alternative Investment Funds offer access to private equity, real estate, infrastructure, and other alternative asset classes. Ideal for sophisticated investors seeking portfolio diversification and potentially higher returns.',
+      Building2,
+      'Alternative Investments'
+    ),
+    'gift-city-funds': createGenericServiceData(
+      'GIFT City Funds',
+      'Global investment opportunities with tax-efficient structures.',
+      'GIFT City (Gujarat International Finance Tec-City) funds provide access to international markets with favorable tax treatment. Ideal for investors seeking global diversification and tax optimization.',
+      Globe2,
+      'Global Investments'
+    ),
+    'derivatives': createGenericServiceData(
+      'Derivatives Trading',
+      'Strategic hedging and portfolio optimization through derivatives.',
+      'Derivatives trading services including futures and options for hedging, speculation, and portfolio optimization. Suitable for experienced investors looking to manage risk and enhance returns.',
+      BarChart3,
+      'Trading Services'
+    ),
+    'currency-trading': createGenericServiceData(
+      'Currency Trading',
+      'Forex solutions with disciplined risk controls.',
+      'Professional currency trading services with comprehensive risk management. Access global forex markets with expert guidance and disciplined trading strategies.',
+      DollarSign,
+      'Forex Trading'
+    ),
+    'commodities': createGenericServiceData(
+      'Commodities Trading',
+      'Precious metals and energy diversification.',
+      'Commodities trading including gold, silver, crude oil, and agricultural products. Diversify your portfolio with tangible assets and hedge against inflation.',
+      Coins,
+      'Commodities'
+    ),
+    'sip-planning': createGenericServiceData(
+      'SIP Planning',
+      'Systematic investing for steady wealth building.',
+      'Structured SIP (Systematic Investment Plan) strategies designed for disciplined wealth creation. Build your portfolio gradually with regular investments aligned with your financial goals.',
+      Wallet,
+      'Investment Planning'
+    ),
+  };
+
+  return serviceMap[serviceId] || null;
+}

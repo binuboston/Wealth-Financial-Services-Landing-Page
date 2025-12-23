@@ -13,10 +13,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const baseStyles = "inline-flex items-center justify-center gap-2 rounded-full transition-colors disabled:opacity-50 disabled:pointer-events-none";
 
 const variants = {
-  default: "bg-[#003448] text-white hover:bg-[#004d6b] shadow-lg shadow-[#003448]/20",
-  outline: "bg-white text-[#003448] border-2 border-[#003448] hover:bg-[#f0f9f6]",
-  ghost: "text-[#003448] hover:text-[#68c0ae] hover:bg-[#f0f9f6]",
-  secondary: "bg-[var(--color-brand-secondary)] text-white hover:bg-[var(--color-brand-secondary)]/90 shadow-lg shadow-[var(--color-brand-secondary)]/20",
+  default: "bg-[var(--color-brand-primary)] text-white hover:bg-[var(--color-brand-primary-dark)] shadow-lg shadow-[var(--color-brand-primary)]/20",
+  outline: "bg-white text-[var(--foreground)] border-2 border-[var(--color-brand-primary)] hover:bg-[#f0f9f6]",
+  ghost: "text-[var(--foreground)] hover:text-[var(--foreground)]/80 hover:bg-[#f0f9f6]",
+  secondary: "bg-[var(--color-brand-secondary)] text-white hover:bg-[var(--color-brand-secondary-dark)] shadow-lg shadow-[var(--color-brand-secondary)]/20",
 };
 
 const sizes = {
@@ -49,13 +49,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       });
     }
     
+    // Extract motion-specific props and regular button props
+    const { whileHover, whileTap, ...buttonProps } = props as any;
+    
     return (
       <motion.button
         ref={ref}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        whileHover={whileHover || { scale: 1.02 }}
+        whileTap={whileTap || { scale: 0.98 }}
         className={combinedClassName}
-        {...(props as any)}
+        {...buttonProps}
       >
         {children}
       </motion.button>

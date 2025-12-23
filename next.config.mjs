@@ -33,7 +33,6 @@ const nextConfig = {
     // Optimize package imports
     optimizePackageImports: [
       'lucide-react',
-      'motion/react',
       'recharts',
     ],
   },
@@ -66,12 +65,30 @@ const nextConfig = {
   },
 
   // Webpack configuration
-  webpack: (config) => {
+  webpack: (config, { isServer, webpack }) => {
     // Add support for importing SVGs
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    // Fix webpack cache timeout issues
+    // Configure cache with better timeout handling
+    if (config.cache && !isServer) {
+      config.cache = {
+        ...config.cache,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        compression: 'gzip',
+      };
+    }
+
+    // Ensure motion package is properly handled for SSR
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
 
     return config;
   },

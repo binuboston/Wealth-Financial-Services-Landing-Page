@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '../styles/globals.css';
-import { Navigation } from '@/components/layout/Navigation';
+import { NavigationWrapper } from '@/components/layout/NavigationWrapper';
 import { siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -20,15 +20,16 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.tagline,
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -40,7 +41,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <div className="min-h-screen bg-white">
-          <Navigation />
+          <NavigationWrapper />
           <main>{children}</main>
         </div>
       </body>

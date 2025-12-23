@@ -124,7 +124,7 @@ export function FAQ() {
                 {/* Center Large Icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center shadow-xl">
-                    <svg className="w-16 h-16 text-[var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-16 h-16 text-[var(--foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                     </svg>
                   </div>
@@ -155,10 +155,10 @@ export function FAQ() {
                       index % 2 === 0 ? 'bg-white' : 'bg-[#f0f9f6]/30'
                     }`}
                   >
-                    <AccordionTrigger className="text-[var(--color-brand-primary)] hover:text-[var(--color-brand-secondary)] text-left py-3 xl:py-4 text-sm xl:text-base">
+                    <AccordionTrigger className="text-[var(--foreground)] hover:text-[var(--foreground)]/80 text-left py-3 xl:py-4 text-sm xl:text-base">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[var(--color-brand-primary)]/70 pb-3 xl:pb-4 text-sm">
+                    <AccordionContent className="text-[var(--foreground)]/70 pb-3 xl:pb-4 text-sm">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

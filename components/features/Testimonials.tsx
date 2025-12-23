@@ -45,7 +45,7 @@ export function Testimonials() {
       <Container size="wide">
         <SectionHeader
           badge="Testimonials"
-          badgeVariant="accent"
+          badgeVariant="primary"
           title="Voices of Enduring Trust"
           description="Real stories from clients who built their financial futures with Dhanovaa."
         />

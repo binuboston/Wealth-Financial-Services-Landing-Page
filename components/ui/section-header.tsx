@@ -12,7 +12,7 @@ export interface SectionHeaderProps {
 
 export function SectionHeader({
   badge,
-  badgeVariant = "secondary",
+  badgeVariant = "primary",
   title,
   description,
   align = "center",
@@ -27,12 +27,12 @@ export function SectionHeader({
     <div className={`mb-12 xl:mb-16 ${alignClasses[align]} ${className}`}>
       {badge && (
         <Badge variant={badgeVariant} className="mb-6 xl:mb-8">
-          <span className="text-[var(--color-brand-primary)] text-sm xl:text-base">{badge}</span>
+          <span className="text-[var(--foreground)] text-sm xl:text-base">{badge}</span>
         </Badge>
       )}
-      <h2 className="text-[var(--color-brand-primary)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl">{title}</h2>
+      <h2 className="text-[var(--foreground)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-tight">{title}</h2>
       {description && (
-        <p className="text-[var(--color-brand-primary)]/70 max-w-3xl mx-auto text-base xl:text-lg">
+        <p className="text-[var(--foreground)]/70 max-w-3xl mx-auto text-base xl:text-lg">
           {description}
         </p>
       )}
