@@ -2,13 +2,13 @@
 export const heroConfig = {
   badge: 'Welcome to the Future of Purposeful Growth',
   title: 'Dhanovaa - Your Growth Architect',
-  description: 'True growth is never accidental. For generations, Dhanovaa has guided families and businesses with clarity and conviction. Let us help you build enduring prosperity.',
+  description: 'Trusted financial guidance built on 30+ years of experience in equities, mutual funds, PMS, AIF, GIFT City investments, derivatives, and long-term wealth planning globally.',
   primaryCTA: {
-    label: 'Get Started',
+    label: 'Begin Your Journey',
     href: '/contact',
   },
   secondaryCTA: {
-    label: 'Learn More',
+    label: 'Our Offerings',
     href: '#about',
   },
   backgroundGradient: {

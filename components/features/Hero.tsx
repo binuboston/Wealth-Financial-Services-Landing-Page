@@ -56,65 +56,64 @@ export function Hero() {
         background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}, ${heroConfig.backgroundGradient.via} 50%, ${heroConfig.backgroundGradient.to})`,
       }}
     >
-      {/* Background Pattern - positioned behind content */}
+        {/* Background Pattern - positioned behind content */}
       <div className="absolute inset-0 h-full opacity-5 overflow-hidden" aria-hidden="true">
-        <BackgroundPatternIcon />
-        <BackgroundPatternIcon1 />
-      </div>
+          <BackgroundPatternIcon1 />
+        </div>
 
       {/* Hero Navigation - inside container */}
       <div className="relative z-50 pt-4 sm:pt-6">
         <HeroNavigation isVisible={!hasScrolled} />
       </div>
 
-      {/* Hero Content */}
+        {/* Hero Content */}
       <div className="relative z-10 flex-1 flex items-center py-12 sm:py-16 lg:py-20 xl:py-24">
         <Container size="wide">
           <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 xl:gap-24 items-center">
-            {/* Left Content */}
-            <motion.div
+              {/* Left Content */}
+              <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.6 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
                 className="mb-2 sm:mb-3 xl:mb-4 text-sm sm:text-base xl:text-lg tracking-wide font-medium text-[var(--color-brand-primary)]"
                 style={{ 
                   fontFamily: designTokens.typography.fontFamily,
                 }}
-              >
+                >
                 {heroConfig.badge}
-              </motion.div>
+                </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-white mb-4 sm:mb-6 xl:mb-8 text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight font-bold"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-              >
+                >
                 {heroConfig.title}
-              </motion.h1>
+                </motion.h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-white/90 mb-6 sm:mb-8 xl:mb-10 text-base sm:text-lg xl:text-xl leading-relaxed"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-              >
+                >
                 {heroConfig.description}
-              </motion.p>
+                </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6"
-              >
+                >
                 <Link href={heroConfig.primaryCTA.href}>
                   <Button 
                     size="lg" 
@@ -140,21 +139,21 @@ export function Hero() {
                     {heroConfig.secondaryCTA.label}
                   </Button>
                 </Link>
+                </motion.div>
               </motion.div>
-            </motion.div>
 
             {/* Right Content - Phone Mockup */}
-            <motion.div
+              <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex justify-center lg:justify-end order-first lg:order-last"
-            >
-              <PhoneMockupWithCalculator />
-            </motion.div>
-          </div>
+              >
+                <PhoneMockupWithCalculator />
+              </motion.div>
+            </div>
         </Container>
-      </div>
-    </section>
+        </div>
+      </section>
   );
-}
+        }

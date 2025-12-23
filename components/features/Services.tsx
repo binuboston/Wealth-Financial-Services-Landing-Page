@@ -117,7 +117,7 @@ export function Services() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 onClick={() => handleServiceClick(service.id)}
-                className="group bg-white border border-[var(--color-border)] hover:border-[var(--color-brand-secondary)]/30 rounded-2xl xl:rounded-3xl p-6 xl:p-8 hover:shadow-2xl transition-all cursor-pointer flex flex-col"
+                className="group rounded-2xl xl:rounded-3xl p-6 xl:p-8 hover:shadow-2xl transition-all cursor-pointer flex flex-col"
               >
                 {/* Icon Container - Fixed Height */}
                 <div className="flex items-center justify-center mb-5 xl:mb-6">

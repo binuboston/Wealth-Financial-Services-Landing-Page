@@ -15,8 +15,7 @@ export default function Logo({ className = '', variant = 'default' }: LogoProps)
       <img
         src={logoSrc}
         alt={altText}
-        className={`h-full w-auto object-contain ${isLightVariant ? 'brightness-0 invert' : ''}`}
-        style={{ maxWidth: '100%', height: 'auto' }}
+        style={{ maxWidth: '160px', height: 'auto' }}
       />
     </div>
   );

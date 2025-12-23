@@ -59,13 +59,13 @@ export function About() {
               <p 
                 className="text-[var(--foreground)] font-semibold mb-3 sm:mb-4 text-lg sm:text-xl"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-              >
+                    >
                 {aboutConfig.journey.founder}
               </p>
               <p 
                 className="text-[var(--foreground)]/70 text-base sm:text-lg leading-relaxed"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-              >
+                    >
                 {aboutConfig.journey.description}
               </p>
             </div>
@@ -82,12 +82,12 @@ export function About() {
               {aboutConfig.features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="h-full"
                   >
                     <div 
@@ -96,7 +96,7 @@ export function About() {
                         backgroundColor: feature.bgColor,
                         transitionDuration: designTokens.transitions.base,
                       }}
-                    >
+              >
                       {/* Icon */}
                       <div className="mb-4 xl:mb-5">
                         <div 
@@ -128,7 +128,7 @@ export function About() {
               })}
             </div>
           </motion.div>
-        </div>
+          </div>
 
         {/* Founder's Message Section */}
         <motion.div

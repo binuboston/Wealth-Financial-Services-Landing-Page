@@ -36,8 +36,9 @@ export function Footer() {
       {/* Organic Pattern Background */}
       <div className="absolute inset-0 overflow-hidden opacity-5">
         <svg 
-          className="absolute bottom-0 left-0 w-[800px] h-[400px]" 
+          className="absolute bottom-0 left-0 w-full h-[150px]" 
           viewBox="0 0 800 400"
+          preserveAspectRatio="none"
           aria-hidden="true"
         >
           <path 

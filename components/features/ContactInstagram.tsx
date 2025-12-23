@@ -109,7 +109,7 @@ export function ContactInstagram() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white/80 backdrop-blur-xl border border-[#003448]/10 rounded-3xl p-8 shadow-xl">
+            <div className="bg-[var(--color-brand-primary-light)]/30 border border-[#003448]/10 rounded-3xl p-8">
               <div className="mb-6">
                 <h3 className="text-[#003448] mb-2">Send us a message</h3>
                 <p className="text-[#003448]/70">We'll get back to you within 24 hours</p>
@@ -350,7 +350,7 @@ export function ContactInstagram() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white/80 backdrop-blur-xl border border-[#003448]/10 rounded-3xl p-8 shadow-xl h-full flex flex-col">
+            <div className="bg-[var(--color-brand-secondary)]/30 border border-[#003448]/10 rounded-3xl p-8 h-full flex flex-col">
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#003448] to-[#68c0ae] rounded-2xl flex items-center justify-center shadow-lg">

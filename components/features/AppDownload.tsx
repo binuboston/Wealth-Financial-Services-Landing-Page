@@ -29,16 +29,15 @@ export function AppDownload() {
           >
             <div className="mb-6 xl:mb-8">
               <Badge variant="primary" className="text-sm xl:text-base bg-white/10 border-white/20 text-white">
-                Contact Us
+                Download Our App
               </Badge>
             </div>
             
             <h2 className="text-white mb-4 text-3xl xl:text-4xl 2xl:text-5xl font-bold">
-              Let's Build Your Legacy Together
+            Manage Your Wealth On The Go
             </h2>
             <p className="text-white/90 mb-8 max-w-xl text-base xl:text-lg">
-              Access your portfolio, track investments, calculate SIP returns, and get real-time market insights 
-              with our mobile app. Available on iOS and Android.
+            Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android.
             </p>
 
             {/* App Store Buttons */}
