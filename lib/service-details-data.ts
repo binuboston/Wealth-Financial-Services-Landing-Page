@@ -20,7 +20,7 @@ import {
   Building2,
   Globe2,
 } from 'lucide-react';
-import { ServiceDetailData } from '@/components/ServiceDetail';
+import { ServiceDetailData } from '@/components/services/ServiceDetail';
 
 // Mutual Funds Service Detail
 export const mutualFundsData: ServiceDetailData = {

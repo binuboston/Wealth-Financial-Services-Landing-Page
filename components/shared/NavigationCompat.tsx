@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Logo from './Logo';
-import { Button } from './ui/button';
+import Logo from '../layout/Logo';
+import { Button } from '../ui/button';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
