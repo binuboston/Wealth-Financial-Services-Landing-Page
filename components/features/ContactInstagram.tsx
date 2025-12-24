@@ -307,37 +307,37 @@ export function ContactInstagram() {
               </form>
 
               {/* Contact Info */}
-              <div className="mt-8 pt-8 border-t border-[#003448]/10 grid sm:grid-cols-3 gap-4">
+              <div className="mt-8 pt-8 border-t border-[#003448]/10 flex flex-row gap-2 sm:gap-4">
                 <motion.a
                   href="tel:+15551234567"
                   whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors"
+                  className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors flex-1"
                 >
-                  <div className="w-10 h-10 bg-[#003448] rounded-lg flex items-center justify-center shadow-lg">
-                    <Phone className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#003448] rounded-lg flex items-center justify-center shadow-lg">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
-                  <span className="text-[#003448]/70 text-sm text-center">Call Us</span>
+                  <span className="text-[#003448]/70 text-xs sm:text-sm text-center">Call Us</span>
                 </motion.a>
 
                 <motion.a
                   href="mailto:info@dhanovaa.com"
                   whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors"
+                  className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors flex-1"
                 >
-                  <div className="w-10 h-10 bg-[#68c0ae] rounded-lg flex items-center justify-center shadow-lg">
-                    <Mail className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#68c0ae] rounded-lg flex items-center justify-center shadow-lg">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
-                  <span className="text-[#003448]/70 text-sm text-center">Email</span>
+                  <span className="text-[#003448]/70 text-xs sm:text-sm text-center">Email</span>
                 </motion.a>
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors"
+                  className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors flex-1"
                 >
-                  <div className="w-10 h-10 bg-[#9ece6c] rounded-lg flex items-center justify-center shadow-lg">
-                    <MapPin className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#9ece6c] rounded-lg flex items-center justify-center shadow-lg">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
-                  <span className="text-[#003448]/70 text-sm text-center">Visit</span>
+                  <span className="text-[#003448]/70 text-xs sm:text-sm text-center">Visit</span>
                 </motion.div>
               </div>
             </div>
