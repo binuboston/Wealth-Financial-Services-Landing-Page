@@ -2,32 +2,45 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, Send, Instagram as InstagramIcon, Heart, MessageCircle, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
+import { siteConfig } from '@/lib/config';
 
-const instagramPosts = [
+interface InstagramPost {
+  id: string;
+  image: string;
+  permalink: string;
+  likes: number;
+}
+
+// Fallback posts if API is not configured
+const fallbackPosts: InstagramPost[] = [
   {
-    id: 1,
+    id: '1',
     image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=400&fit=crop',
-    likes: 1234,
+    permalink: siteConfig.social.instagram,
+    likes: 0,
   },
   {
-    id: 2,
+    id: '2',
     image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=400&fit=crop',
-    likes: 2156,
+    permalink: siteConfig.social.instagram,
+    likes: 0,
   },
   {
-    id: 3,
+    id: '3',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop',
-    likes: 1876,
+    permalink: siteConfig.social.instagram,
+    likes: 0,
   },
   {
-    id: 4,
+    id: '4',
     image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop',
-    likes: 3421,
+    permalink: siteConfig.social.instagram,
+    likes: 0,
   },
 ];
 
@@ -41,6 +54,8 @@ export function ContactInstagram() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -72,6 +87,39 @@ export function ContactInstagram() {
       setFormState({ name: '', email: '', phone: '', message: '' });
     }, 3000);
   };
+
+  // Fetch Instagram posts
+  useEffect(() => {
+    const fetchInstagramPosts = async () => {
+      try {
+        setIsLoadingPosts(true);
+        const response = await fetch('/api/instagram');
+        const data = await response.json();
+        
+        if (data.posts && data.posts.length > 0) {
+          // Transform API posts to component format
+          const transformedPosts: InstagramPost[] = data.posts.slice(0, 4).map((post: any) => ({
+            id: post.id,
+            image: post.media_url,
+            permalink: post.permalink,
+            likes: post.like_count || 0,
+          }));
+          setInstagramPosts(transformedPosts);
+        } else {
+          // Use fallback posts if API is not configured or returns no posts
+          setInstagramPosts(fallbackPosts);
+        }
+      } catch (error) {
+        console.error('Error fetching Instagram posts:', error);
+        // Use fallback posts on error
+        setInstagramPosts(fallbackPosts);
+      } finally {
+        setIsLoadingPosts(false);
+      }
+    };
+
+    fetchInstagramPosts();
+  }, []);
 
   return (
     <section id="contact" className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
@@ -358,43 +406,57 @@ export function ContactInstagram() {
                   </div>
                   <div>
                     <h3 className="text-[#003448]">Follow Us</h3>
-                    <p className="text-[#003448]/70">@dhanovaa</p>
+                    <p className="text-[#003448]/70">@dhanovaafinserv</p>
                   </div>
                 </div>
               </div>
 
               {/* Compact Instagram Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                {instagramPosts.map((post, index) => (
-                  <motion.div
-                    key={post.id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
-                  >
-                    <ImageWithFallback
-                      src={post.image}
-                      alt={`Instagram post ${post.id}`}
-                      className="w-full h-full object-cover"
+              {isLoadingPosts ? (
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="aspect-square rounded-2xl bg-gray-200 animate-pulse"
                     />
-                    
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                      <div className="flex items-center gap-2 text-white">
-                        <Heart className="w-4 h-4 fill-white" />
-                        <span className="text-sm">{post.likes.toLocaleString()}</span>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {instagramPosts.map((post, index) => (
+                    <motion.a
+                      key={post.id}
+                      href={post.permalink || siteConfig.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05, rotate: 2 }}
+                      className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                    >
+                      <ImageWithFallback
+                        src={post.image}
+                        alt={`Instagram post ${post.id}`}
+                        className="w-full h-full object-cover"
+                      />
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                        <div className="flex items-center gap-2 text-white">
+                          <Heart className="w-4 h-4 fill-white" />
+                          <span className="text-sm">{post.likes.toLocaleString()}</span>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                    </motion.a>
+                  ))}
+                </div>
+              )}
 
               {/* Follow Button */}
               <motion.a
-                href="https://instagram.com"
+                href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
