@@ -76,7 +76,7 @@ export function FAQ() {
             className="hidden lg:flex items-center justify-center"
           >
             <div className="relative w-full max-w-md">
-              {/* Organic Green Blob Background */}
+              {/* Circular Background with Minimal Gradient */}
               <div className="relative aspect-square">
                 <svg
                   viewBox="0 0 400 400"
@@ -84,16 +84,18 @@ export function FAQ() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
-                    <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#8dd4c0" stopOpacity="0.4" />
-                      <stop offset="50%" stopColor="#68C0AE" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#5aad9d" stopOpacity="0.2" />
+                    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#68C0AE" stopOpacity="0.15" />
+                      <stop offset="50%" stopColor="#605095" stopOpacity="0.12" />
+                      <stop offset="100%" stopColor="#9ece6c" stopOpacity="0.1" />
                     </linearGradient>
                   </defs>
-                  <path
-                    d="M80,120 Q60,80 100,60 T180,80 Q220,60 260,80 T340,100 Q360,140 340,180 T300,240 Q280,280 240,300 T160,320 Q120,340 80,320 T40,260 Q20,220 40,180 Z"
-                    fill="url(#blobGradient)"
-                    className="drop-shadow-lg"
+                  <circle
+                    cx="200"
+                    cy="200"
+                    r="180"
+                    fill="url(#circleGradient)"
+                    className="drop-shadow-sm"
                   />
                 </svg>
 

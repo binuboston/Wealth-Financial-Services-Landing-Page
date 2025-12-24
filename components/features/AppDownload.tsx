@@ -40,11 +40,6 @@ export function AppDownload() {
             Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android.
             </p>
 
-            {/* Mobile Calculator - Show after title section on mobile */}
-            <div className="lg:hidden mb-8">
-              <PhoneMockupWithCalculator />
-            </div>
-
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <motion.a
