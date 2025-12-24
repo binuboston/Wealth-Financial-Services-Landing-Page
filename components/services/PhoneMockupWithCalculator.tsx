@@ -101,6 +101,10 @@ function SliderInput({
 }: SliderInputPropsWithVariant) {
   const percentage = ((value - min) / (max - min)) * 100;
   
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(Number(e.target.value));
+  };
+  
   if (variant === 'minimal') {
     return (
       <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/20">
@@ -118,10 +122,13 @@ function SliderInput({
           max={max}
           step={step}
           value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={handleChange}
           className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`
+            background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`,
+            pointerEvents: 'auto',
+            WebkitTapHighlightColor: 'transparent',
+            touchAction: 'pan-x',
           }}
         />
       </div>
@@ -144,10 +151,13 @@ function SliderInput({
         max={max}
         step={step}
         value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={handleChange}
         className="w-full h-1 bg-[#f0f9f6] rounded-lg appearance-none cursor-pointer"
         style={{
-          background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #f0f9f6 ${percentage}%, #f0f9f6 100%)`
+          background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #f0f9f6 ${percentage}%, #f0f9f6 100%)`,
+          pointerEvents: 'auto',
+          WebkitTapHighlightColor: 'transparent',
+          touchAction: 'pan-x',
         }}
       />
     </div>
@@ -292,134 +302,134 @@ export function PhoneMockupWithCalculator() {
     <div className={variant === 'minimal' ? 'p-4' : 'p-4 lg:p-4 bg-gradient-to-b from-[#f0f9f6] to-white'}>
       {/* Header - Only show in default variant */}
       {variant === 'default' && (
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 bg-[#003448] rounded-lg flex items-center justify-center">
-            <Calculator className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <div className="text-[#003448] text-sm">Investment Calculator</div>
-            <div className="text-[#003448]/60 text-xs">Plan your wealth journey</div>
-          </div>
-        </div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-[#003448] rounded-lg flex items-center justify-center">
+                <Calculator className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <div className="text-[#003448] text-sm">Investment Calculator</div>
+                <div className="text-[#003448]/60 text-xs">Plan your wealth journey</div>
+              </div>
+            </div>
       )}
 
-      {/* Tabs */}
-      <Tabs 
-        defaultValue="sip" 
-        value={activeTab} 
-        onValueChange={(value) => setActiveTab(value as 'sip' | 'lumpsum')}
-        className="mb-4"
-      >
+            {/* Tabs */}
+            <Tabs 
+              defaultValue="sip" 
+              value={activeTab} 
+              onValueChange={(value) => setActiveTab(value as 'sip' | 'lumpsum')}
+              className="mb-4"
+            >
         <TabsList className={variant === 'minimal' 
           ? "w-full grid grid-cols-2 bg-white/10 backdrop-blur-sm border border-white/20" 
           : "w-full grid grid-cols-2 bg-white border border-[#003448]/10"}>
-          <TabsTrigger 
-            value="sip"
+                <TabsTrigger 
+                  value="sip"
             className={variant === 'minimal'
               ? "data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 text-xs"
               : "data-[state=active]:bg-[#003448] data-[state=active]:text-white text-[#003448]/60 text-xs"}
-          >
-            <PiggyBank className="w-3 h-3 mr-1" />
-            SIP
-          </TabsTrigger>
-          <TabsTrigger 
-            value="lumpsum"
+                >
+                  <PiggyBank className="w-3 h-3 mr-1" />
+                  SIP
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="lumpsum"
             className={variant === 'minimal'
               ? "data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 text-xs"
               : "data-[state=active]:bg-[#003448] data-[state=active]:text-white text-[#003448]/60 text-xs"}
-          >
-            <Wallet className="w-3 h-3 mr-1" />
-            Lumpsum
-          </TabsTrigger>
-        </TabsList>
+                >
+                  <Wallet className="w-3 h-3 mr-1" />
+                  Lumpsum
+                </TabsTrigger>
+              </TabsList>
 
-        {/* SIP Calculator */}
+              {/* SIP Calculator */}
         <TabsContent value="sip" className="space-y-4 mt-4">
-          <div className="space-y-3">
-            <SliderInput
-              label="Monthly Investment"
-              value={sipMonthlyInvestment}
-              onChange={setSipMonthlyInvestment}
-              min={1000}
-              max={50000}
-              step={1000}
-              unit="₹"
+                <div className="space-y-3">
+                  <SliderInput
+                    label="Monthly Investment"
+                    value={sipMonthlyInvestment}
+                    onChange={setSipMonthlyInvestment}
+                    min={1000}
+                    max={50000}
+                    step={1000}
+                    unit="₹"
               color="#68c0ae"
               variant={variant}
-            />
-            
-            <SliderInput
-              label="Expected Return"
-              value={sipExpectedReturn}
-              onChange={setSipExpectedReturn}
-              min={1}
-              max={25}
-              step={0.5}
-              unit="% p.a."
-              color="#68c0ae"
+                  />
+                  
+                  <SliderInput
+                    label="Expected Return"
+                    value={sipExpectedReturn}
+                    onChange={setSipExpectedReturn}
+                    min={1}
+                    max={25}
+                    step={0.5}
+                    unit="% p.a."
+                    color="#68c0ae"
               variant={variant}
-            />
-            
-            <SliderInput
-              label="Time Period"
-              value={sipTimePeriod}
-              onChange={setSipTimePeriod}
-              min={1}
-              max={30}
-              step={1}
-              unit="Years"
-              color="#9ece6c"
+                  />
+                  
+                  <SliderInput
+                    label="Time Period"
+                    value={sipTimePeriod}
+                    onChange={setSipTimePeriod}
+                    min={1}
+                    max={30}
+                    step={1}
+                    unit="Years"
+                    color="#9ece6c"
               variant={variant}
-            />
-          </div>
+                  />
+                </div>
 
           <ResultsDisplay results={sipResults} formatCurrency={formatCurrency} variant={variant} />
-        </TabsContent>
+              </TabsContent>
 
-        {/* Lumpsum Calculator */}
+              {/* Lumpsum Calculator */}
         <TabsContent value="lumpsum" className="space-y-4 mt-4">
-          <div className="space-y-3">
-            <SliderInput
-              label="Lumpsum Amount"
-              value={lumpsumAmount}
-              onChange={setLumpsumAmount}
-              min={10000}
-              max={1000000}
-              step={10000}
-              unit="₹"
+                <div className="space-y-3">
+                  <SliderInput
+                    label="Lumpsum Amount"
+                    value={lumpsumAmount}
+                    onChange={setLumpsumAmount}
+                    min={10000}
+                    max={1000000}
+                    step={10000}
+                    unit="₹"
               color="#68c0ae"
               variant={variant}
-            />
-            
-            <SliderInput
-              label="Expected Return"
-              value={lumpsumExpectedReturn}
-              onChange={setLumpsumExpectedReturn}
-              min={1}
-              max={25}
-              step={0.5}
-              unit="% p.a."
-              color="#68c0ae"
+                  />
+                  
+                  <SliderInput
+                    label="Expected Return"
+                    value={lumpsumExpectedReturn}
+                    onChange={setLumpsumExpectedReturn}
+                    min={1}
+                    max={25}
+                    step={0.5}
+                    unit="% p.a."
+                    color="#68c0ae"
               variant={variant}
-            />
-            
-            <SliderInput
-              label="Time Period"
-              value={lumpsumTimePeriod}
-              onChange={setLumpsumTimePeriod}
-              min={1}
-              max={30}
-              step={1}
-              unit="Years"
-              color="#9ece6c"
+                  />
+                  
+                  <SliderInput
+                    label="Time Period"
+                    value={lumpsumTimePeriod}
+                    onChange={setLumpsumTimePeriod}
+                    min={1}
+                    max={30}
+                    step={1}
+                    unit="Years"
+                    color="#9ece6c"
               variant={variant}
-            />
-          </div>
+                  />
+                </div>
 
           <ResultsDisplay results={lumpsumResults} formatCurrency={formatCurrency} variant={variant} />
-        </TabsContent>
-      </Tabs>
-    </div>
+              </TabsContent>
+            </Tabs>
+          </div>
   );
 
   return (
@@ -442,46 +452,87 @@ export function PhoneMockupWithCalculator() {
             <div className="h-full overflow-auto">
               <CalculatorContent variant="default" />
             </div>
-          </div>
         </div>
-        
+      </div>
+      
         {/* Floating elements - Desktop only */}
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 backdrop-blur-xl rounded-2xl border-2 border-white/30 shadow-lg flex items-center justify-center"
-        >
-          <TrendingUp className="w-10 h-10 text-[#68c0ae] drop-shadow-lg" strokeWidth={2.5} />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 backdrop-blur-xl rounded-2xl border-2 border-white/30 shadow-lg flex items-center justify-center"
-        >
-          <PiggyBank className="w-12 h-12 text-[#9ece6c] drop-shadow-lg" strokeWidth={2.5} />
-        </motion.div>
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 backdrop-blur-xl rounded-2xl border-2 border-white/30 shadow-lg flex items-center justify-center"
+      >
+        <TrendingUp className="w-10 h-10 text-[#68c0ae] drop-shadow-lg" strokeWidth={2.5} />
+      </motion.div>
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 backdrop-blur-xl rounded-2xl border-2 border-white/30 shadow-lg flex items-center justify-center"
+      >
+        <PiggyBank className="w-12 h-12 text-[#9ece6c] drop-shadow-lg" strokeWidth={2.5} />
+      </motion.div>
       </div>
 
       {/* Custom Slider Styles */}
       <style>{`
-        input[type="range"]::-webkit-slider-thumb {
+        input[type="range"] {
+          -webkit-appearance: none;
           appearance: none;
-          width: 14px;
-          height: 14px;
+          touch-action: pan-x;
+          -webkit-tap-highlight-color: transparent;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
           border-radius: 50%;
           background: white;
-          cursor: pointer;
+          cursor: grab;
           border: 2px solid currentColor;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+          transition: transform 0.1s ease;
+          touch-action: pan-x;
+        }
+        input[type="range"]::-webkit-slider-thumb:active {
+          cursor: grabbing;
+          transform: scale(1.2);
         }
         input[type="range"]::-moz-range-thumb {
-          width: 14px;
-          height: 14px;
+          width: 18px;
+          height: 18px;
           border-radius: 50%;
           background: white;
-          cursor: pointer;
+          cursor: grab;
           border: 2px solid currentColor;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+          transition: transform 0.1s ease;
+          touch-action: pan-x;
+          -moz-appearance: none;
+        }
+        input[type="range"]::-moz-range-thumb:active {
+          cursor: grabbing;
+          transform: scale(1.2);
+        }
+        input[type="range"]::-ms-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: white;
+          cursor: grab;
+          border: 2px solid currentColor;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        input[type="range"]::-ms-thumb:active {
+          cursor: grabbing;
+          transform: scale(1.2);
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          height: 4px;
+          cursor: pointer;
+        }
+        input[type="range"]::-moz-range-track {
+          height: 4px;
+          cursor: pointer;
         }
       `}</style>
     </div>

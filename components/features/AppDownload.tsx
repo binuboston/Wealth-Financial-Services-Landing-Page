@@ -34,7 +34,7 @@ export function AppDownload() {
             </div>
             
             <h2 className="text-white mb-4 text-3xl xl:text-4xl 2xl:text-5xl font-bold">
-            Manage Your Wealth On The Go
+              Manage Your Wealth On The Go
             </h2>
             <p className="text-white/90 mb-8 max-w-xl text-base xl:text-lg">
             Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android.
