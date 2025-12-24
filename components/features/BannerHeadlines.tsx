@@ -28,7 +28,7 @@ export function BannerHeadlines() {
   return (
     <Section background="muted">
       <Container size="full">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12 py-12 sm:py-16 xl:py-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12 ">
           {headlines.map((item, index) => (
             <motion.div
               key={index}
