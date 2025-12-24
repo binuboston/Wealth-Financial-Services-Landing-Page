@@ -40,6 +40,11 @@ export function AppDownload() {
             Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android.
             </p>
 
+            {/* Mobile Calculator - Show after title section on mobile */}
+            <div className="lg:hidden mb-8">
+              <PhoneMockupWithCalculator />
+            </div>
+
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <motion.a
@@ -97,13 +102,13 @@ export function AppDownload() {
             </div>
           </motion.div>
 
-          {/* Right Side - Interactive Phone Mockup with SIP Calculator */}
+          {/* Right Side - Interactive Phone Mockup with SIP Calculator (Desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="relative hidden lg:block"
           >
             <PhoneMockupWithCalculator />
           </motion.div>

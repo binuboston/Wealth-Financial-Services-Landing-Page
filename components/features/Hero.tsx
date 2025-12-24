@@ -69,13 +69,12 @@ export function Hero() {
         {/* Hero Content */}
       <div className="relative z-10 flex-1 flex items-center py-12 sm:py-16 lg:py-20 xl:py-24">
         <Container size="wide">
-          <div className="max-w-4xl mx-auto">
-              {/* Title Section */}
+          <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 xl:gap-24 items-center">
+              {/* Left Content */}
               <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-              className="text-center mb-8 sm:mb-12 lg:mb-16"
               >
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -103,7 +102,7 @@ export function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-white/90 mb-6 sm:mb-8 xl:mb-10 text-base sm:text-lg xl:text-xl leading-relaxed max-w-3xl mx-auto"
+                className="text-white/90 mb-6 sm:mb-8 xl:mb-10 text-base sm:text-lg xl:text-xl leading-relaxed"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
                 >
                 {heroConfig.description}
@@ -113,7 +112,7 @@ export function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6"
                 >
                 <Link href={heroConfig.primaryCTA.href}>
                   <Button 
@@ -143,14 +142,14 @@ export function Hero() {
                 </motion.div>
               </motion.div>
 
-            {/* Calculator Section - Below Title */}
+            {/* Right Content - Phone Mockup */}
               <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex justify-center"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex justify-center lg:justify-end order-first lg:order-last"
               >
-                <PhoneMockupWithCalculator variant="hero" />
+                <PhoneMockupWithCalculator />
               </motion.div>
             </div>
         </Container>
