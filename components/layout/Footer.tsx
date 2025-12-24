@@ -49,7 +49,7 @@ export function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <div className="mb-4">
@@ -118,8 +118,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div>
+          {/* Newsletter - Hidden for now */}
+          {/* <div>
             <h3 className="mb-4 text-white font-semibold text-base sm:text-lg">
               {footerConfig.newsletter.title}
             </h3>
@@ -146,7 +146,7 @@ export function Footer() {
                 <footerConfig.newsletter.buttonIcon className="w-5 h-5" />
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Bar */}

@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Calculator } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Container } from '../ui/container';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
@@ -47,6 +48,7 @@ function BackgroundPatternIcon1() {
 
 export function Hero() {
   const hasScrolled = useScrollDetection(100);
+  const [showCalculator, setShowCalculator] = useState(false);
 
   return (
     <section 
@@ -108,6 +110,23 @@ export function Hero() {
                 {heroConfig.description}
                 </motion.p>
 
+                {/* Calculator Toggle Link - Mobile Only */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.35 }}
+                  className="lg:hidden mb-6"
+                >
+                  <button
+                    onClick={() => setShowCalculator(!showCalculator)}
+                    className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors text-base sm:text-lg underline underline-offset-4 decoration-white/50 hover:decoration-white"
+                    style={{ fontFamily: designTokens.typography.fontFamily }}
+                  >
+                    <Calculator className="w-5 h-5" />
+                    {showCalculator ? 'Hide Calculator' : 'Try Investment Calculator'}
+                  </button>
+                </motion.div>
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -149,7 +168,24 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex justify-center lg:justify-end order-first lg:order-last"
               >
-                <PhoneMockupWithCalculator />
+                {/* Mobile: Show calculator only when showCalculator is true with animation */}
+                {/* Desktop: Always show calculator */}
+                <div className="hidden lg:block">
+                  <PhoneMockupWithCalculator />
+                </div>
+                <AnimatePresence>
+                  {showCalculator && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="lg:hidden w-full"
+                    >
+                      <PhoneMockupWithCalculator />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             </div>
         </Container>
