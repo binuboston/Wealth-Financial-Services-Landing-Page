@@ -210,7 +210,7 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                 >
                   <Card className="h-full border-2 hover:border-[var(--color-brand-secondary)] transition-all hover:shadow-xl group">
                     <CardHeader>
-                      <div className="w-14 h-14 xl:w-16 xl:h-16 bg-gradient-to-br from-[var(--color-brand-secondary)] to-[var(--color-brand-accent)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <div className="w-14 h-14 xl:w-16 xl:h-16 bg-[var(--color-brand-primary)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <FeatureIcon className="w-7 h-7 xl:w-8 xl:h-8 text-white" />
                       </div>
                       <CardTitle className="text-xl xl:text-2xl">{feature.title}</CardTitle>
