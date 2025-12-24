@@ -7,6 +7,7 @@ import { Section } from '../ui/section';
 import { Container } from '../ui/container';
 import { SectionHeader } from '../ui/section-header';
 import { blogPosts } from '@/lib/config/blog.config';
+import Link from 'next/link';
 
 // Show only first 3 posts on homepage
 const homepagePosts = blogPosts.slice(0, 3);
@@ -32,10 +33,11 @@ export function Blog() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <div className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl overflow-hidden hover:shadow-xl transition-all group h-full">
+              <Link href={`/blog/${post.slug}`}>
+                <div className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl overflow-hidden hover:shadow-xl transition-all group h-full cursor-pointer">
                 <div className="relative h-48 xl:h-56 bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1] overflow-hidden">
                   <ImageWithFallback
-                    src={`https://images.unsplash.com/photo-${1600000000000 + index}?w=600&h=400&fit=crop`}
+                    src={`https://picsum.photos/600/400?random=${index + 1}`}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -69,6 +71,7 @@ export function Blog() {
                   </div>
                 </div>
               </div>
+              </Link>
             </motion.article>
           ))}
         </div>
