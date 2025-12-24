@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: ['financial services', 'wealth advisory', 'SIP', 'mutual funds', 'financial planning', 'Kerala', 'India'],
   authors: [{ name: siteConfig.name }],
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
