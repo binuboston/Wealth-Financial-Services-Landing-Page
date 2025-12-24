@@ -54,19 +54,6 @@ export default function ServiceDetailsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Back button - positioned below navigation */}
-      <div className="sticky top-24 left-0 right-0 z-40 w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-4">
-        <Button
-          onClick={() => router.push('/#services')}
-          variant="secondary"
-          size="lg"
-          className="shadow-xl backdrop-blur-sm bg-white/90 hover:bg-white"
-        >
-          <ArrowLeft className="mr-2 w-5 h-5" />
-          Back to Services
-        </Button>
-      </div>
-
       <AnimatePresence mode="wait">
         <motion.div
           key={serviceId}

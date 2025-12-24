@@ -4,22 +4,47 @@ import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from '@/components/shared/figma/ImageWithFallback';
 import { Container } from '@/components/ui/container';
-import { SectionHeader } from '@/components/ui/section-header';
+import { Badge } from '@/components/ui/badge';
 import { Footer } from '@/components/layout/Footer';
+import { HeroNavigation } from '@/components/layout/HeroNavigation';
 import { blogPosts } from '@/lib/config/blog.config';
 import { Section } from '@/components/ui/section';
 
 export default function BlogPage() {
   return (
-    <div className="pt-16 sm:pt-20">
-      <Section background="gradient" className="py-12 sm:py-16 lg:py-20">
-        <Container size="wide">
-          <SectionHeader
-            badge="Latest Insights"
-            badgeVariant="secondary"
-            title="Financial Insights & Resources"
-            description="Stay informed with our latest articles on wealth management, investment strategies, and financial planning."
-          />
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <Section background="gradient" className="relative overflow-hidden pt-32 pb-20 xl:pt-40 xl:pb-32">
+        {/* Hero Navigation */}
+        <div className="absolute top-0 left-0 right-0 z-50 pt-4 sm:pt-6">
+          <HeroNavigation isVisible={true} />
+        </div>
+        
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-[var(--color-brand-secondary)] rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-[var(--color-brand-accent)] rounded-full blur-3xl" />
+        </div>
+
+        <Container size="default" className="relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center text-white"
+          >
+            <div className="mb-12 xl:mb-16">
+              <Badge variant="secondary" className="mb-6 xl:mb-8">
+                <span className="text-white text-sm xl:text-base">Latest Insights</span>
+              </Badge>
+              <h1 className="text-white mb-6 xl:mb-8 text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
+                Financial Insights & Resources
+              </h1>
+              <p className="text-white/90 max-w-3xl mx-auto text-lg xl:text-xl">
+                Stay informed with our latest articles on wealth management, investment strategies, and financial planning.
+              </p>
+            </div>
+          </motion.div>
         </Container>
       </Section>
 

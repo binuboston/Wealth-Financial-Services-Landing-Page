@@ -5,6 +5,7 @@ import { Container } from '../ui/container';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { HeroNavigation } from '../layout/HeroNavigation';
 import {
   Accordion,
   AccordionContent,
@@ -91,6 +92,11 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <Section background="gradient" className="relative overflow-hidden pt-32 pb-20 xl:pt-40 xl:pb-32">
+        {/* Hero Navigation */}
+        <div className="absolute top-0 left-0 right-0 z-50 pt-4 sm:pt-6">
+          <HeroNavigation isVisible={true} />
+        </div>
+        
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 right-20 w-96 h-96 bg-[var(--color-brand-secondary)] rounded-full blur-3xl" />

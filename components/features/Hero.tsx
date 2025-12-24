@@ -64,7 +64,7 @@ export function Hero() {
       {/* Hero Navigation - inside container */}
       <div className="relative z-50 pt-4 sm:pt-6">
         <HeroNavigation isVisible={!hasScrolled} />
-      </div>
+        </div>
 
         {/* Hero Content */}
       <div className="relative z-10 flex-1 flex items-center py-12 sm:py-16 lg:py-20 xl:py-24">

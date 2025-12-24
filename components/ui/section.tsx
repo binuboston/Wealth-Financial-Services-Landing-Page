@@ -17,7 +17,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
   }, ref) => {
     const backgrounds = {
       white: "bg-white",
-      muted: "bg-gradient-to-b from-[var(--color-muted)] to-white",
+      muted: "bg-gradient-to-b from-[#e8f5f1] via-[#f0f9f6] to-white",
       gradient: "bg-gradient-to-br from-[var(--color-brand-primary)] via-[var(--color-brand-primary-dark)] to-[var(--color-brand-primary)]",
       light: "bg-[#f8fdfb]",
     };
