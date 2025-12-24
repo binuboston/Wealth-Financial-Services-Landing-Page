@@ -61,7 +61,27 @@ export const ImageWithFallback = React.memo(function ImageWithFallback({
     );
   }
 
-  // Use Next.js Image for optimization (handles external URLs if in remotePatterns)
+  // Check if this is an external URL (http/https)
+  const isExternalUrl = typeof imgSrc === 'string' && (imgSrc.startsWith('http://') || imgSrc.startsWith('https://'));
+  
+  // For ALL external URLs, use regular img tag to avoid width/height requirements
+  // Next.js Image requires width/height for external images even with unoptimized
+  if (isExternalUrl) {
+    return (
+      <img 
+        src={imgSrc as string} 
+        alt={alt} 
+        className={className}
+        style={style}
+        onError={handleError}
+        loading="lazy"
+        {...rest}
+      />
+    );
+  }
+  
+  // Use Next.js Image only for local images (starting with / or relative paths)
+  // These don't require width/height when using fill or when dimensions are provided
   try {
     return (
       <Image
@@ -72,7 +92,6 @@ export const ImageWithFallback = React.memo(function ImageWithFallback({
         onError={handleError}
         loading="lazy"
         quality={85}
-        unoptimized={typeof imgSrc === 'string' && imgSrc.startsWith('http') && !imgSrc.includes('images.unsplash.com') && !imgSrc.includes('picsum.photos')}
         {...rest}
       />
     );

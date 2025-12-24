@@ -523,7 +523,7 @@ export function PhoneMockupWithCalculator() {
             {/* App Screen Content */}
             <div className="h-full overflow-auto">
               <CalculatorContent variant="default" />
-            </div>
+          </div>
         </div>
       </div>
       

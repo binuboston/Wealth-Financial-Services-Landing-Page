@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { ImageWithFallback } from '@/components/shared/figma/ImageWithFallback';
 import { Container } from '@/components/ui/container';
 import { Badge } from '@/components/ui/badge';
 import { Footer } from '@/components/layout/Footer';
@@ -63,11 +62,10 @@ export default function BlogPage() {
                 <Link href={`/blog/${post.slug}`}>
                   <div className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl overflow-hidden hover:shadow-xl transition-all group h-full cursor-pointer">
                   <div className="relative h-48 xl:h-56 bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1] overflow-hidden">
-                    <ImageWithFallback
-                      src={`https://picsum.photos/600/400?random=${index + 1}`}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    {/* Placeholder for blog image - add local image here */}
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-[#003448]/20 text-4xl font-bold">Image</div>
+                    </div>
                     <div className="absolute top-4 xl:top-5 left-4 xl:left-5">
                       <span className="px-3 xl:px-4 py-1 xl:py-2 bg-white/90 backdrop-blur-sm rounded-full text-[#003448] border border-[#003448]/10 text-sm xl:text-base">
                         {post.category}

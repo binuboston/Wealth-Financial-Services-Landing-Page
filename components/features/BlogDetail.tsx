@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowLeft, ArrowRight, Share2, User } from 'lucide-react';
-import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
 import { Badge } from '../ui/badge';
@@ -129,13 +128,12 @@ export function BlogDetail({ post, content, author, relatedPosts = [] }: BlogDet
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative h-[400px] xl:h-[500px] rounded-2xl xl:rounded-3xl overflow-hidden shadow-2xl"
+            className="relative h-[400px] xl:h-[500px] rounded-2xl xl:rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1]"
           >
-            <ImageWithFallback
-              src={`https://picsum.photos/1200/600?random=${post.slug?.length || 1}`}
-              alt={post.title}
-              className="w-full h-full object-cover"
-            />
+            {/* Placeholder for featured image - add local image here */}
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-[#003448]/20 text-5xl font-bold">Featured Image</div>
+            </div>
           </motion.div>
         </Container>
       </Section>
@@ -229,11 +227,10 @@ export function BlogDetail({ post, content, author, relatedPosts = [] }: BlogDet
                   <Link href={`/blog/${relatedPost.slug}`}>
                     <div className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl overflow-hidden hover:shadow-xl transition-all group h-full cursor-pointer">
                       <div className="relative h-48 xl:h-56 bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1] overflow-hidden">
-                        <ImageWithFallback
-                          src={`https://picsum.photos/600/400?random=${(relatedPost.slug?.length || index) + 10}`}
-                          alt={relatedPost.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                        {/* Placeholder for blog image - add local image here */}
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="text-[#003448]/20 text-4xl font-bold">Image</div>
+                        </div>
                         <div className="absolute top-4 xl:top-5 left-4 xl:left-5">
                           <span className="px-3 xl:px-4 py-1 xl:py-2 bg-white/90 backdrop-blur-sm rounded-full text-[#003448] border border-[#003448]/10 text-sm xl:text-base">
                             {relatedPost.category}
