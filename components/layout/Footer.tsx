@@ -28,7 +28,7 @@ export function Footer() {
 
   return (
     <footer 
-      className="text-white py-12 relative overflow-hidden"
+      className="text-white py-16 xl:py-20 relative overflow-hidden"
       style={{
         background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}, ${heroConfig.backgroundGradient.via} 50%, ${heroConfig.backgroundGradient.to})`,
       }}
@@ -49,13 +49,41 @@ export function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        {/* Trust Indicators */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 pb-8 border-b border-white/10">
+          <div className="text-center md:text-left">
+            <div className="text-3xl xl:text-4xl font-bold text-white mb-1">
+              {footerConfig.trustIndicators.experience}
+            </div>
+            <div className="text-white/70 text-sm xl:text-base">
+              {footerConfig.trustIndicators.experienceLabel}
+            </div>
+          </div>
+          <div className="text-center md:text-left">
+            <div className="text-3xl xl:text-4xl font-bold text-white mb-1">
+              {footerConfig.trustIndicators.clients}
+            </div>
+            <div className="text-white/70 text-sm xl:text-base">
+              {footerConfig.trustIndicators.clientsLabel}
+            </div>
+          </div>
+          <div className="text-center md:text-left">
+            <div className="text-3xl xl:text-4xl font-bold text-white mb-1">
+              {footerConfig.trustIndicators.compliance}
+            </div>
+            <div className="text-white/70 text-sm xl:text-base">
+              {footerConfig.trustIndicators.complianceLabel}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
-          <div>
+          <div className="lg:col-span-2">
             <div className="mb-4">
               <Logo className="h-10" variant="light" />
             </div>
-            <p className="text-white/80 mb-4 text-sm sm:text-base">
+            <p className="text-white/80 mb-6 text-sm sm:text-base leading-relaxed max-w-md">
               {footerConfig.company.description}
             </p>
             <div className="flex gap-3">
@@ -72,7 +100,7 @@ export function Footer() {
                     aria-label={`Visit our ${social.name} page`}
                   >
                     <Icon className="w-5 h-5" />
-              </a>
+                  </a>
                 );
               })}
             </div>
@@ -98,24 +126,23 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Corporate Values */}
           <div>
             <h3 className="mb-4 text-white font-semibold text-base sm:text-lg">
-              Services
+              Our Commitment
             </h3>
-            <ul className="space-y-2">
-              {footerConfig.services.map((service) => (
-                <li key={service.href}>
-                  <Link
-                    href={service.href}
-                    className="text-white/70 hover:text-[var(--color-brand-accent)] transition-colors text-sm sm:text-base"
-                    style={{ transitionDuration: designTokens.transitions.base }}
-                  >
-                    {service.label}
-                  </Link>
-                </li>
+            <div className="space-y-4">
+              {footerConfig.corporateValues.map((value, index) => (
+                <div key={index} className="border-l-2 border-white/20 pl-3">
+                  <h4 className="text-white font-medium text-sm mb-1">
+                    {value.title}
+                  </h4>
+                  <p className="text-white/60 text-xs leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Newsletter - Hidden for now */}
@@ -149,8 +176,9 @@ export function Footer() {
           </div> */}
         </div>
 
+
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10">
+        <div className="pt-6 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/70 text-center md:text-left text-sm sm:text-base">
               {footerConfig.legal.copyright}

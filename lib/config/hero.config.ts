@@ -5,7 +5,7 @@ export const heroConfig = {
   description: 'Trusted financial guidance built on 30+ years of experience in equities, mutual funds, PMS, AIF, GIFT City investments, derivatives, and long-term wealth planning globally.',
   primaryCTA: {
     label: 'Begin Your Journey',
-    href: '/contact',
+    href: '/#contact',
   },
   secondaryCTA: {
     label: 'Our Offerings',

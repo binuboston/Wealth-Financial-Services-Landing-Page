@@ -1,12 +1,13 @@
 // Footer configuration
 import { siteConfig } from './site.config';
 import type { LucideIcon } from 'lucide-react';
-import { Linkedin, Twitter, Facebook, Instagram, Mail } from 'lucide-react';
+import { Linkedin, Facebook, Instagram, Mail } from 'lucide-react';
+import { XIcon } from '@/components/icons/XIcon';
 
 export interface SocialLink {
   name: string;
   url: string;
-  icon: LucideIcon;
+  icon: LucideIcon | React.ComponentType<{ className?: string }>;
 }
 
 export interface FooterLink {
@@ -23,9 +24,31 @@ export const footerConfig = {
   company: {
     description: 'Dhanovaa — Your Growth Architect. Building enduring prosperity through disciplined financial strategies and generational insight.',
   },
+  trustIndicators: {
+    experience: '30+ Years',
+    experienceLabel: 'of Financial Excellence',
+    clients: '10,000+',
+    clientsLabel: 'Trusted Clients',
+    compliance: 'SEBI Registered',
+    complianceLabel: 'Regulatory Compliance',
+  },
+  corporateValues: [
+    {
+      title: 'Integrity First',
+      description: 'Transparent, ethical practices in every financial decision we make.',
+    },
+    {
+      title: 'Client-Centric',
+      description: 'Your financial goals are our commitment. Personalized strategies for lasting wealth.',
+    },
+    {
+      title: 'Regulatory Excellence',
+      description: 'Fully compliant with SEBI regulations. Your investments are protected and secure.',
+    },
+  ],
   socialLinks: [
     { name: 'LinkedIn', url: siteConfig.social.linkedin, icon: Linkedin },
-    { name: 'Twitter', url: siteConfig.social.twitter, icon: Twitter },
+    { name: 'X', url: siteConfig.social.twitter, icon: XIcon },
     { name: 'Facebook', url: siteConfig.social.facebook, icon: Facebook },
     { name: 'Instagram', url: siteConfig.social.instagram, icon: Instagram },
   ] as SocialLink[],
@@ -34,12 +57,6 @@ export const footerConfig = {
     { label: 'Services', href: '#services' },
     { label: 'Blog', href: '#blog' },
     { label: 'Contact', href: '#contact' },
-  ] as FooterLink[],
-  services: [
-    { label: 'Equities', href: '/service-details?service=equities' },
-    { label: 'Mutual Funds', href: '/service-details?service=mutual-funds' },
-    { label: 'PMS & AIF', href: '/service-details?service=pms' },
-    { label: 'GIFT City Funds', href: '/service-details?service=gift-city' },
   ] as FooterLink[],
   newsletter: {
     title: 'Newsletter',

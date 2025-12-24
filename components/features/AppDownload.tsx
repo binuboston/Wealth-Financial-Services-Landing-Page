@@ -43,7 +43,7 @@ export function AppDownload() {
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <motion.a
-                href="https://apps.apple.com"
+                href="/#contact"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -60,7 +60,7 @@ export function AppDownload() {
               </motion.a>
 
               <motion.a
-                href="https://play.google.com"
+                href="https://play.google.com/store/apps/details?id=com.dhanasreefinancialservices"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
