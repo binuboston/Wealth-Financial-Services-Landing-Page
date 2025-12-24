@@ -1,27 +1,93 @@
-import React, { useState } from 'react'
+'use client';
+
+import React, { useState, useCallback } from 'react';
+import Image from 'next/image';
 
 const ERROR_IMG_SRC =
-  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg=='
+  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg==';
 
-export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-  const [didError, setDidError] = useState(false)
+interface ImageWithFallbackProps extends React.ComponentPropsWithoutRef<typeof Image> {
+  fallbackSrc?: string;
+}
 
-  const handleError = () => {
-    setDidError(true)
+export const ImageWithFallback = React.memo(function ImageWithFallback({
+  src,
+  alt = '',
+  className = '',
+  style,
+  fallbackSrc = ERROR_IMG_SRC,
+  ...rest
+}: ImageWithFallbackProps) {
+  const [didError, setDidError] = useState(false);
+  const [imgSrc, setImgSrc] = useState(src);
+
+  const handleError = useCallback(() => {
+    if (!didError) {
+      setDidError(true);
+      setImgSrc(fallbackSrc);
+    }
+  }, [didError, fallbackSrc]);
+
+  // Reset error state when src changes
+  React.useEffect(() => {
+    if (src !== imgSrc) {
+      setDidError(false);
+      setImgSrc(src);
+    }
+  }, [src, imgSrc]);
+
+  // If it's a data URL, use regular img
+  const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
+
+  // Try to use Next.js Image for optimization, fallback to regular img if needed
+  if (isDataUrl || didError) {
+    return (
+      <div
+        className={`inline-block bg-gray-100 text-center align-middle ${className}`}
+        style={style}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <img 
+            src={imgSrc as string} 
+            alt={didError ? 'Error loading image' : alt} 
+            className={className}
+            style={style}
+            onError={handleError}
+            loading="lazy"
+            {...rest}
+          />
+        </div>
+      </div>
+    );
   }
 
-  const { src, alt, style, className, ...rest } = props
-
-  return didError ? (
-    <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
-      style={style}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
-      </div>
-    </div>
-  ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
-  )
-}
+  // Use Next.js Image for optimization (handles external URLs if in remotePatterns)
+  try {
+    return (
+      <Image
+        src={imgSrc}
+        alt={alt}
+        className={className}
+        style={style}
+        onError={handleError}
+        loading="lazy"
+        quality={85}
+        unoptimized={typeof imgSrc === 'string' && imgSrc.startsWith('http') && !imgSrc.includes('images.unsplash.com') && !imgSrc.includes('picsum.photos')}
+        {...rest}
+      />
+    );
+  } catch (error) {
+    // Fallback to regular img if Image component fails
+    return (
+      <img 
+        src={imgSrc as string} 
+        alt={alt} 
+        className={className}
+        style={style}
+        onError={handleError}
+        loading="lazy"
+        {...rest}
+      />
+    );
+  }
+});

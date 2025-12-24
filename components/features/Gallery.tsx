@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, X } from 'lucide-react';
 import { Button } from '../ui/button';
+import Image from 'next/image';
 
 interface GalleryItem {
   id: number;
@@ -106,15 +107,29 @@ const galleryItems: GalleryItem[] = [
   }
 ];
 
-export function Gallery() {
+export const Gallery = memo(function Gallery() {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('All');
 
-  const categories = ['All', 'Advisory', 'Investment', 'Events', 'Culture', 'Videos'];
+  const categories = useMemo(() => ['All', 'Advisory', 'Investment', 'Events', 'Culture', 'Videos'], []);
 
-  const filteredItems = activeFilter === 'All' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === activeFilter);
+  const filteredItems = useMemo(() => {
+    return activeFilter === 'All' 
+      ? galleryItems 
+      : galleryItems.filter(item => item.category === activeFilter);
+  }, [activeFilter]);
+
+  const handleFilterChange = useCallback((category: string) => {
+    setActiveFilter(category);
+  }, []);
+
+  const handleItemClick = useCallback((item: GalleryItem) => {
+    setSelectedItem(item);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedItem(null);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--color-surface)] to-white py-12 lg:py-20">
@@ -143,7 +158,7 @@ export function Gallery() {
             <Button
               key={category}
               variant={activeFilter === category ? 'default' : 'outline'}
-              onClick={() => setActiveFilter(category)}
+              onClick={() => handleFilterChange(category)}
               className="transition-all duration-300"
             >
               {category}
@@ -165,14 +180,18 @@ export function Gallery() {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300"
-              onClick={() => setSelectedItem(item)}
+              onClick={() => handleItemClick(item)}
             >
               {/* Image/Video Thumbnail */}
               <div className="absolute inset-0">
-                <img
-                  src={item.type === 'image' ? item.url : item.thumbnail}
+                <Image
+                  src={item.type === 'image' ? item.url : (item.thumbnail || item.url)}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
                 />
               </div>
 
@@ -224,14 +243,14 @@ export function Gallery() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4"
-          onClick={() => setSelectedItem(null)}
+          onClick={handleCloseModal}
         >
           {/* Close Button */}
           <Button
             variant="ghost"
             size="icon"
             className="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20"
-            onClick={() => setSelectedItem(null)}
+            onClick={handleCloseModal}
           >
             <X className="w-6 h-6" />
           </Button>
@@ -273,4 +292,4 @@ export function Gallery() {
       )}
     </div>
   );
-}
+});

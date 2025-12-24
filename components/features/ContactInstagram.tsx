@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, Send, Instagram as InstagramIcon, Heart, MessageCircle, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent, useEffect, useCallback, useMemo, memo } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -57,43 +57,55 @@ export function ContactInstagram() {
   const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
 
-  const validateField = (name: string, value: string) => {
+  // Memoize validation regex
+  const emailRegex = useMemo(() => /\S+@\S+\.\S+/, []);
+  const phoneRegex = useMemo(() => /^\+?[\d\s-()]+$/, []);
+
+  const validateField = useCallback((name: string, value: string) => {
     switch (name) {
       case 'email':
-        if (value && !/\S+@\S+\.\S+/.test(value)) {
+        if (value && !emailRegex.test(value)) {
           return 'Invalid email address';
         }
         break;
       case 'phone':
-        if (value && !/^\+?[\d\s-()]+$/.test(value)) {
+        if (value && !phoneRegex.test(value)) {
           return 'Invalid phone number';
         }
         break;
     }
     return '';
-  };
+  }, [emailRegex, phoneRegex]);
 
-  const handleChange = (name: string, value: string) => {
-    setFormState({ ...formState, [name]: value });
+  const handleChange = useCallback((name: string, value: string) => {
+    setFormState(prev => ({ ...prev, [name]: value }));
     const error = validateField(name, value);
-    setErrors({ ...errors, [name]: error });
-  };
+    setErrors(prev => ({ ...prev, [name]: error }));
+  }, [validateField]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
       setFormState({ name: '', email: '', phone: '', message: '' });
     }, 3000);
-  };
+  }, []);
 
-  // Fetch Instagram posts
+  // Fetch Instagram posts with AbortController for cleanup
   useEffect(() => {
+    const abortController = new AbortController();
+    
     const fetchInstagramPosts = async () => {
       try {
         setIsLoadingPosts(true);
-        const response = await fetch('/api/instagram');
+        const response = await fetch('/api/instagram', {
+          signal: abortController.signal,
+          next: { revalidate: 3600 }, // Cache for 1 hour
+        });
+        
+        if (abortController.signal.aborted) return;
+        
         const data = await response.json();
         
         if (data.posts && data.posts.length > 0) {
@@ -110,15 +122,23 @@ export function ContactInstagram() {
           setInstagramPosts(fallbackPosts);
         }
       } catch (error) {
-        console.error('Error fetching Instagram posts:', error);
+        if (error instanceof Error && error.name === 'AbortError') {
+          return; // Request was aborted, ignore
+        }
         // Use fallback posts on error
         setInstagramPosts(fallbackPosts);
       } finally {
-        setIsLoadingPosts(false);
+        if (!abortController.signal.aborted) {
+          setIsLoadingPosts(false);
+        }
       }
     };
 
     fetchInstagramPosts();
+    
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (
