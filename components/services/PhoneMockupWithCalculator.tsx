@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Calculator, TrendingUp, PiggyBank, Wallet } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabs';
@@ -100,26 +100,109 @@ function SliderInput({
   variant = 'default',
 }: SliderInputPropsWithVariant) {
   const percentage = ((value - min) / (max - min)) * 100;
-  
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(Number(e.target.value));
+  const sliderRef = useRef<HTMLInputElement>(null);
+  const isDraggingRef = useRef(false);
+  const onChangeRef = useRef(onChange);
+  const minRef = useRef(min);
+  const maxRef = useRef(max);
+  const stepRef = useRef(step);
+
+  // Keep refs updated
+  useEffect(() => {
+    onChangeRef.current = onChange;
+    minRef.current = min;
+    maxRef.current = max;
+    stepRef.current = step;
+  }, [onChange, min, max, step]);
+
+  // Calculate value from position
+  const getValueFromPosition = (clientX: number) => {
+    if (!sliderRef.current) return value;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const rawValue = minRef.current + percentage * (maxRef.current - minRef.current);
+    const steppedValue = Math.round(rawValue / stepRef.current) * stepRef.current;
+    return Math.max(minRef.current, Math.min(maxRef.current, steppedValue));
   };
-  
-  const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.currentTarget.style.cursor = 'grabbing';
+
+  // Mouse handlers - enhance native dragging
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDraggingRef.current = true;
+    // Update value immediately on mousedown for better responsiveness
+    const newValue = getValueFromPosition(e.clientX);
+    onChangeRef.current(newValue);
   };
-  
-  const handleMouseUp = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.currentTarget.style.cursor = 'grab';
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (isDraggingRef.current && sliderRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      const newValue = getValueFromPosition(e.clientX);
+      onChangeRef.current(newValue);
+    }
   };
-  
-  const handleTouchStart = (e: React.TouchEvent<HTMLInputElement>) => {
-    // Prevent scrolling while dragging on touch devices
-    e.currentTarget.style.touchAction = 'none';
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
   };
-  
-  const handleTouchEnd = (e: React.TouchEvent<HTMLInputElement>) => {
-    e.currentTarget.style.touchAction = 'auto';
+
+  // Touch handlers - for smooth touch dragging
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDraggingRef.current = true;
+    const touch = e.touches[0];
+    if (touch) {
+      const newValue = getValueFromPosition(touch.clientX);
+      onChangeRef.current(newValue);
+    }
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (isDraggingRef.current && e.touches[0]) {
+      e.preventDefault();
+      e.stopPropagation();
+      const touch = e.touches[0];
+      const newValue = getValueFromPosition(touch.clientX);
+      onChangeRef.current(newValue);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDraggingRef.current = false;
+  };
+
+  // Add global event listeners for smooth dragging
+  useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
+  const sliderProps = {
+    ref: sliderRef,
+    type: "range" as const,
+    min,
+    max,
+    step,
+    value,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(Number(e.target.value)),
+    onInput: (e: React.FormEvent<HTMLInputElement>) => onChange(Number((e.target as HTMLInputElement).value)),
+    onMouseDown: handleMouseDown,
+    onTouchStart: handleTouchStart,
+    className: variant === 'minimal' 
+      ? "w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer touch-none select-none"
+      : "w-full h-1 bg-[#f0f9f6] rounded-lg appearance-none cursor-pointer touch-none select-none",
+    style: {
+      background: variant === 'minimal'
+        ? `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`
+        : `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #f0f9f6 ${percentage}%, #f0f9f6 100%)`
+    }
   };
   
   if (variant === 'minimal') {
@@ -133,25 +216,7 @@ function SliderInput({
              `₹${value.toLocaleString()}`}
           </span>
         </div>
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={handleInput}
-          onInput={handleInput}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-grab active:cursor-grabbing touch-none select-none"
-          style={{
-            background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`,
-            WebkitTapHighlightColor: 'transparent',
-          }}
-        />
+        <input {...sliderProps} />
       </div>
     );
   }
@@ -166,25 +231,7 @@ function SliderInput({
            `₹${value.toLocaleString()}`}
         </span>
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={handleInput}
-        onInput={handleInput}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="w-full h-1 bg-[#f0f9f6] rounded-lg appearance-none cursor-grab active:cursor-grabbing touch-none select-none"
-        style={{
-          background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #f0f9f6 ${percentage}%, #f0f9f6 100%)`,
-          WebkitTapHighlightColor: 'transparent',
-        }}
-      />
+      <input {...sliderProps} />
     </div>
   );
 }
@@ -499,58 +546,24 @@ export function PhoneMockupWithCalculator() {
 
       {/* Custom Slider Styles */}
       <style>{`
-        input[type="range"] {
-          -webkit-appearance: none;
-          appearance: none;
-          touch-action: none;
-          -webkit-tap-highlight-color: transparent;
-        }
         input[type="range"]::-webkit-slider-thumb {
-          -webkit-appearance: none;
           appearance: none;
-          width: 18px;
-          height: 18px;
+          width: 14px;
+          height: 14px;
           border-radius: 50%;
           background: white;
-          cursor: grab;
+          cursor: pointer;
           border: 2px solid currentColor;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          transition: transform 0.1s ease;
-        }
-        input[type="range"]::-webkit-slider-thumb:active {
-          cursor: grabbing;
-          transform: scale(1.2);
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         input[type="range"]::-moz-range-thumb {
-          width: 18px;
-          height: 18px;
+          width: 14px;
+          height: 14px;
           border-radius: 50%;
           background: white;
-          cursor: grab;
-          border: 2px solid currentColor;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          transition: transform 0.1s ease;
-        }
-        input[type="range"]::-moz-range-thumb:active {
-          cursor: grabbing;
-          transform: scale(1.2);
-        }
-        input[type="range"]::-ms-thumb {
-          width: 18px;
-          height: 18px;
-          border-radius: 50%;
-          background: white;
-          cursor: grab;
-          border: 2px solid currentColor;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-          height: 4px;
           cursor: pointer;
-        }
-        input[type="range"]::-moz-range-track {
-          height: 4px;
-          cursor: pointer;
+          border: 2px solid currentColor;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
       `}</style>
     </div>
