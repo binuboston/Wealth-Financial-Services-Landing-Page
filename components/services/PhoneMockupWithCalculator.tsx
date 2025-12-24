@@ -101,8 +101,25 @@ function SliderInput({
 }: SliderInputPropsWithVariant) {
   const percentage = ((value - min) / (max - min)) * 100;
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(e.target.value));
+  };
+  
+  const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.currentTarget.style.cursor = 'grabbing';
+  };
+  
+  const handleMouseUp = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.currentTarget.style.cursor = 'grab';
+  };
+  
+  const handleTouchStart = (e: React.TouchEvent<HTMLInputElement>) => {
+    // Prevent scrolling while dragging on touch devices
+    e.currentTarget.style.touchAction = 'none';
+  };
+  
+  const handleTouchEnd = (e: React.TouchEvent<HTMLInputElement>) => {
+    e.currentTarget.style.touchAction = 'auto';
   };
   
   if (variant === 'minimal') {
@@ -122,13 +139,17 @@ function SliderInput({
           max={max}
           step={step}
           value={value}
-          onChange={handleChange}
-          className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer"
+          onChange={handleInput}
+          onInput={handleInput}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-grab active:cursor-grabbing touch-none select-none"
           style={{
             background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`,
-            pointerEvents: 'auto',
             WebkitTapHighlightColor: 'transparent',
-            touchAction: 'pan-x',
           }}
         />
       </div>
@@ -151,13 +172,17 @@ function SliderInput({
         max={max}
         step={step}
         value={value}
-        onChange={handleChange}
-        className="w-full h-1 bg-[#f0f9f6] rounded-lg appearance-none cursor-pointer"
+        onChange={handleInput}
+        onInput={handleInput}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="w-full h-1 bg-[#f0f9f6] rounded-lg appearance-none cursor-grab active:cursor-grabbing touch-none select-none"
         style={{
           background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #f0f9f6 ${percentage}%, #f0f9f6 100%)`,
-          pointerEvents: 'auto',
           WebkitTapHighlightColor: 'transparent',
-          touchAction: 'pan-x',
         }}
       />
     </div>
@@ -477,7 +502,7 @@ export function PhoneMockupWithCalculator() {
         input[type="range"] {
           -webkit-appearance: none;
           appearance: none;
-          touch-action: pan-x;
+          touch-action: none;
           -webkit-tap-highlight-color: transparent;
         }
         input[type="range"]::-webkit-slider-thumb {
@@ -491,7 +516,6 @@ export function PhoneMockupWithCalculator() {
           border: 2px solid currentColor;
           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
           transition: transform 0.1s ease;
-          touch-action: pan-x;
         }
         input[type="range"]::-webkit-slider-thumb:active {
           cursor: grabbing;
@@ -506,8 +530,6 @@ export function PhoneMockupWithCalculator() {
           border: 2px solid currentColor;
           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
           transition: transform 0.1s ease;
-          touch-action: pan-x;
-          -moz-appearance: none;
         }
         input[type="range"]::-moz-range-thumb:active {
           cursor: grabbing;
@@ -521,10 +543,6 @@ export function PhoneMockupWithCalculator() {
           cursor: grab;
           border: 2px solid currentColor;
           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-        input[type="range"]::-ms-thumb:active {
-          cursor: grabbing;
-          transform: scale(1.2);
         }
         input[type="range"]::-webkit-slider-runnable-track {
           height: 4px;
