@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendEmail, formatContactEmail } from '@/lib/email';
 
 // Type definitions
 interface ContactFormData {
@@ -7,6 +8,9 @@ interface ContactFormData {
   phone?: string;
   message: string;
 }
+
+// Recipient email address
+const CONTACT_EMAIL = 'support@dhanovaa.com';
 
 // Rate limiting (simple in-memory store - use Redis in production)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -37,7 +41,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
@@ -96,27 +100,66 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Implement your email service here
-    // Examples:
-    // - SendGrid
-    // - Resend
-    // - AWS SES
-    // - Nodemailer
-    
-    // For now, return success
-    // In production, integrate with your email service
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Thank you for contacting us. We will get back to you soon!',
-      },
-      { 
-        status: 200,
-        headers: {
-          'Cache-Control': 'no-store',
+    // Send email to support@dhanovaa.com
+    try {
+      const emailHtml = formatContactEmail({
+        name,
+        email,
+        phone: body.phone?.trim(), // Include phone if provided (for leads)
+        message,
+      });
+
+      await sendEmail({
+        to: CONTACT_EMAIL,
+        subject: `New Contact Form Submission from ${name}`,
+        html: emailHtml,
+        replyTo: email, // Allow replying directly to the user
+      });
+
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Thank you for contacting us. We will get back to you soon!',
         },
+        { 
+          status: 200,
+          headers: {
+            'Cache-Control': 'no-store',
+          },
+        }
+      );
+    } catch (error) {
+      console.error('Error sending contact email:', error);
+      
+      // In development, still return success if email isn't configured
+      // In production, you should configure SMTP or use a service
+      if (process.env.NODE_ENV === 'development') {
+        return NextResponse.json(
+          {
+            success: true,
+            message: 'Thank you for contacting us. We will get back to you soon!',
+            note: 'Email not sent (email service not configured in development)',
+          },
+          { 
+            status: 200,
+            headers: {
+              'Cache-Control': 'no-store',
+            },
+          }
+        );
       }
-    );
+
+      // In production, return error if email fails
+      return NextResponse.json(
+        { error: 'Failed to send email. Please try again later.' },
+        { 
+          status: 500,
+          headers: {
+            'Cache-Control': 'no-store',
+          },
+        }
+      );
+    }
 
   } catch (error) {
     // Don't expose internal errors to client
