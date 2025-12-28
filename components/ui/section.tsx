@@ -1,9 +1,13 @@
 import * as React from "react";
+import { Shape } from "./shape";
+import { shapesConfig } from "@/lib/config/shapes.config";
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   background?: "white" | "muted" | "gradient" | "light";
   withPattern?: boolean;
   patternColor?: "primary" | "secondary" | "accent";
+  shapes?: (keyof typeof shapesConfig)[];
+  shapeOpacity?: number;
 }
 
 const Section = React.forwardRef<HTMLElement, SectionProps>(
@@ -12,6 +16,8 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
     background = "white", 
     withPattern = false,
     patternColor = "accent",
+    shapes = [],
+    shapeOpacity = 0.1,
     children, 
     ...props 
   }, ref) => {
@@ -36,6 +42,20 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
               opacity: 0.1,
             }}
               />
+        )}
+        {/* Render shapes */}
+        {shapes.length > 0 && (
+          <>
+            {shapes.map((shapeKey, index) => (
+              <Shape
+                key={shapeKey}
+                shapeKey={shapeKey}
+                opacity={shapeOpacity}
+                zIndex={0}
+                delay={index * 0.15}
+              />
+            ))}
+          </>
         )}
         {children}
       </section>

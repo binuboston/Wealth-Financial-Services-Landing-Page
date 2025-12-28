@@ -11,4 +11,6 @@ export { blogPosts } from './blog.config';
 export type { BlogPost } from './blog.config';
 export { comparisonConfig } from './comparison.config';
 export type { ComparisonProduct, ComparisonFeature, ComparisonConfig } from './comparison.config';
+export { shapesConfig } from './shapes.config';
+export type { ShapeConfig, ShapePosition } from './shapes.config';
 

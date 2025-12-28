@@ -4,20 +4,16 @@ import { motion } from 'motion/react';
 import { Smartphone, Apple } from 'lucide-react';
 import { SectionBadge } from '../ui/section-badge';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
-
+import { Shape } from '../ui/shape';
 export function AppDownload() {
   return (
     <section className="py-24 lg:py-32 bg-gradient-to-br from-[#003448] via-[#004d6b] to-[#003448] relative overflow-hidden">
-      {/* Organic Pattern Overlay */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
-        <svg className="absolute top-0 right-0 w-[800px] h-[800px]" viewBox="0 0 800 800">
-          <path d="M400,0 Q600,200 700,400 T800,800 L400,800 Z" fill="#9ece6c" />
-        </svg>
-        <svg className="absolute bottom-0 left-0 w-[600px] h-[600px]" viewBox="0 0 600 600">
-          <path d="M0,300 Q100,200 200,280 T400,500 T600,600 L0,600 Z" fill="#68c0ae" />
-        </svg>
-      </div>
-      
+       {/* Background Shapes - positioned behind content */}
+       <Shape shapeKey="shape9" opacity={1} zIndex={0} />
+        <Shape shapeKey="shape1" opacity={1} zIndex={0} />
+        <Shape shapeKey="shape3" opacity={1} zIndex={0} />
+        <Shape shapeKey="shape6" opacity={1} zIndex={0} />
+      {/* Organic Pattern Background */}
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - App Download */}
@@ -43,7 +39,7 @@ export function AppDownload() {
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <motion.a
-                href="/#contact"
+                href="https://apps.apple.com/in/app/ofa-client/id1206294474"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}

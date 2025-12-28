@@ -116,18 +116,18 @@ export async function POST(request: NextRequest) {
         replyTo: email, // Allow replying directly to the user
       });
 
-      return NextResponse.json(
-        {
-          success: true,
-          message: 'Thank you for contacting us. We will get back to you soon!',
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Thank you for contacting us. We will get back to you soon!',
+      },
+      { 
+        status: 200,
+        headers: {
+          'Cache-Control': 'no-store',
         },
-        { 
-          status: 200,
-          headers: {
-            'Cache-Control': 'no-store',
-          },
-        }
-      );
+      }
+    );
     } catch (error) {
       console.error('Error sending contact email:', error);
       

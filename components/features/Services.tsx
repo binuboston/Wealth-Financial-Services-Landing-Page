@@ -6,6 +6,7 @@ import { TrendingUp, Wallet, LineChart, Building2, Globe2, BarChart3, DollarSign
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
 import { SectionHeader } from '../ui/section-header';
+import { Shape } from '../ui/shape';
 
 const services = [
   {
@@ -95,6 +96,11 @@ export function Services() {
 
   return (
     <Section id="services" background="muted" withPattern patternColor="primary">
+       {/* Background Shapes - positioned behind content */}
+       <Shape shapeKey="shape9" opacity={1} zIndex={0} delay={0} />
+        <Shape shapeKey="shape1" opacity={1} zIndex={0} delay={0.15} />
+        <Shape shapeKey="shape6" opacity={1} zIndex={0} delay={0.3} />
+        <Shape shapeKey="shape3" opacity={1} zIndex={0} delay={0.45} />
       <Container size="full">
         <SectionHeader
           badge="Our Services"

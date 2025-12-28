@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 3815.3 3274.8">
+  <!-- Generator: Adobe Illustrator 29.8.3, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+
+      .st1 {
+        fill: #66bfad;
+      }
+
+      .st2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st0" y="2150.2" width="1596.5" height="1124.6"/>
+    </clipPath>
+  </defs>
+  <g id="Layer_1-2">
+    <g class="st2">
+      <g>
+        <polyline class="st0" points="1596.5 2150.2 1596.5 3274.8 0 3274.8 0 2150.2"/>
+        <path class="st1" d="M2055.2,4692.9l-534.6,632.5c-75.2,89-197.6,122.3-307.6,83.7l-2691.2-944.7c-52.4-18.4-90.7-63.7-100.2-118.4l-143.3-827.7c-13.9-80.1,37.3-157.1,116.5-175.4l2807.8-648.5c73.6-17,148.6,22.2,176.7,92.3l701.1,1750.3c21.1,52.6,11.4,112.6-25.2,155.8h0Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

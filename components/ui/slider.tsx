@@ -18,7 +18,7 @@ const Slider = React.forwardRef<
   const thumbStyle = thumbColor ? { backgroundColor: thumbColor } : {};
   const thumbBorderStyle = thumbBorderColor ? { borderColor: thumbBorderColor } : {};
 
-  return (
+    return (
     <SliderPrimitive.Root
       ref={ref}
       className={cn(

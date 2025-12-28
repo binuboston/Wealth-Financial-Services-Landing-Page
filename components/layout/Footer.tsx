@@ -5,6 +5,7 @@ import { useState, FormEvent } from 'react';
 import Logo from './Logo';
 import { footerConfig, siteConfig, heroConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
+import { Shape } from '../ui/shape';
 
 export function Footer() {
   const [email, setEmail] = useState('');
@@ -33,20 +34,13 @@ export function Footer() {
         background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}, ${heroConfig.backgroundGradient.via} 50%, ${heroConfig.backgroundGradient.to})`,
       }}
     >
+       {/* Background Shapes - positioned behind content */}
+       <Shape shapeKey="shape9" opacity={0.2} zIndex={0} />
+        <Shape shapeKey="shape1" opacity={0.2} zIndex={0} />
+        <Shape shapeKey="shape3" opacity={0.2} zIndex={0} />
+        <Shape shapeKey="shape6" opacity={0.2} zIndex={0} />
       {/* Organic Pattern Background */}
-      <div className="absolute inset-0 overflow-hidden opacity-5">
-        <svg 
-          className="absolute bottom-0 left-0 w-full h-[150px]" 
-          viewBox="0 0 800 400"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path 
-            d="M0,200 Q200,100 400,180 T800,200 L800,400 L0,400 Z" 
-            fill={designTokens.colors.brand.accent}
-          />
-        </svg>
-      </div>
+ 
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Trust Indicators */}

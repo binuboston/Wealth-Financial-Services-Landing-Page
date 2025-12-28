@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/features/Hero';
+import { ConfidenceSection } from '@/components/features/ConfidenceSection';
 import { BannerHeadlines } from '@/components/features/BannerHeadlines';
 import { About } from '@/components/features/About';
 import { Services } from '@/components/features/Services';
@@ -40,6 +41,7 @@ export default function HomePage() {
   return (
     <div>
       <Hero />
+      <ConfidenceSection />
       <BannerHeadlines />
       <About />
       <Services />

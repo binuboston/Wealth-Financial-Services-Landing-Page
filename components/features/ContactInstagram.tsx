@@ -98,12 +98,6 @@ export function ContactInstagram() {
 
   return (
     <section id="contact" className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-      {/* Organic Pattern Background */}
-      <div className="absolute inset-0 overflow-hidden opacity-5">
-        <svg className="absolute top-0 left-0 w-[600px] h-[600px]" viewBox="0 0 600 600">
-          <path d="M0,0 Q200,100 300,200 T600,400 L600,0 Z" fill="#9ece6c" />
-        </svg>
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <motion.div
@@ -164,36 +158,36 @@ export function ContactInstagram() {
                   ))}
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  {instagramPosts.map((post, index) => (
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {instagramPosts.map((post, index) => (
                     <motion.a
-                      key={post.id}
+                    key={post.id}
                       href={post.permalink || siteConfig.social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05, rotate: 2 }}
-                      className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
-                    >
-                      <ImageWithFallback
-                        src={post.image}
-                        alt={`Instagram post ${post.id}`}
-                        className="w-full h-full object-cover"
-                      />
-                      
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                        <div className="flex items-center gap-2 text-white">
-                          <Heart className="w-4 h-4 fill-white" />
-                          <span className="text-sm">{post.likes.toLocaleString()}</span>
-                        </div>
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                  >
+                    <ImageWithFallback
+                      src={post.image}
+                      alt={`Instagram post ${post.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                      <div className="flex items-center gap-2 text-white">
+                        <Heart className="w-4 h-4 fill-white" />
+                        <span className="text-sm">{post.likes.toLocaleString()}</span>
                       </div>
+                    </div>
                     </motion.a>
-                  ))}
-                </div>
+                ))}
+              </div>
               )}
 
               {/* Follow Button */}
