@@ -128,17 +128,27 @@ export async function POST(request: NextRequest) {
         },
       }
     );
-    } catch (error) {
-      console.error('Error sending contact email:', error);
+    } catch (error: any) {
+      // Enhanced error logging for Vercel
+      console.error('[Contact API] Error sending contact email:');
+      console.error('[Contact API] Error:', error);
+      console.error('[Contact API] Error message:', error?.message);
+      console.error('[Contact API] Environment:', {
+        NODE_ENV: process.env.NODE_ENV,
+        VERCEL: process.env.VERCEL,
+        hasSmtpHost: !!process.env.SMTP_HOST,
+        hasSmtpUser: !!process.env.SMTP_USER,
+        hasSmtpPass: !!process.env.SMTP_PASS,
+      });
       
       // In development, still return success if email isn't configured
-      // In production, you should configure SMTP or use a service
       if (process.env.NODE_ENV === 'development') {
         return NextResponse.json(
           {
             success: true,
             message: 'Thank you for contacting us. We will get back to you soon!',
             note: 'Email not sent (email service not configured in development)',
+            error: error?.message || 'Unknown error',
           },
           { 
             status: 200,
@@ -149,9 +159,18 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // In production, return error if email fails
+      // In production/Vercel, return user-friendly error
+      // The error details are logged to Vercel function logs for debugging
+      const errorMessage = error?.message || 'Unknown error';
+      const isConfigurationError = errorMessage.includes('not configured') || 
+                                   errorMessage.includes('environment variables');
+      
       return NextResponse.json(
-        { error: 'Failed to send email. Please try again later.' },
+        { 
+          error: isConfigurationError 
+            ? 'Email service is not properly configured. Please contact support.' 
+            : 'Failed to send email. Please try again later.',
+        },
         { 
           status: 500,
           headers: {
