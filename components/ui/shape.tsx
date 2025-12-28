@@ -88,8 +88,9 @@ export function Shape({
   return (
     <motion.div
       className={cn(
-        'absolute pointer-events-none overflow-visible',
+        'absolute pointer-events-none overflow-hidden',
         positionClass,
+        'hidden md:block', // Hide on mobile devices
         className
       )}
       initial={mounted ? animation.initial : false}
@@ -122,14 +123,14 @@ export function Shape({
       }}
       aria-hidden="true"
     >
-      {/* Responsive sizing - edge to edge with proper positioning */}
+      {/* Responsive sizing - smaller on tablet, full size on desktop */}
       <div 
         className="relative"
         style={{
-          width: 'clamp(200px, 50vw, 800px)',
-          height: 'clamp(200px, 50vh, 800px)',
-          minWidth: '200px',
-          minHeight: '200px',
+          width: 'clamp(250px, 35vw, 600px)',
+          height: 'clamp(250px, 35vh, 600px)',
+          minWidth: '250px',
+          minHeight: '250px',
         }}
       >
         <Image
@@ -140,7 +141,7 @@ export function Shape({
           style={{
             objectPosition: getObjectPosition(),
           }}
-          sizes="(max-width: 640px) 200px, (max-width: 768px) 300px, (max-width: 1024px) 400px, (max-width: 1280px) 500px, (max-width: 1536px) 600px, 800px"
+          sizes="(max-width: 1024px) 250px, (max-width: 1280px) 350px, (max-width: 1536px) 450px, 600px"
         />
       </div>
     </motion.div>
