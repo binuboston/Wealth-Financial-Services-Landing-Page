@@ -66,6 +66,12 @@ export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams)
     const isDevelopment = process.env.NODE_ENV === 'development';
     const isVercel = process.env.VERCEL === '1';
     
+    // Check which variables are missing for better error reporting
+    const missing = [];
+    if (!process.env.SMTP_HOST) missing.push('SMTP_HOST');
+    if (!process.env.SMTP_USER) missing.push('SMTP_USER');
+    if (!process.env.SMTP_PASS) missing.push('SMTP_PASS');
+    
     if (isDevelopment) {
       console.log('📧 Email not configured. Would send email:');
       console.log('To:', to);
@@ -81,15 +87,22 @@ export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams)
       console.log('SMTP_FROM=support@dhanovaa.com');
       console.log('---\n');
     } else if (isVercel) {
-      console.error('[Email] Configuration missing in Vercel. Please add environment variables in Vercel dashboard:');
+      console.error('[Email] ❌ Configuration missing in Vercel');
+      console.error('[Email] Missing variables:', missing.join(', '));
       console.error('[Email] Required: SMTP_HOST, SMTP_USER, SMTP_PASS');
       console.error('[Email] Optional: SMTP_PORT, SMTP_SECURE, SMTP_FROM');
+      console.error('[Email] 📖 See VERCEL_EMAIL_SETUP.md for detailed setup instructions');
+      console.error('[Email] Steps:');
+      console.error('[Email] 1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables');
+      console.error('[Email] 2. Add all required SMTP variables');
+      console.error('[Email] 3. Redeploy your application');
+      console.error('[Email] Note: For Gmail, use App Password (not regular password)');
     }
     
     throw new Error(
       isVercel
-        ? 'Email service not configured. Please add SMTP environment variables in Vercel dashboard (Settings → Environment Variables).'
-        : 'Email service not configured. Please set up SMTP environment variables.'
+        ? `Email service not configured. Missing: ${missing.join(', ')}. Please add SMTP environment variables in Vercel dashboard (Settings → Environment Variables). See VERCEL_EMAIL_SETUP.md for instructions.`
+        : `Email service not configured. Missing: ${missing.join(', ')}. Please set up SMTP environment variables.`
     );
   }
 
