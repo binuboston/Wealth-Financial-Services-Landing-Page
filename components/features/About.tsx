@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
-import { Badge } from '../ui/badge';
+import { SectionBadge } from '../ui/section-badge';
 import { aboutConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
 
@@ -22,9 +22,7 @@ export function About() {
           >
             {/* Badge */}
             <div className="mb-6 xl:mb-8">
-              <Badge variant="primary" className="text-sm xl:text-base">
-                {aboutConfig.badge}
-              </Badge>
+              <SectionBadge animate>{aboutConfig.badge}</SectionBadge>
             </div>
 
             {/* Title */}
@@ -81,6 +79,13 @@ export function About() {
             <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 items-stretch">
               {aboutConfig.features.map((feature, index) => {
                 const Icon = feature.icon;
+                // Use darker text for Mission and Vision cards for better readability on light backgrounds
+                const isMissionOrVision = feature.title === 'Mission' || feature.title === 'Vision';
+                const textColor = isMissionOrVision ? 'text-[#003448]' : 'text-white';
+                const textOpacity = isMissionOrVision ? 'text-[#003448]/90' : 'text-white/90';
+                const iconBg = isMissionOrVision ? 'rgba(0, 52, 72, 0.15)' : 'rgba(255, 255, 255, 0.2)';
+                const iconColor = isMissionOrVision ? 'text-[#003448]' : 'text-white';
+                
                 return (
               <motion.div
                 key={feature.title}
@@ -101,15 +106,15 @@ export function About() {
                       <div className="mb-4 xl:mb-5">
                         <div 
                           className="w-12 h-12 xl:w-14 xl:h-14 rounded-xl flex items-center justify-center"
-                          style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+                          style={{ backgroundColor: iconBg }}
                         >
-                          <Icon className="w-6 h-6 xl:w-7 xl:h-7 text-white" />
-                        </div>
-                      </div>
-                      
+                          <Icon className={`w-6 h-6 xl:w-7 xl:h-7 ${iconColor}`} />
+          </div>
+        </div>
+
                       {/* Title */}
                       <h3 
-                        className="text-white mb-3 xl:mb-4 text-lg xl:text-xl font-semibold"
+                        className={`${textColor} mb-3 xl:mb-4 text-lg xl:text-xl font-semibold`}
                         style={{ fontFamily: designTokens.typography.fontFamily }}
                       >
                         {feature.title}
@@ -117,7 +122,7 @@ export function About() {
                       
                       {/* Description */}
                       <p 
-                        className="text-white/90 text-sm xl:text-base leading-relaxed flex-grow"
+                        className={`${textOpacity} text-sm xl:text-base leading-relaxed flex-grow`}
                         style={{ fontFamily: designTokens.typography.fontFamily }}
                       >
                         {feature.description}
@@ -143,7 +148,7 @@ export function About() {
             style={{
               backgroundColor: '#003448', // Dark teal/blue-green
             }}
-          >
+        >
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left Side - Founder's Image */}
               <div className="relative h-[400px] sm:h-[500px] lg:h-auto lg:min-h-[500px]">

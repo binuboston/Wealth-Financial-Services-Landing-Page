@@ -1,62 +1,57 @@
-import * as React from "react";
+import * as React from "react"
+import * as SliderPrimitive from "@radix-ui/react-slider"
+import { cn } from "./utils"
 
-export interface SliderProps {
-  value: number[];
-  onValueChange: (value: number[]) => void;
-  min: number;
-  max: number;
-  step: number;
-  className?: string;
+interface SliderProps extends React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> {
+  trackColor?: string;
+  rangeColor?: string;
+  thumbColor?: string;
+  thumbBorderColor?: string;
 }
 
-const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
-  ({ value, onValueChange, min, max, step, className = "" }, ref) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onValueChange([Number(e.target.value)]);
-    };
+const Slider = React.forwardRef<
+  React.ElementRef<typeof SliderPrimitive.Root>,
+  SliderProps
+>(({ className, trackColor, rangeColor, thumbColor, thumbBorderColor, ...props }, ref) => {
+  const trackStyle = trackColor ? { backgroundColor: trackColor } : {};
+  const rangeStyle = rangeColor ? { backgroundColor: rangeColor } : {};
+  const thumbStyle = thumbColor ? { backgroundColor: thumbColor } : {};
+  const thumbBorderStyle = thumbBorderColor ? { borderColor: thumbBorderColor } : {};
 
-    const percentage = ((value[0] - min) / (max - min)) * 100;
-
-    return (
-      <div ref={ref} className={`relative w-full ${className}`}>
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value[0]}
-          onChange={handleChange}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
-          style={{
-            background: `linear-gradient(to right, #2563eb 0%, #2563eb ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`
-          }}
+  return (
+    <SliderPrimitive.Root
+      ref={ref}
+      className={cn(
+        "relative flex w-full touch-none select-none items-center",
+        className
+      )}
+      {...props}
+    >
+      <SliderPrimitive.Track 
+        className={cn(
+          "relative h-2 w-full grow overflow-hidden rounded-full bg-secondary"
+        )}
+        style={trackStyle}
+      >
+        <SliderPrimitive.Range 
+          className={cn("absolute h-full transition-all duration-150 ease-out")}
+          style={rangeStyle}
         />
-        <style>{`
-          .slider-thumb::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #2563eb;
-            cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          }
-          .slider-thumb::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #2563eb;
-            cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          }
-        `}</style>
-      </div>
-    );
-  }
-);
+      </SliderPrimitive.Track>
+      <SliderPrimitive.Thumb 
+        className={cn(
+          "block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background",
+          "transition-all duration-150 ease-out",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "disabled:pointer-events-none disabled:opacity-50",
+          "cursor-grab active:cursor-grabbing hover:scale-110 active:scale-125",
+          "shadow-md hover:shadow-lg"
+        )}
+        style={{ ...thumbStyle, ...thumbBorderStyle }}
+      />
+    </SliderPrimitive.Root>
+  )
+})
+Slider.displayName = SliderPrimitive.Root.displayName
 
-Slider.displayName = "Slider";
-
-export { Slider };
+export { Slider }

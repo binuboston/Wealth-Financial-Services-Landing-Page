@@ -123,3 +123,9 @@ The email includes:
 In development, check the console for email logs if SMTP is not configured.
 
 
+
+
+
+
+
+

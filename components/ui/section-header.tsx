@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Badge } from "./badge";
+import { SectionBadge } from "./section-badge";
 
 export interface SectionHeaderProps {
   badge?: string;
-  badgeVariant?: "primary" | "secondary" | "accent";
+  badgeVariant?: "primary" | "secondary" | "accent"; // Kept for backward compatibility but not used
   title: string;
   description?: string;
   align?: "left" | "center";
@@ -12,7 +12,7 @@ export interface SectionHeaderProps {
 
 export function SectionHeader({
   badge,
-  badgeVariant = "primary",
+  badgeVariant = "primary", // Kept for backward compatibility but not used
   title,
   description,
   align = "center",
@@ -26,9 +26,9 @@ export function SectionHeader({
   return (
     <div className={`mb-12 xl:mb-16 ${alignClasses[align]} ${className}`}>
       {badge && (
-        <Badge variant={badgeVariant} className="mb-6 xl:mb-8">
-          <span className="text-[var(--foreground)] text-sm xl:text-base">{badge}</span>
-        </Badge>
+        <div className="mb-6 xl:mb-8">
+          <SectionBadge animate>{badge}</SectionBadge>
+        </div>
       )}
       <h2 className="text-[var(--foreground)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-tight">{title}</h2>
       {description && (

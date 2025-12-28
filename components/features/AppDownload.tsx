@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Smartphone, Apple } from 'lucide-react';
-import { Badge } from '../ui/badge';
+import { SectionBadge } from '../ui/section-badge';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
 
 export function AppDownload() {
@@ -28,9 +28,9 @@ export function AppDownload() {
             transition={{ duration: 0.6 }}
           >
             <div className="mb-6 xl:mb-8">
-              <Badge variant="primary" className="text-sm xl:text-base bg-white/10 border-white/20 text-white">
+              <SectionBadge className="bg-white/10 border-white/20 [&_span]:text-white" animate>
                 Download Our App
-              </Badge>
+              </SectionBadge>
             </div>
             
             <h2 className="text-white mb-4 text-3xl xl:text-4xl 2xl:text-5xl font-bold">

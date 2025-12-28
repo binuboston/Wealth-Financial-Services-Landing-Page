@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { ContactForm } from './ContactForm';
 import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
 import { siteConfig } from '@/lib/config';
+import { SectionBadge } from '../ui/section-badge';
 
 interface InstagramPost {
   id: string;
@@ -112,9 +113,7 @@ export function ContactInstagram() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-2 bg-[#68c0ae]/20 border border-[#68c0ae]/30 rounded-full mb-6">
-            <span className="text-[#003448]">Get in Touch</span>
-          </div>
+          <SectionBadge animate>Get in Touch</SectionBadge>
           <h2 className="text-[#003448] mb-6">
             Let&apos;s Build Stronger Futures
           </h2>
