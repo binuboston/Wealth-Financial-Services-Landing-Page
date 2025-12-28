@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import type { Transporter } from 'nodemailer';
 
 interface SendEmailParams {
   to: string;
@@ -7,9 +8,29 @@ interface SendEmailParams {
   replyTo?: string;
 }
 
+// SMTP transport options interface
+interface SMTPTransportOptions {
+  host: string;
+  port: number;
+  secure: boolean;
+  auth: {
+    user: string;
+    pass: string;
+  };
+  pool?: boolean;
+  maxConnections?: number;
+  maxMessages?: number;
+  connectionTimeout?: number;
+  greetingTimeout?: number;
+  socketTimeout?: number;
+  tls?: {
+    rejectUnauthorized?: boolean;
+  };
+}
+
 // Create transporter based on environment variables
 // Optimized for Vercel serverless functions
-const getTransporter = () => {
+const getTransporter = (): Transporter | null => {
   // Check for required environment variables
   const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
@@ -27,7 +48,7 @@ const getTransporter = () => {
   }
 
   // Create transporter with Vercel-optimized settings
-  return nodemailer.createTransport({
+  const transportOptions: SMTPTransportOptions = {
     host: smtpHost,
     port: parseInt(process.env.SMTP_PORT || '587'),
     secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
@@ -43,13 +64,16 @@ const getTransporter = () => {
     connectionTimeout: 10000, // 10 seconds
     greetingTimeout: 10000,
     socketTimeout: 10000,
-    // Additional Gmail-specific settings
-    ...(smtpHost.includes('gmail.com') && {
-      tls: {
-        rejectUnauthorized: false, // Gmail sometimes has certificate issues
-      },
-    }),
-  });
+  };
+
+  // Add Gmail-specific TLS settings if using Gmail
+  if (smtpHost.includes('gmail.com')) {
+    transportOptions.tls = {
+      rejectUnauthorized: false, // Gmail sometimes has certificate issues
+    };
+  }
+
+  return nodemailer.createTransport(transportOptions);
 };
 
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
