@@ -348,8 +348,8 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
         </Container>
       </Section>
 
-      {/* Pricing/Tiers Section (Optional) */}
-      {data.pricingTiers && data.pricingTiers.length > 0 && (
+      {/* Pricing/Tiers Section (Optional) - Hidden per user request */}
+      {/* {data.pricingTiers && data.pricingTiers.length > 0 && (
         <Section background="muted" withPattern patternColor="primary">
           <Container size="full">
             <motion.div
@@ -439,7 +439,7 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
             </div>
           </Container>
         </Section>
-      )}
+      )} */}
 
       {/* Related Services (Optional) */}
       {data.relatedServices && data.relatedServices.length > 0 && (
