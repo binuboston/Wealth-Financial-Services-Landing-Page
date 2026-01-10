@@ -157,8 +157,10 @@ export function About() {
                     src={aboutConfig.foundersMessage.imageUrl}
                     alt={aboutConfig.foundersMessage.founderName}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    quality={90}
                   />
                 </div>
               </div>

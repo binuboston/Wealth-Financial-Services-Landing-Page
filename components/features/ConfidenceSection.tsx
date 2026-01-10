@@ -18,12 +18,12 @@ const stats: StatItem[] = [
     label: 'Years in Capital Markets',
   },
   {
-    value: 500,
+    value: 1000,
     suffix: '+',
     label: 'Clients Guided Across India & Abroad',
   },
   {
-    value: 170,
+    value: 400,
     prefix: '₹',
     suffix: '+',
     label: 'Crores of Assets Overseen',
@@ -31,7 +31,7 @@ const stats: StatItem[] = [
   {
     value: 40,
     suffix: '+',
-    label: 'Branches & Service Points',
+    label: 'Empaneled AMC\'s',
   },
 ];
 
