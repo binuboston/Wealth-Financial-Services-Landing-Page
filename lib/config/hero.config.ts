@@ -9,7 +9,7 @@ export const heroConfig = {
   },
   secondaryCTA: {
     label: 'Our Offerings',
-    href: '#about',
+    href: '#services',
   },
   backgroundGradient: {
     from: '#003448',

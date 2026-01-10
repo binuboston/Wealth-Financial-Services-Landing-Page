@@ -25,11 +25,11 @@ export const footerConfig = {
     description: 'Dhanovaa — Your Growth Architect. Building enduring prosperity through disciplined financial strategies and generational insight.',
   },
   trustIndicators: {
-    experience: '30+ Years',
+    experience: '25+ Years',
     experienceLabel: 'of Financial Excellence',
-    clients: '10,000+',
+    clients: '1000+',
     clientsLabel: 'Trusted Clients',
-    compliance: 'SEBI Registered',
+    compliance: 'AMFI Registered',
     complianceLabel: 'Regulatory Compliance',
   },
   corporateValues: [

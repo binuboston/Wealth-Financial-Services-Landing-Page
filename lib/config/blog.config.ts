@@ -21,7 +21,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     title: 'Why Financial Planning Is More Important Than Ever',
-    excerpt: 'Financial planning is no longer optional. In today's fast-changing economic environment, structured financial planning is essential for achieving long-term financial goals.',
+    excerpt: 'Financial planning is no longer optional. In today\'s fast-changing economic environment, structured financial planning is essential for achieving long-term financial goals.',
     date: 'Jan 10, 2026',
     readTime: '5 min read',
     category: 'Financial Planning',
