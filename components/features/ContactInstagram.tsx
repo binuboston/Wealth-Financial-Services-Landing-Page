@@ -204,7 +204,7 @@ export function ContactInstagram() {
               </motion.a>
 
               {/* Stats */}
-              <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+              {/* <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-[#003448]">15K+</div>
                   <div className="text-[#003448]/70 text-sm">Followers</div>
@@ -217,7 +217,7 @@ export function ContactInstagram() {
                   <div className="text-[#003448]">98%</div>
                   <div className="text-[#003448]/70 text-sm">Engagement</div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </div>
