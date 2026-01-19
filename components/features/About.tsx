@@ -4,104 +4,143 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
-import { SectionHeader } from '../ui/section-header';
+import { SectionBadge } from '../ui/section-badge';
 import { Button } from '../ui/button';
 import { aboutConfig } from '@/lib/config';
-import { ArrowRight, Target, Eye } from 'lucide-react';
+import { designTokens } from '@/lib/design-tokens';
+import { ArrowRight } from 'lucide-react';
 
 export function About() {
   return (
-    <Section id="about" background="muted">
+    <Section id="about" background="white" withPattern patternColor="accent">
       <Container size="wide">
-        <SectionHeader
-          badge="About Us"
-          badgeVariant="primary"
-          title="Your Trusted Financial Partner"
-          description={aboutConfig.introduction[0]}
-        />
-
-        {/* Introduction Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto mb-12 xl:mb-16"
-        >
-          <div className="space-y-4 text-center">
-            <p className="text-[var(--foreground)]/70 text-lg xl:text-xl leading-relaxed">
-              {aboutConfig.introduction[1]}
-            </p>
-            <p className="text-[var(--foreground)]/70 text-lg xl:text-xl leading-relaxed">
-              {aboutConfig.introduction[2]}
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Mission & Vision Preview Cards */}
-        <div className="grid md:grid-cols-2 gap-6 xl:gap-8 mb-12 xl:mb-16">
-          {/* Mission Card */}
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 xl:gap-24 items-start">
+          {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gradient-to-br from-[var(--color-brand-primary)] to-[var(--color-brand-primary-dark)] rounded-2xl xl:rounded-3xl p-8 xl:p-10 text-white shadow-lg hover:shadow-xl transition-all"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="mb-4">
-              <div className="w-12 h-12 xl:w-14 xl:h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                <Target className="w-6 h-6 xl:w-7 xl:h-7 text-white" />
-              </div>
-              <h3 className="text-xl xl:text-2xl font-bold mb-3">
-                {aboutConfig.mission.title}
-              </h3>
+            {/* Badge */}
+            <div className="mb-6 xl:mb-8">
+              <SectionBadge animate>{aboutConfig.badge}</SectionBadge>
             </div>
-            <p className="text-white/90 text-sm xl:text-base leading-relaxed line-clamp-3">
-              {aboutConfig.mission.description}
+
+            {/* Title */}
+            <h2 
+              className="text-[var(--foreground)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-tight"
+              style={{ fontFamily: designTokens.typography.fontFamily }}
+            >
+              Your Trusted Financial Partner
+            </h2>
+            
+            {/* Description */}
+            <p
+              className="text-[var(--foreground)]/70 text-base sm:text-lg xl:text-lg leading-relaxed mb-6"
+              style={{ fontFamily: designTokens.typography.fontFamily }}
+            >
+              {aboutConfig.introduction[0]}
             </p>
+            
+            {/* Description Paragraphs */}
+            <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10">
+              {aboutConfig.introduction.slice(1).map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-[var(--foreground)]/70 text-base sm:text-lg xl:text-lg leading-relaxed"
+                  style={{ fontFamily: designTokens.typography.fontFamily }}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Button
+                asChild
+                variant="outline"
+                className="group border-[var(--color-brand-primary)] text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary)] hover:text-white"
+              >
+                <Link href="/about">
+                  Learn More About Us
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </Button>
+            </motion.div>
           </motion.div>
 
-          {/* Vision Card */}
+          {/* Right Content - Features Grid */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gradient-to-br from-[var(--color-brand-secondary)] to-[var(--color-brand-secondary-dark)] rounded-2xl xl:rounded-3xl p-8 xl:p-10 text-white shadow-lg hover:shadow-xl transition-all"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="mb-4">
-              <div className="w-12 h-12 xl:w-14 xl:h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                <Eye className="w-6 h-6 xl:w-7 xl:h-7 text-white" />
-              </div>
-              <h3 className="text-xl xl:text-2xl font-bold mb-3">
-                {aboutConfig.vision.title}
-              </h3>
+            <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+              {aboutConfig.features.map((feature, index) => {
+                const Icon = feature.icon;
+                // Use darker text for Mission and Vision cards for better readability on light backgrounds
+                const isMissionOrVision = feature.title === 'Mission' || feature.title === 'Vision';
+                const textColor = isMissionOrVision ? 'text-[#003448]' : 'text-white';
+                const textOpacity = isMissionOrVision ? 'text-[#003448]/90' : 'text-white/90';
+                const iconBg = isMissionOrVision ? 'rgba(0, 52, 72, 0.15)' : 'rgba(255, 255, 255, 0.2)';
+                const iconColor = isMissionOrVision ? 'text-[#003448]' : 'text-white';
+                
+                return (
+                  <motion.div
+                    key={feature.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="h-full"
+                  >
+                    <div 
+                      className="h-full flex flex-col rounded-2xl xl:rounded-3xl p-6 xl:p-8 shadow-lg hover:shadow-xl transition-all"
+                      style={{
+                        backgroundColor: feature.bgColor,
+                        transitionDuration: designTokens.transitions.base,
+                      }}
+                    >
+                      {/* Icon */}
+                      <div className="mb-4 xl:mb-5">
+                        <div 
+                          className="w-12 h-12 xl:w-14 xl:h-14 rounded-xl flex items-center justify-center"
+                          style={{ backgroundColor: iconBg }}
+                        >
+                          <Icon className={`w-6 h-6 xl:w-7 xl:h-7 ${iconColor}`} />
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 
+                        className={`${textColor} mb-3 xl:mb-4 text-lg xl:text-xl font-semibold`}
+                        style={{ fontFamily: designTokens.typography.fontFamily }}
+                      >
+                        {feature.title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p 
+                        className={`${textOpacity} text-sm xl:text-base leading-relaxed flex-grow`}
+                        style={{ fontFamily: designTokens.typography.fontFamily }}
+                      >
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
-            <p className="text-white/90 text-sm xl:text-base leading-relaxed line-clamp-3">
-              {aboutConfig.vision.description}
-            </p>
           </motion.div>
         </div>
-
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center"
-        >
-          <Button
-            asChild
-            variant="outline"
-            className="group border-[var(--color-brand-primary)] text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary)] hover:text-white"
-          >
-            <Link href="/about">
-              Learn More About Us
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Link>
-          </Button>
-        </motion.div>
       </Container>
     </Section>
   );
