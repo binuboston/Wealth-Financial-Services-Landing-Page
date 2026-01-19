@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '../styles/globals.css';
 import { NavigationWrapper } from '@/components/layout/NavigationWrapper';
+import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 import { siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({
         <div className="min-h-screen bg-white">
           <NavigationWrapper />
           <main>{children}</main>
+          <WhatsAppFloat />
         </div>
       </body>
     </html>

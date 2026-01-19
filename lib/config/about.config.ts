@@ -39,7 +39,7 @@ export const aboutConfig = {
     {
       icon: TrendingUp,
       title: 'What Sets Us Apart',
-      description: 'Great futures are built, not found. Solid strategies for shifting markets. Progress with purpose, not chance.',
+      description: 'Because great futures are built, not found.\nSolid strategies for shifting markets.\nProgress with purpose, not chance.\nDesigned for those who build legacies.',
       bgColor: '#605095', // Purple/Secondary
     },
   ] as AboutFeature[],
