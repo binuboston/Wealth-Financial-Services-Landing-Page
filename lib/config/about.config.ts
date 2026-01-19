@@ -1,6 +1,6 @@
 // About section configuration
 import type { LucideIcon } from 'lucide-react';
-import { BookOpen, Target, Eye, TrendingUp } from 'lucide-react';
+import { BookOpen, Target, Eye } from 'lucide-react';
 
 export interface AboutFeature {
   icon: LucideIcon;
@@ -12,41 +12,27 @@ export interface AboutFeature {
 export const aboutConfig = {
   badge: 'About Us',
   title: 'Dhanovaa — Your Growth Architect',
-  description: [
+  introduction: [
     'Welcome to Dhanovaa, a place where disciplined financial strategy meets generations of market insight.',
     'We help families, professionals, NRIs, and businesses navigate equities, mutual funds, PMS, AIF, GIFT City funds, commodities, currency trading, and insurance with clarity and conviction.',
     'Here, growth isn\'t a chase. It\'s a structure, a design shaped by experience and foresight.',
   ],
-  features: [
-    {
-      icon: BookOpen,
-      title: 'Our Story',
-      description: 'True growth is never accidental. For generations, Dhanovaa has guided families and businesses with clarity and conviction.',
-      bgColor: '#003448', // Dark blue
-    },
-    {
-      icon: Target,
-      title: 'Mission',
-      description: 'To guide clients toward long-term financial growth by designing disciplined, insight-driven strategies that adapt, endure, and create lasting value.',
-      bgColor: '#68C0AE', // Teal/Primary
-    },
-    {
-      icon: Eye,
-      title: 'Vision',
-      description: 'To be the trusted architect of enduring prosperity for individuals, families, and institutions, creating futures defined by clarity, stability, and growth.',
-      bgColor: '#8dd4c0', // Light green (primary light)
-    },
-    {
-      icon: TrendingUp,
-      title: 'What Sets Us Apart',
-      description: 'Great futures are built, not found. Solid strategies for shifting markets. Progress with purpose, not chance.',
-      bgColor: '#605095', // Purple/Secondary
-    },
-  ] as AboutFeature[],
+  ourStory: {
+    title: 'Our Story',
+    description: 'True growth is never accidental. It is built with foresight, discipline, and time. For generations, Dhanovaa has guided families and businesses with clarity and conviction, turning uncertainty into direction and direction into enduring progress. We are not driven by trends but by principles, interpreting markets, shaping strategies, and constructing structures that stand firm across cycles. As your growth architect, we design progress meant to last beyond tomorrow.',
+  },
+  mission: {
+    title: 'Mission',
+    description: 'To guide clients toward long-term financial growth by designing disciplined, insight-driven strategies that adapt, endure, and create lasting value.',
+  },
+  vision: {
+    title: 'Vision',
+    description: 'To be the trusted architect of enduring prosperity for individuals, families, and institutions, creating futures defined by clarity, stability, and growth.',
+  },
   journey: {
     title: 'Our Journey So Far',
-    founder: 'Sreenath Prabhu',
-    description: 'What began as Dhanasree Wealth Financial Services founded by, a seasoned expert with decades of capital market experience has steadily grown from a small proprietorship into a trusted financial advisory serving clients across Kerala and India. Dhanovaa is the natural evolution of that journey, a future-ready identity built on legacy, principled decision-making, and the architecture of long-term financial growth.',
+    description: 'What began as Dhanasree Wealth Financial Services founded by Sreenath Prabhu, a seasoned expert with decades of capital market experience has steadily grown from a small proprietorship into a trusted financial advisory serving clients across Kerala and India. Over the years, we expanded our expertise across equities, mutual funds, PMS, AIF, currency and commodity markets, derivatives, and insurance, earning a reputation for clarity, discipline, and dependable guidance.',
+    evolution: 'Dhanovaa is the natural evolution of that journey, a future-ready identity built on legacy, principled decision-making, and the architecture of long-term financial growth. Through changing markets and across generations, we continue to stand as Your Growth Architect, designing progress that endures beyond tomorrow.',
   },
   foundersMessage: {
     header: "FOUNDER'S MESSAGE",

@@ -2,7 +2,7 @@
 export const heroConfig = {
   badge: 'Welcome to the Future of Purposeful Growth',
   title: 'Dhanovaa - Your Growth Architect',
-  description: 'Trusted financial guidance built on 30+ years of experience in equities, mutual funds, PMS, AIF, GIFT City investments, derivatives, and long-term wealth planning globally.',
+  description: 'Trusted financial guidance built on 25+ years of experience in equities, mutual funds, PMS, AIF, GIFT City investments, derivatives, and long-term wealth planning globally.',
   primaryCTA: {
     label: 'Begin Your Journey',
     href: '/#contact',

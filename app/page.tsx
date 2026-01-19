@@ -27,6 +27,11 @@ const Blog = dynamic(() => import('@/components/features/Blog').then(mod => ({ d
   ssr: true,
 });
 
+const GoogleReviews = dynamic(() => import('@/components/features/GoogleReviews').then(mod => ({ default: mod.GoogleReviews })), {
+  loading: () => <div className="min-h-[400px] flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>,
+  ssr: true,
+});
+
 const AppDownload = dynamic(() => import('@/components/features/AppDownload').then(mod => ({ default: mod.AppDownload })), {
   loading: () => <div className="min-h-[400px] flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>,
   ssr: true,
@@ -49,6 +54,7 @@ export default function HomePage() {
       <FAQ />
       <Testimonials />
       <Blog />
+      {/* <GoogleReviews /> */}
       <AppDownload />
       <ContactInstagram />
       <Footer />
