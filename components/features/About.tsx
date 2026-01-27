@@ -105,8 +105,9 @@ export function About() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="h-full"
                   >
-                    <div 
-                      className="h-full flex flex-col rounded-2xl xl:rounded-3xl p-6 xl:p-8 shadow-lg hover:shadow-xl transition-all"
+                    <Link 
+                      href="/about"
+                      className="h-full flex flex-col rounded-2xl xl:rounded-3xl p-6 xl:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group"
                       style={{
                         backgroundColor: feature.bgColor,
                         transitionDuration: designTokens.transitions.base,
@@ -151,7 +152,15 @@ export function About() {
                           {feature.description}
                         </p>
                       )}
-                    </div>
+
+                      {/* Read more - Our Story card only */}
+                      {feature.title === 'Our Story' && (
+                        <div className="mt-4 pt-4 border-t border-white/20 flex items-center gap-2 text-white/90 group-hover:gap-3 transition-all text-sm xl:text-base">
+                          <span>Read more</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      )}
+                    </Link>
                   </motion.div>
                 );
               })}
@@ -191,13 +200,15 @@ export function About() {
 
               {/* Right Side - Message Content */}
               <div className="p-8 sm:p-10 xl:p-12 flex flex-col justify-center">
-                {/* Header */}
-                <h3 
-                  className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase mb-6 sm:mb-8"
+                {/* Header - chip style matching other sections */}
+                <div 
+                  className="inline-block w-fit px-4 py-2 bg-white/20 border border-white/30 rounded-full mb-6 sm:mb-8"
                   style={{ fontFamily: designTokens.typography.fontFamily }}
                 >
-                  {aboutConfig.foundersMessage.header}
-                </h3>
+                  <span className="text-white font-medium text-sm sm:text-base">
+                    {aboutConfig.foundersMessage.header}
+                  </span>
+                </div>
 
                 {/* Message Paragraphs */}
                 <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10">

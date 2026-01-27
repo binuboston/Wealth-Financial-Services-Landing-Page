@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import Link from 'next/link';
 import { LucideIcon, ArrowRight, Check, TrendingUp } from 'lucide-react';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
@@ -456,27 +457,23 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                 Related Services
               </Badge>
               <h2 className="text-3xl xl:text-4xl 2xl:text-5xl text-[var(--foreground)] mb-4">
-                Explore More Solutions
+                Explore More Services
               </h2>
-              <p className="text-lg xl:text-xl text-[var(--foreground)]/70 max-w-3xl mx-auto">
-                Complete your financial strategy with complementary services.
-              </p>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
               {data.relatedServices.map((service, index) => {
                 const ServiceIcon = service.icon;
                 return (
-                  <motion.a
-                    key={index}
-                    href={service.link}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className="group bg-white border-2 border-[var(--color-border)] hover:border-[var(--color-brand-secondary)] rounded-2xl xl:rounded-3xl p-6 xl:p-8 hover:shadow-xl transition-all cursor-pointer"
-                  >
+                  <Link key={index} href={service.link}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.08 }}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="group bg-white border-2 border-[var(--color-border)] hover:border-[var(--color-brand-secondary)] rounded-2xl xl:rounded-3xl p-6 xl:p-8 hover:shadow-xl transition-all cursor-pointer h-full"
+                    >
                     <div className="w-14 h-14 xl:w-16 xl:h-16 bg-[var(--color-brand-primary)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <ServiceIcon className="w-7 h-7 xl:w-8 xl:h-8 text-white" />
                     </div>
@@ -490,7 +487,8 @@ export function ServiceDetail({ data, onCTAClick }: ServiceDetailProps) {
                       <span className="text-sm">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </div>
-                  </motion.a>
+                    </motion.div>
+                  </Link>
                 );
               })}
             </div>

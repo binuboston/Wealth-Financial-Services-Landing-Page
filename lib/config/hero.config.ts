@@ -8,7 +8,7 @@ export const heroConfig = {
     href: '/#contact',
   },
   secondaryCTA: {
-    label: 'Our Offerings',
+    label: 'Our Services',
     href: '#services',
   },
   backgroundGradient: {

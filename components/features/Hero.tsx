@@ -89,15 +89,16 @@ export function Hero() {
                   initial={mounted ? { opacity: 0, y: 20 } : false}
                   animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                   transition={mounted ? { duration: 0.6, delay: 0.35 } : undefined}
-                  className="mb-4 lg:hidden"
+                  className="mb-6 lg:hidden"
                 >
                   <button
                     onClick={() => setShowCalculator(!showCalculator)}
-                    className="text-white/90 hover:text-white transition-colors flex items-center gap-2 text-base sm:text-lg underline decoration-white/50 hover:decoration-white"
+                    className="group w-full sm:w-auto px-6 py-3 sm:py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 rounded-full text-white font-medium text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                     style={{ fontFamily: designTokens.typography.fontFamily }}
                   >
-                    <Calculator className="w-4 h-4" />
-                    {showCalculator ? 'Hide Calculator' : 'Try Our Calculator'}
+                    <Calculator className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+                    <span>{showCalculator ? 'Hide Calculator' : 'Try Our Calculator'}</span>
+                    <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${showCalculator ? 'rotate-180' : 'group-hover:translate-x-1'}`} />
                   </button>
                 </motion.div>
                   

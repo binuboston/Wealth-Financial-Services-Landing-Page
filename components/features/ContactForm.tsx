@@ -382,15 +382,18 @@ export function ContactForm({ className = '' }: ContactFormProps) {
           <span className="text-[#003448]/70 text-xs sm:text-sm text-center">Email</span>
         </motion.a>
 
-        <motion.div
+        <motion.a
+          href="https://maps.app.goo.gl/qSoSGfnNh2nUjLMi6"
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
-          className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors flex-1"
+          className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl hover:bg-[#f0f9f6] transition-colors flex-1 cursor-pointer"
         >
           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#9ece6c] rounded-lg flex items-center justify-center shadow-lg">
             <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <span className="text-[#003448]/70 text-xs sm:text-sm text-center">Visit</span>
-        </motion.div>
+        </motion.a>
       </div>
     </div>
   );
