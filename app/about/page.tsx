@@ -8,10 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { HeroNavigation } from '@/components/layout/HeroNavigation';
 import { Footer } from '@/components/layout/Footer';
+import { FounderMessage } from '@/components/features/FounderMessage';
 import { useRouter } from 'next/navigation';
 import { aboutConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
-import Image from 'next/image';
 
 export default function AboutPage() {
   const router = useRouter();
@@ -204,80 +204,10 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Founder's Message Section */}
-      <Section background="muted">
-        <Container size="full">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-6xl mx-auto"
-          >
-            <div 
-              className="rounded-3xl xl:rounded-[2rem] overflow-hidden shadow-2xl"
-              style={{
-                backgroundColor: '#003448',
-              }}
-            >
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Left Side - Founder's Image */}
-                <div className="relative h-[400px] sm:h-[500px] lg:h-auto lg:min-h-[500px]">
-                  <div className="absolute inset-0 bg-gray-700">
-                    <Image
-                      src={aboutConfig.foundersMessage.imageUrl}
-                      alt={aboutConfig.foundersMessage.founderName}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority
-                      quality={90}
-                    />
-                  </div>
-                </div>
-
-                {/* Right Side - Message Content */}
-                <div className="p-8 sm:p-10 xl:p-12 flex flex-col justify-center">
-                  {/* Header */}
-                  <h3 
-                    className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase mb-6 sm:mb-8"
-                    style={{ fontFamily: designTokens.typography.fontFamily }}
-                  >
-                    {aboutConfig.foundersMessage.header}
-                  </h3>
-
-                  {/* Message Paragraphs */}
-                  <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10">
-                    {aboutConfig.foundersMessage.paragraphs.map((paragraph, index) => (
-                      <p
-                        key={index}
-                        className="text-white text-base sm:text-lg xl:text-xl leading-relaxed"
-                        style={{ fontFamily: designTokens.typography.fontFamily }}
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-
-                  {/* Signature */}
-                  <div className="pt-4 border-t border-white/20">
-                    <p 
-                      className="text-white text-xl sm:text-2xl xl:text-3xl font-bold mb-2"
-                      style={{ fontFamily: designTokens.typography.fontFamily }}
-                    >
-                      {aboutConfig.foundersMessage.founderName}
-                    </p>
-                    <p 
-                      className="text-white/80 text-sm sm:text-base xl:text-lg"
-                      style={{ fontFamily: designTokens.typography.fontFamily }}
-                    >
-                      {aboutConfig.foundersMessage.founderTitle}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+      {/* Founder's Message Section - matches home page About section styling */}
+      <Section background="white" withPattern patternColor="accent">
+        <Container size="wide">
+          <FounderMessage className="mt-0" />
         </Container>
       </Section>
 
