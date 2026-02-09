@@ -9,6 +9,7 @@ import { Button } from '../ui/button';
 import { HeroNavigation } from '../layout/HeroNavigation';
 import { BlogPost } from '@/lib/config/blog.config';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface BlogDetailProps {
   post: BlogPost;
@@ -121,22 +122,28 @@ export function BlogDetail({ post, content, author, relatedPosts = [] }: BlogDet
       </Section>
 
       {/* Featured Image */}
-      <Section background="white" className="py-0 -mt-8">
-        <Container size="wide" className="relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative h-[400px] xl:h-[500px] rounded-2xl xl:rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1]"
-          >
-            {/* Placeholder for featured image - add local image here */}
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-[#003448]/20 text-5xl font-bold">Featured Image</div>
-            </div>
-          </motion.div>
-        </Container>
-      </Section>
+      {post.featuredImage && (
+        <Section background="white" className="py-0 -mt-8">
+          <Container size="wide" className="relative z-10">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative h-[400px] xl:h-[500px] rounded-2xl xl:rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1]"
+            >
+              <Image
+                src={post.featuredImage}
+                alt={post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                priority
+              />
+            </motion.div>
+          </Container>
+        </Section>
+      )}
 
       {/* Content Section */}
       <Section background="white" className="py-12 sm:py-16 lg:py-20">
@@ -227,10 +234,19 @@ export function BlogDetail({ post, content, author, relatedPosts = [] }: BlogDet
                   <Link href={`/blog/${relatedPost.slug}`}>
                     <div className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl overflow-hidden hover:shadow-xl transition-all group h-full cursor-pointer">
                       <div className="relative h-48 xl:h-56 bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1] overflow-hidden">
-                        {/* Placeholder for blog image - add local image here */}
-                        <div className="w-full h-full flex items-center justify-center">
-                          <div className="text-[#003448]/20 text-4xl font-bold">Image</div>
-                        </div>
+                        {relatedPost.featuredImage ? (
+                          <Image
+                            src={relatedPost.featuredImage}
+                            alt={relatedPost.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div className="text-[#003448]/20 text-4xl font-bold">Image</div>
+                          </div>
+                        )}
                         <div className="absolute top-4 xl:top-5 left-4 xl:left-5">
                           <span className="px-3 xl:px-4 py-1 xl:py-2 bg-white/90 backdrop-blur-sm rounded-full text-[#003448] border border-[#003448]/10 text-sm xl:text-base">
                             {relatedPost.category}

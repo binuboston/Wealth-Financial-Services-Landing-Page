@@ -5,6 +5,7 @@ import { BannerHeadlines } from '@/components/features/BannerHeadlines';
 import { About } from '@/components/features/About';
 import { Services } from '@/components/features/Services';
 import { Footer } from '@/components/layout/Footer';
+import { getPosts, FALLBACK_POSTS } from '@/lib/api/wp';
 
 // Lazy load heavy components below the fold
 const ComparisonChart = dynamic(() => import('@/components/features/ComparisonChart').then(mod => ({ default: mod.ComparisonChart })), {
@@ -42,7 +43,16 @@ const ContactInstagram = dynamic(() => import('@/components/features/ContactInst
   ssr: true,
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch blog posts for homepage (first 3), always show fallback if empty
+  let allPosts: Awaited<ReturnType<typeof getPosts>>;
+  try {
+    allPosts = await getPosts();
+  } catch {
+    allPosts = FALLBACK_POSTS;
+  }
+  const homepagePosts = (allPosts.length > 0 ? allPosts : FALLBACK_POSTS).slice(0, 3);
+
   return (
     <div>
       <Hero />
@@ -53,7 +63,7 @@ export default function HomePage() {
       <ComparisonChart />
       <FAQ />
       <Testimonials />
-      <Blog />
+      <Blog initialPosts={homepagePosts} />
       {/* <GoogleReviews /> */}
       <AppDownload />
       <ContactInstagram />

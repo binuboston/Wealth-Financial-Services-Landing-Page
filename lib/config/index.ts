@@ -7,7 +7,6 @@ export { footerConfig } from './footer.config';
 export type { SocialLink, FooterLink, FooterColumn } from './footer.config';
 export { aboutConfig } from './about.config';
 export type { AboutFeature } from './about.config';
-export { blogPosts } from './blog.config';
 export type { BlogPost } from './blog.config';
 export { comparisonConfig } from './comparison.config';
 export type { ComparisonProduct, ComparisonFeature, ComparisonConfig } from './comparison.config';
