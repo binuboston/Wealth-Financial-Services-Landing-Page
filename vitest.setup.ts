@@ -1,3 +1,4 @@
+// @ts-nocheck - Vitest setup file, excluded from Next.js build type-check
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
