@@ -32,7 +32,7 @@ vi.mock('next/image', () => {
 vi.mock('motion/react', async () => {
   const React = await import('react');
   const createEl = (tag: string) => (props: Record<string, unknown>) =>
-    React.createElement(tag, props, (props as { children?: unknown }).children);
+    React.createElement(tag, props, (props as { children?: React.ReactNode }).children);
   return {
     motion: {
       div: createEl('div'),
