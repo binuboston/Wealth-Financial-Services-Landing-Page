@@ -18,6 +18,15 @@ export interface BlogPost {
   };
 }
 
+export interface GalleryItem {
+  id: number;
+  type: 'image' | 'video';
+  url: string;
+  thumbnail?: string;
+  title: string;
+  category: string;
+}
+
 // Fallback mock data - exported so components can use it directly when API fails
 export const FALLBACK_POSTS: BlogPost[] = [
   {
@@ -313,14 +322,14 @@ function formatDate(dateString: string): string {
 // Transform WordPress post to our BlogPost format
 function transformPost(post: WPPost): BlogPost {
   const category = post._embedded?.["wp:term"]?.[0]?.[0]?.name || 'Uncategorized';
-  
+
   // Extract featured image - WordPress REST API with _embed includes featured media
   let featuredImage: string | undefined;
   const featuredMedia = post._embedded?.["wp:featuredmedia"];
   if (featuredMedia && featuredMedia.length > 0 && featuredMedia[0]?.source_url) {
     featuredImage = featuredMedia[0].source_url;
   }
-  
+
   const author = post._embedded?.author?.[0];
 
   return {
@@ -345,30 +354,49 @@ function transformPost(post: WPPost): BlogPost {
  */
 export async function getPosts(): Promise<BlogPost[]> {
   try {
-    // Create abort controller for timeout
+    // 1. Get the category ID for 'gallery' to exclude it
+    let galleryCatId: number | null = null;
+    try {
+      const catRes = await fetch(`${API_URL}/categories?slug=gallery`);
+      const categories = await catRes.json();
+      if (categories && categories.length > 0) {
+        galleryCatId = categories[0].id;
+      }
+    } catch (e) {
+      console.warn('Could not fetch gallery category ID for exclusion');
+    }
+
+    // 2. Fetch posts, excluding gallery if ID found
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-    
-    const res = await fetch(`${API_URL}/posts?_embed&per_page=100`, {
-      next: { revalidate: 3600 }, // Revalidate every hour
+
+    const excludeParam = galleryCatId ? `&categories_exclude=${galleryCatId}` : '';
+    const res = await fetch(`${API_URL}/posts?_embed&per_page=100${excludeParam}`, {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
       signal: controller.signal,
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch posts: ${res.statusText}`);
     }
-    
+
     const posts: WPPost[] = await res.json();
-    
+
     // If WordPress returns empty array, use fallback
     if (!posts || posts.length === 0) {
       console.warn('WordPress API returned no posts, using fallback data');
       return FALLBACK_POSTS;
     }
-    
-    return posts.map(transformPost);
+
+    // Filter out posts that have 'gallery' as a category just in case categories_exclude fails or is not supported
+    const filteredPosts = posts.filter(post => {
+      const categories = post._embedded?.["wp:term"]?.[0] || [];
+      return !categories.some(cat => cat.slug === 'gallery');
+    });
+
+    return filteredPosts.map(transformPost);
   } catch (error) {
     console.error('Error fetching WordPress posts, using fallback data:', error);
     // Return fallback data instead of empty array
@@ -387,21 +415,21 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     // Create abort controller for timeout
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-    
+
     const res = await fetch(`${API_URL}/posts?slug=${slug}&_embed`, {
-      next: { revalidate: 3600 }, // Revalidate every hour
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
       signal: controller.signal,
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch post: ${res.statusText}`);
     }
-    
-    const data: WPPost[] = await res.json();
-    
-    if (!data || data.length === 0) {
+
+    const posts: WPPost[] = await res.json();
+
+    if (!posts || posts.length === 0) {
       // Try to find in fallback data
       const fallbackPost = FALLBACK_POSTS.find(p => p.slug === slug);
       if (fallbackPost) {
@@ -410,8 +438,17 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       }
       return null;
     }
-    
-    return transformPost(data[0]);
+
+    const post = posts[0];
+
+    // Verify it's not a gallery item
+    const categories = post._embedded?.["wp:term"]?.[0] || [];
+    if (categories.some(cat => cat.slug === 'gallery')) {
+      console.warn(`Attempted to access gallery item "${slug}" as a blog post. Blocking.`);
+      return null;
+    }
+
+    return transformPost(post);
   } catch (error) {
     console.error(`Error fetching WordPress post with slug "${slug}", trying fallback:`, error);
     // Try to find in fallback data
@@ -432,7 +469,7 @@ export async function getRelatedPosts(currentSlug: string, category: string, lim
     const related = allPosts
       .filter(post => post.slug !== currentSlug && post.category === category)
       .slice(0, limit);
-    
+
     // If not enough posts in same category, fill with other posts
     if (related.length < limit) {
       const additional = allPosts
@@ -440,10 +477,74 @@ export async function getRelatedPosts(currentSlug: string, category: string, lim
         .slice(0, limit - related.length);
       related.push(...additional);
     }
-    
+
     return related;
   } catch (error) {
     console.error('Error fetching related posts:', error);
+    return [];
+  }
+}
+/**
+ * Fetch gallery items from WordPress
+ * Uses posts from the 'gallery' category
+ */
+export async function getGalleryItems(): Promise<GalleryItem[]> {
+  try {
+    // 1. Get the category ID for 'gallery'
+    const catRes = await fetch(`${API_URL}/categories?slug=gallery`);
+    const categories = await catRes.json();
+
+    if (!categories || categories.length === 0) {
+      console.warn('Gallery category not found in WordPress');
+      return [];
+    }
+
+    const galleryCatId = categories[0].id;
+
+    // 2. Fetch posts in that category
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const res = await fetch(`${API_URL}/posts?categories=${galleryCatId}&_embed&per_page=100`, {
+      next: { revalidate: 60 },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch gallery items: ${res.statusText}`);
+    }
+
+    const posts: WPPost[] = await res.json();
+
+    return posts.map(post => {
+      const content = post.content.rendered;
+      // Simple regex to find YouTube/Vimeo embed URLs in content
+      const videoMatch = content.match(/https?:\/\/(?:www\.)?(?:youtube\.com\/embed\/|vimeo\.com\/video\/)[a-zA-Z0-9_-]+/);
+      const isVideo = !!videoMatch;
+
+      let featuredImage: string | undefined;
+      const featuredMedia = post._embedded?.["wp:featuredmedia"];
+      if (featuredMedia && featuredMedia.length > 0 && featuredMedia[0]?.source_url) {
+        featuredImage = featuredMedia[0].source_url;
+      }
+
+      // Get category name (excluding the 'Gallery' category itself for filtering)
+      const itemCategory = post._embedded?.["wp:term"]?.[0]
+        ?.find(term => term.slug !== 'gallery')?.name || 'General';
+
+      return {
+        id: post.id,
+        type: isVideo ? 'video' : 'image',
+        url: isVideo ? videoMatch[0] : (featuredImage || ''),
+        thumbnail: featuredImage,
+        title: post.title.rendered,
+        category: itemCategory
+      };
+    });
+  } catch (error) {
+    console.error('Error fetching gallery items:', error);
     return [];
   }
 }

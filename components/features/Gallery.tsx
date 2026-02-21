@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useMemo, useCallback, memo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, X } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -15,7 +15,7 @@ interface GalleryItem {
   category: string;
 }
 
-const galleryItems: GalleryItem[] = [
+const FALLBACK_GALLERY_ITEMS: GalleryItem[] = [
   // Images
   {
     id: 1,
@@ -37,87 +37,39 @@ const galleryItems: GalleryItem[] = [
     url: 'https://images.unsplash.com/photo-1631649387042-f60a0133d3ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwc3RvY2slMjBtYXJrZXR8ZW58MXx8fHwxNzY1MzI5NTY0fDA&ixlib=rb-4.1.0&q=80&w=1080',
     title: 'Market Analysis',
     category: 'Investment'
-  },
-  {
-    id: 4,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1574884280706-7342ca3d4231?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhZHZpc29yJTIwY29uc3VsdGF0aW9ufGVufDF8fHx8MTc2NTQyMzEwN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Expert Consultation',
-    category: 'Advisory'
-  },
-  {
-    id: 5,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1758518731706-be5d5230e5a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3Jwb3JhdGUlMjB0ZWFtJTIwbWVldGluZ3xlbnwxfHx8fDE3NjUzMzk1MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Team Collaboration',
-    category: 'Culture'
-  },
-  {
-    id: 6,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1758599543110-f9cf3903a2ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHN1Y2Nlc3MlMjBjZWxlYnJhdGlvbnxlbnwxfHx8fDE3NjUzNTAzNTF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Success Stories',
-    category: 'Events'
-  },
-  {
-    id: 7,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1703355685639-d558d1b0f63e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvZmZpY2UlMjB3b3Jrc3BhY2UlMjBtb2Rlcm58ZW58MXx8fHwxNzY1NDA5NDk5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Our Office Space',
-    category: 'Culture'
-  },
-  {
-    id: 8,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1762427354051-a9bdb181ae3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkb2N1bWVudHMlMjBhbmFseXNpc3xlbnwxfHx8fDE3NjU0MjMxMDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Portfolio Review',
-    category: 'Investment'
-  },
-  {
-    id: 9,
-    type: 'image',
-    url: 'https://images.unsplash.com/photo-1764726354739-1222d1ea5b63?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBuZXR3b3JraW5nJTIwZXZlbnR8ZW58MXx8fHwxNzY1Mzk0OTA5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Networking Event',
-    category: 'Events'
-  },
-  // Videos (using placeholder embed URLs)
-  {
-    id: 10,
-    type: 'video',
-    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: 'https://images.unsplash.com/photo-1758518729841-308509f69a7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBwbGFubmluZyUyMG1lZXRpbmd8ZW58MXx8fHwxNzY1Mzg1NzY1fDA&ixlib=rb-4.1.0&q=80&w=400',
-    title: 'Introduction to Dhanovaa',
-    category: 'Videos'
-  },
-  {
-    id: 11,
-    type: 'video',
-    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: 'https://images.unsplash.com/photo-1631649387042-f60a0133d3ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwc3RvY2slMjBtYXJrZXR8ZW58MXx8fHwxNzY1MzI5NTY0fDA&ixlib=rb-4.1.0&q=80&w=400',
-    title: 'Investment Strategies 2025',
-    category: 'Videos'
-  },
-  {
-    id: 12,
-    type: 'video',
-    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: 'https://images.unsplash.com/photo-1574884280706-7342ca3d4231?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhZHZpc29yJTIwY29uc3VsdGF0aW9ufGVufDF8fHx8MTc2NTQyMzEwN3ww&ixlib=rb-4.1.0&q=80&w=400',
-    title: 'Client Success Story',
-    category: 'Videos'
   }
 ];
 
 export const Gallery = memo(function Gallery() {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [items, setItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const categories = useMemo(() => ['All', 'Advisory', 'Investment', 'Events', 'Culture', 'Videos'], []);
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then(res => res.json())
+      .then(data => {
+        setItems(Array.isArray(data) && data.length > 0 ? data : FALLBACK_GALLERY_ITEMS);
+        setLoading(false);
+      })
+      .catch(() => {
+        setItems(FALLBACK_GALLERY_ITEMS);
+        setLoading(false);
+      });
+  }, []);
+
+  const categories = useMemo(() => {
+    const base = ['All'];
+    const dynamicCats = Array.from(new Set(items.map(item => item.category)));
+    return [...base, ...dynamicCats];
+  }, [items]);
 
   const filteredItems = useMemo(() => {
-    return activeFilter === 'All' 
-      ? galleryItems 
-      : galleryItems.filter(item => item.category === activeFilter);
-  }, [activeFilter]);
+    return activeFilter === 'All'
+      ? items
+      : items.filter(item => item.category === activeFilter);
+  }, [activeFilter, items]);
 
   const handleFilterChange = useCallback((category: string) => {
     setActiveFilter(category);
@@ -142,9 +94,17 @@ export const Gallery = memo(function Gallery() {
           className="text-center mb-12"
         >
           <h1 className="text-[var(--color-primary)] mb-4">Our Gallery</h1>
-          <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            Explore moments from our journey, events, and success stories
-          </p>
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : (
+            <>
+              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                Explore moments from our journey, events, and success stories
+              </p>
+            </>
+          )}
         </motion.div>
 
         {/* Category Filters */}

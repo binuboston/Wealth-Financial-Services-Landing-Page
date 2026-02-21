@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getPosts, FALLBACK_POSTS } from '@/lib/api/wp';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
