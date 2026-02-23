@@ -98,11 +98,10 @@ export function GoogleReviews() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-6 h-6 ${
-                    i < Math.round(averageRating)
-                      ? 'fill-[#9ece6c] text-[#9ece6c]'
-                      : 'fill-gray-300 text-gray-300'
-                  }`}
+                  className={`w-6 h-6 ${i < Math.round(averageRating)
+                    ? 'fill-[#9ece6c] text-[#9ece6c]'
+                    : 'fill-gray-300 text-gray-300'
+                    }`}
                 />
               ))}
             </div>
@@ -234,11 +233,10 @@ export function GoogleReviews() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex
-                      ? 'bg-[var(--color-brand-primary)] w-6'
-                      : 'bg-[#003448]/20 hover:bg-[#003448]/40'
-                  }`}
+                  className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
+                    ? 'bg-[var(--color-brand-primary)] w-6'
+                    : 'bg-[#003448]/20 hover:bg-[#003448]/40'
+                    }`}
                   aria-label={`Go to review set ${index + 1}`}
                 />
               ))}

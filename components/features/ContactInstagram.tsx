@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Instagram as InstagramIcon, Heart } from 'lucide-react';
+import { Instagram as InstagramIcon, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ContactForm } from './ContactForm';
 import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
@@ -19,25 +19,25 @@ interface InstagramPost {
 const fallbackPosts: InstagramPost[] = [
   {
     id: '1',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=400&fit=crop',
+    image: '/media/ig-1.jpg',
     permalink: siteConfig.social.instagram,
     likes: 0,
   },
   {
     id: '2',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=400&fit=crop',
+    image: '/media/ig-2.jpg',
     permalink: siteConfig.social.instagram,
     likes: 0,
   },
   {
     id: '3',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop',
+    image: '/media/ig-3.jpg',
     permalink: siteConfig.social.instagram,
     likes: 0,
   },
   {
     id: '4',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop',
+    image: '/media/ig-4.jpg',
     permalink: siteConfig.social.instagram,
     likes: 0,
   },
@@ -50,7 +50,7 @@ export function ContactInstagram() {
   // Fetch Instagram posts with AbortController for cleanup
   useEffect(() => {
     const abortController = new AbortController();
-    
+
     const fetchInstagramPosts = async () => {
       try {
         setIsLoadingPosts(true);
@@ -58,11 +58,11 @@ export function ContactInstagram() {
           signal: abortController.signal,
           next: { revalidate: 3600 }, // Cache for 1 hour
         });
-        
+
         if (abortController.signal.aborted) return;
-        
+
         const data = await response.json();
-        
+
         if (data.posts && data.posts.length > 0) {
           // Transform API posts to component format
           const transformedPosts: InstagramPost[] = data.posts.slice(0, 4).map((post: any) => ({
@@ -90,7 +90,7 @@ export function ContactInstagram() {
     };
 
     fetchInstagramPosts();
-    
+
     return () => {
       abortController.abort();
     };
@@ -158,36 +158,30 @@ export function ContactInstagram() {
                   ))}
                 </div>
               ) : (
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                {instagramPosts.map((post, index) => (
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {instagramPosts.map((post, index) => (
                     <motion.a
-                    key={post.id}
+                      key={post.id}
                       href={post.permalink || siteConfig.social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
-                  >
-                    <ImageWithFallback
-                      src={post.image}
-                      alt={`Instagram post ${post.id}`}
-                      className="w-full h-full object-cover"
-                    />
-                    
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                      <div className="flex items-center gap-2 text-white">
-                        <Heart className="w-4 h-4 fill-white" />
-                        <span className="text-sm">{post.likes.toLocaleString()}</span>
-                      </div>
-                    </div>
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05, rotate: 2 }}
+                      className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                    >
+                      <ImageWithFallback
+                        src={post.image}
+                        alt={`Instagram post ${post.id}`}
+                        width={400}
+                        height={400}
+                        className="w-full h-full object-cover"
+                      />
                     </motion.a>
-                ))}
-              </div>
+                  ))}
+                </div>
               )}
 
               {/* Follow Button */}
@@ -197,10 +191,36 @@ export function ContactInstagram() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-auto w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#003448] text-white rounded-2xl hover:bg-[#004d6b] transition-all shadow-lg"
+                className="mt-auto w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-white border border-[#003448]/10 text-[#003448] rounded-2xl hover:bg-gray-50 transition-all shadow-sm hover:shadow-md font-medium group"
               >
-                <InstagramIcon className="w-5 h-5" />
+                <svg
+                  className="w-5 h-5 transition-transform group-hover:scale-110"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <radialGradient
+                      id="instagrad"
+                      cx="0"
+                      cy="0"
+                      r="1"
+                      gradientUnits="userSpaceOnUse"
+                      gradientTransform="translate(12 12) rotate(45) scale(12)"
+                    >
+                      <stop offset="0" stopColor="#F58529" />
+                      <stop offset="0.1" stopColor="#FEDA77" />
+                      <stop offset="0.5" stopColor="#DD2A7B" />
+                      <stop offset="1" stopColor="#8134AF" />
+                    </radialGradient>
+                  </defs>
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.56.216.96.475 1.382.897.422.422.68.822.897 1.382.164.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.216.56-.475.96-.897 1.382-.422.422-.822.68-1.382.897-.422.164-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.56-.216-.96-.475-1.382-.897-.422-.422-.68-.822-.897-1.382-.164-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.216-.56.475-.96.897-1.382.422-.422.822-.68 1.382-.897.422-.164 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.741 0 12c0 3.259.012 3.667.072 4.947.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.078 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.741 24 12 24c3.259 0 3.667-.012 4.947-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.078-1.337 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.012-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.337-1.077-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                    fill="url(#instagrad)"
+                  />
+                </svg>
                 <span>Follow on Instagram</span>
+                <ChevronRight className="w-5 h-5 text-[#003448]/30 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
               {/* Stats */}
