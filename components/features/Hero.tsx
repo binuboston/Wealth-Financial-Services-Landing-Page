@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, Calculator } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Container } from '../ui/container';
+import { SectionBadge } from '../ui/section-badge';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
 import { HeroNavigation } from '../layout/HeroNavigation';
 import { Shape } from '../ui/shape';
@@ -24,93 +25,88 @@ export function Hero() {
   }, []);
 
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       className="relative overflow-hidden min-h-screen flex flex-col"
       style={{
         background: `linear-gradient(to bottom, ${heroConfig.backgroundGradient.from}, ${heroConfig.backgroundGradient.via} 50%, ${heroConfig.backgroundGradient.to})`,
       }}
     >
-        {/* Background Shapes - positioned behind content */}
-        <Shape shapeKey="shape9" opacity={1} zIndex={0} delay={0} />
-        <Shape shapeKey="shape1" opacity={1} zIndex={0} delay={0.15} />
-        <Shape shapeKey="shape6" opacity={1} zIndex={0} delay={0.3} />
-        <Shape shapeKey="shape3" opacity={1} zIndex={0} delay={0.45} />
+      {/* Background Shapes - positioned behind content */}
+      <Shape shapeKey="shape9" opacity={1} zIndex={0} delay={0} />
+      <Shape shapeKey="shape1" opacity={1} zIndex={0} delay={0.15} />
+      <Shape shapeKey="shape6" opacity={1} zIndex={0} delay={0.3} />
+      <Shape shapeKey="shape3" opacity={1} zIndex={0} delay={0.45} />
 
       {/* Hero Navigation - inside container */}
       <div className="relative z-50 pt-4 sm:pt-6">
         <HeroNavigation isVisible={!hasScrolled} />
-        </div>
+      </div>
 
-        {/* Hero Content */}
+      {/* Hero Content */}
       <div className="relative z-10 flex-1 flex items-center py-12 sm:py-16 lg:py-20 xl:py-24">
         <Container size="wide">
           <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 xl:gap-24 items-center">
-              {/* Left Content */}
-              <motion.div
+            {/* Left Content */}
+            <motion.div
               initial={mounted ? { opacity: 0, x: -20 } : false}
               animate={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
-                transition={mounted ? { duration: 0.6 } : undefined}
+              transition={mounted ? { duration: 0.6 } : undefined}
+            >
+              <SectionBadge
+                animate
+                className="bg-white/10 border-white/20 [&_span]:text-white mb-6 sm:mb-8"
               >
-                <motion.div
-                  initial={mounted ? { opacity: 0, y: 20 } : false}
-                  animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-                  transition={mounted ? { duration: 0.6, delay: 0.1 } : undefined}
-                className="mb-2 sm:mb-3 xl:mb-4 text-sm sm:text-base xl:text-lg tracking-wide font-medium text-[var(--color-brand-primary)]"
-                style={{ 
-                  fontFamily: designTokens.typography.fontFamily,
-                }}
-                >
                 {heroConfig.badge}
-                </motion.div>
+              </SectionBadge>
 
-                <motion.h1
-                  initial={mounted ? { opacity: 0, y: 20 } : false}
-                  animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-                  transition={mounted ? { duration: 0.6, delay: 0.2 } : undefined}
+              <motion.h1
+                initial={mounted ? { opacity: 0, y: 20 } : false}
+                animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                transition={mounted ? { duration: 0.6, delay: 0.2 } : undefined}
                 className="text-white mb-4 sm:mb-6 xl:mb-8 text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight font-bold"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-                >
+              >
                 {heroConfig.title}
-                </motion.h1>
+              </motion.h1>
 
-                <motion.p
-                  initial={mounted ? { opacity: 0, y: 20 } : false}
-                  animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-                  transition={mounted ? { duration: 0.6, delay: 0.3 } : undefined}
+              <motion.p
+                initial={mounted ? { opacity: 0, y: 20 } : false}
+                animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                transition={mounted ? { duration: 0.6, delay: 0.3 } : undefined}
                 className="text-white/90 mb-6 sm:mb-8 xl:mb-10 text-base sm:text-lg xl:text-xl leading-relaxed"
                 style={{ fontFamily: designTokens.typography.fontFamily }}
-                >
+              >
                 {heroConfig.description}
-                </motion.p>
+              </motion.p>
 
-                {/* Mobile Calculator Toggle Link - Only visible on mobile */}
-                <motion.div
-                  initial={mounted ? { opacity: 0, y: 20 } : false}
-                  animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-                  transition={mounted ? { duration: 0.6, delay: 0.35 } : undefined}
-                  className="mb-6 lg:hidden"
+              {/* Mobile Calculator Toggle Link - Only visible on mobile */}
+              <motion.div
+                initial={mounted ? { opacity: 0, y: 20 } : false}
+                animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                transition={mounted ? { duration: 0.6, delay: 0.35 } : undefined}
+                className="mb-6 lg:hidden"
+              >
+                <button
+                  onClick={() => setShowCalculator(!showCalculator)}
+                  className="group w-full sm:w-auto px-6 py-3 sm:py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 rounded-full text-white font-medium text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  style={{ fontFamily: designTokens.typography.fontFamily }}
                 >
-                  <button
-                    onClick={() => setShowCalculator(!showCalculator)}
-                    className="group w-full sm:w-auto px-6 py-3 sm:py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 rounded-full text-white font-medium text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
-                    style={{ fontFamily: designTokens.typography.fontFamily }}
-                  >
-                    <Calculator className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
-                    <span>{showCalculator ? 'Hide Calculator' : 'Try Our Calculator'}</span>
-                    <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${showCalculator ? 'rotate-180' : 'group-hover:translate-x-1'}`} />
-                  </button>
-                </motion.div>
-                  
-                <motion.div
-                  initial={mounted ? { opacity: 0, y: 20 } : false}
-                  animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-                  transition={mounted ? { duration: 0.6, delay: 0.4 } : undefined}
+                  <Calculator className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+                  <span>{showCalculator ? 'Hide Calculator' : 'Try Our Calculator'}</span>
+                  <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${showCalculator ? 'rotate-180' : 'group-hover:translate-x-1'}`} />
+                </button>
+              </motion.div>
+
+              <motion.div
+                initial={mounted ? { opacity: 0, y: 20 } : false}
+                animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                transition={mounted ? { duration: 0.6, delay: 0.4 } : undefined}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6"
-                >
+              >
                 <Link href={heroConfig.primaryCTA.href}>
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="group w-full sm:w-auto"
                     style={{
                       backgroundColor: 'var(--color-brand-secondary)',
@@ -122,7 +118,7 @@ export function Hero() {
                   </Button>
                 </Link>
                 <Link href={heroConfig.secondaryCTA.href}>
-                  <Button 
+                  <Button
                     size="lg"
                     className="group w-full sm:w-auto"
                     style={{
@@ -133,21 +129,21 @@ export function Hero() {
                     {heroConfig.secondaryCTA.label}
                   </Button>
                 </Link>
-                </motion.div>
               </motion.div>
+            </motion.div>
 
             {/* Right Content - Phone Mockup */}
-              <motion.div
+            <motion.div
               initial={mounted ? { opacity: 0, x: 20 } : false}
               animate={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               transition={mounted ? { duration: 0.8, delay: 0.2 } : undefined}
               className={`justify-center lg:justify-end order-first lg:order-last ${showCalculator ? 'flex' : 'hidden lg:flex'}`}
-              >
-                <PhoneMockupWithCalculator />
-              </motion.div>
-            </div>
+            >
+              <PhoneMockupWithCalculator />
+            </motion.div>
+          </div>
         </Container>
-        </div>
-      </section>
+      </div>
+    </section>
   );
-        }
+}

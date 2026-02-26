@@ -10,6 +10,7 @@ import { aboutConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
 import { ArrowRight } from 'lucide-react';
 import { FounderMessage } from './FounderMessage';
+import { SectionHeader } from '../ui/section-header';
 
 export function About() {
   return (
@@ -24,19 +25,13 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2"
           >
-            {/* Badge */}
-            <div className="mb-6 xl:mb-8">
-              <SectionBadge animate>{aboutConfig.badge}</SectionBadge>
-            </div>
+            <SectionHeader
+              badge={aboutConfig.badge}
+              title="Your Trusted Financial Partner"
+              align="left"
+              className="mb-8"
+            />
 
-            {/* Title */}
-            <h2 
-              className="text-[var(--foreground)] mb-6 xl:mb-8 text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-tight"
-              style={{ fontFamily: designTokens.typography.fontFamily }}
-            >
-              Your Trusted Financial Partner
-            </h2>
-            
             {/* Description */}
             <p
               className="text-[var(--foreground)]/70 text-base sm:text-lg xl:text-lg leading-relaxed mb-6"
@@ -44,7 +39,7 @@ export function About() {
             >
               {aboutConfig.introduction[0]}
             </p>
-            
+
             {/* Description Paragraphs */}
             <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10">
               {aboutConfig.introduction.slice(1).map((paragraph, index) => (
@@ -95,7 +90,7 @@ export function About() {
                 const textOpacity = isMissionOrVision ? 'text-[#003448]/90' : 'text-white/90';
                 const iconBg = isMissionOrVision ? 'rgba(0, 52, 72, 0.15)' : 'rgba(255, 255, 255, 0.2)';
                 const iconColor = isMissionOrVision ? 'text-[#003448]' : 'text-white';
-                
+
                 return (
                   <motion.div
                     key={feature.title}
@@ -105,7 +100,7 @@ export function About() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="h-full"
                   >
-                    <Link 
+                    <Link
                       href="/about"
                       className="h-full flex flex-col rounded-2xl xl:rounded-3xl p-6 xl:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group"
                       style={{
@@ -115,7 +110,7 @@ export function About() {
                     >
                       {/* Icon */}
                       <div className="mb-4 xl:mb-5">
-                        <div 
+                        <div
                           className="w-12 h-12 xl:w-14 xl:h-14 rounded-xl flex items-center justify-center"
                           style={{ backgroundColor: iconBg }}
                         >
@@ -124,16 +119,16 @@ export function About() {
                       </div>
 
                       {/* Title */}
-                      <h3 
+                      <h3
                         className={`${textColor} mb-3 xl:mb-4 text-lg xl:text-xl font-semibold`}
                         style={{ fontFamily: designTokens.typography.fontFamily }}
                       >
                         {feature.title}
                       </h3>
-                      
+
                       {/* Description */}
                       {feature.title === 'What Sets Us Apart' ? (
-                        <ul 
+                        <ul
                           className={`${textOpacity} text-sm xl:text-base leading-relaxed flex-grow space-y-2 list-none`}
                           style={{ fontFamily: designTokens.typography.fontFamily }}
                         >
@@ -145,7 +140,7 @@ export function About() {
                           ))}
                         </ul>
                       ) : (
-                        <p 
+                        <p
                           className={`${textOpacity} text-sm xl:text-base leading-relaxed flex-grow`}
                           style={{ fontFamily: designTokens.typography.fontFamily }}
                         >

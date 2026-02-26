@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { aboutConfig } from '@/lib/config';
 import { designTokens } from '@/lib/design-tokens';
+import { SectionBadge } from '../ui/section-badge';
 
 interface FounderMessageProps {
   /** Optional className for the wrapper */
@@ -46,14 +47,12 @@ export function FounderMessage({ className = '' }: FounderMessageProps) {
           {/* Right Side - Message Content */}
           <div className="p-8 sm:p-10 xl:p-12 flex flex-col justify-center">
             {/* Header - chip style */}
-            <div
-              className="inline-block w-fit px-4 py-2 bg-white/20 border border-white/30 rounded-full mb-6 sm:mb-8"
-              style={{ fontFamily: designTokens.typography.fontFamily }}
+            <SectionBadge
+              animate
+              className="bg-white/20 border-white/30 [&_span]:text-white mb-6 sm:mb-8"
             >
-              <span className="text-white font-medium text-sm sm:text-base">
-                {foundersMessage.header}
-              </span>
-            </div>
+              {foundersMessage.header}
+            </SectionBadge>
 
             {/* Message Paragraphs */}
             <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10">

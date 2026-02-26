@@ -68,7 +68,7 @@ export const aboutConfig = {
     ],
     founderName: 'Sreenath Prabhu',
     founderTitle: 'Founder & Director, Dhanovaa',
-    imageUrl: '/media/sreenath.png',
+    imageUrl: '/media/sreenath-prabhu.jpeg',
   },
 } as const;
 

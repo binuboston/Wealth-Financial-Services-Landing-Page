@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'motion/react';
-import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, ExternalLink, Quote } from 'lucide-react';
 import { useState } from 'react';
 import { Section } from '../ui/section';
 import { Container } from '../ui/container';
@@ -133,11 +133,14 @@ export function GoogleReviews() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     whileHover={{ scale: 1.02, y: -4 }}
-                    className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl p-6 xl:p-8 hover:shadow-xl transition-all relative"
+                    className="bg-white border border-[#003448]/10 rounded-2xl xl:rounded-3xl p-8 xl:p-10 hover:shadow-xl transition-all relative"
                   >
-                    {/* Google Logo Badge */}
-                    <div className="absolute top-4 right-4">
+                    <Quote className="w-10 h-10 xl:w-12 xl:h-12 text-[#68c0ae] opacity-20 absolute top-6 xl:top-8 right-6 xl:right-8" />
+
+                    {/* Google Logo Badge - Moved to top left to avoid Quote overlap */}
+                    <div className="absolute top-4 left-4">
                       <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-full border border-[#003448]/10 shadow-sm">
+
                         <svg
                           className="w-4 h-4"
                           viewBox="0 0 24 24"
@@ -166,33 +169,31 @@ export function GoogleReviews() {
                     </div>
 
                     {/* Rating */}
-                    <div className="flex gap-1 mb-4">
+                    <div className="flex gap-1 mb-4 xl:mb-5">
                       {[...Array(review.rating)].map((_, i) => (
                         <Star
                           key={i}
-                          className="w-4 h-4 fill-[#9ece6c] text-[#9ece6c]"
+                          className="w-5 h-5 xl:w-6 xl:h-6 fill-[#9ece6c] text-[#9ece6c]"
                         />
                       ))}
                     </div>
 
                     {/* Review Content */}
-                    <p className="text-[#003448]/70 mb-6 text-sm xl:text-base leading-relaxed line-clamp-4">
+                    <p className="text-[#003448]/70 mb-6 xl:mb-8 text-sm xl:text-base leading-relaxed">
                       {review.content}
                     </p>
 
                     {/* Reviewer Info */}
-                    <div className="flex items-center justify-between pt-4 border-t border-[#003448]/10">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-[#003448] to-[#68c0ae] rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md">
-                          {review.name.charAt(0)}
+                    <div className="flex items-center gap-3 xl:gap-4">
+                      <div className="w-12 h-12 xl:w-14 xl:h-14 bg-gradient-to-br from-[#003448] to-[#68c0ae] rounded-full flex items-center justify-center text-white text-lg xl:text-xl font-semibold shadow-lg">
+                        {review.name.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="text-[#003448] font-semibold text-base xl:text-lg">
+                          {review.name}
                         </div>
-                        <div>
-                          <div className="text-[#003448] font-semibold text-sm xl:text-base">
-                            {review.name}
-                          </div>
-                          <div className="text-[#003448]/60 text-xs xl:text-sm">
-                            {review.date}
-                          </div>
+                        <div className="text-[#003448]/60 text-sm xl:text-base">
+                          {review.date}
                         </div>
                       </div>
                     </div>

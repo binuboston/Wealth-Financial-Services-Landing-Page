@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 // Client-side image component with error handling for WordPress images
 function BlogImage({ src, alt }: { src?: string; alt: string }) {
   const [imgError, setImgError] = useState(false);
-  
+
   if (!src || imgError) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1]">
@@ -22,7 +22,7 @@ function BlogImage({ src, alt }: { src?: string; alt: string }) {
       </div>
     );
   }
-  
+
   // Use regular img tag for external WordPress images for better compatibility
   if (src.startsWith('http://') || src.startsWith('https://')) {
     return (
@@ -35,7 +35,7 @@ function BlogImage({ src, alt }: { src?: string; alt: string }) {
       />
     );
   }
-  
+
   // Use Next.js Image for local images
   return (
     <Image
@@ -80,7 +80,7 @@ export function Blog({ initialPosts }: BlogProps) {
     <Section id="blog" background="gradient">
       <Container size="wide">
         <SectionHeader
-          badge="Blog"
+          badge="Latest Insights"
           badgeVariant="primary"
           title="Financial Insights & Resources"
           description="Stay informed with our latest articles on wealth management, investment strategies, and financial planning."

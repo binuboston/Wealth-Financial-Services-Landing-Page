@@ -2,17 +2,17 @@
 
 import { motion } from 'motion/react';
 import { Smartphone, Apple } from 'lucide-react';
-import { SectionBadge } from '../ui/section-badge';
+import { SectionHeader } from '../ui/section-header';
 import { PhoneMockupWithCalculator } from '../services/PhoneMockupWithCalculator';
 import { Shape } from '../ui/shape';
 export function AppDownload() {
   return (
     <section className="py-24 lg:py-32 bg-gradient-to-br from-[#003448] via-[#004d6b] to-[#003448] relative overflow-hidden">
-       {/* Background Shapes - positioned behind content */}
-       <Shape shapeKey="shape9" opacity={1} zIndex={0} />
-        <Shape shapeKey="shape1" opacity={1} zIndex={0} />
-        <Shape shapeKey="shape3" opacity={1} zIndex={0} />
-        <Shape shapeKey="shape6" opacity={1} zIndex={0} />
+      {/* Background Shapes - positioned behind content */}
+      <Shape shapeKey="shape9" opacity={1} zIndex={0} />
+      <Shape shapeKey="shape1" opacity={1} zIndex={0} />
+      <Shape shapeKey="shape3" opacity={1} zIndex={0} />
+      <Shape shapeKey="shape6" opacity={1} zIndex={0} />
       {/* Organic Pattern Background */}
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -23,18 +23,13 @@ export function AppDownload() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="mb-6 xl:mb-8">
-              <SectionBadge className="bg-white/10 border-white/20 [&_span]:text-white" animate>
-                Download Our App
-              </SectionBadge>
-            </div>
-            
-            <h2 className="text-white mb-4 text-3xl xl:text-4xl 2xl:text-5xl font-bold">
-              Manage Your Wealth On The Go
-            </h2>
-            <p className="text-white/90 mb-8 max-w-xl text-base xl:text-lg">
-            Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android.
-            </p>
+            <SectionHeader
+              badge="Download Our App"
+              title="Manage Your Wealth On The Go"
+              description="Access your portfolio, track investments, calculate SIP returns, and get real-time market insights with our mobile app. Available on iOS and Android."
+              align="left"
+              className="[&_h2]:text-white [&_p]:text-white/90 [&_span]:text-white [&_.bg-\[#68c0ae\]\/20]:bg-white/10 [&_.border-\[#68c0ae\]\/30]:border-white/20"
+            />
 
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -65,7 +60,7 @@ export function AppDownload() {
               >
                 <div className="w-10 h-10 bg-[#003448] rounded-xl flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.302-8.635-8.634z"/>
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.302-8.635-8.634z" />
                   </svg>
                 </div>
                 <div className="text-left">

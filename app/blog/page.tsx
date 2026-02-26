@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Container } from '@/components/ui/container';
-import { Badge } from '@/components/ui/badge';
+import { SectionHeader } from '@/components/ui/section-header';
 import { Footer } from '@/components/layout/Footer';
 import { HeroNavigation } from '@/components/layout/HeroNavigation';
 import { Section } from '@/components/ui/section';
@@ -15,7 +15,7 @@ import type { BlogPost } from '@/lib/config/blog.config';
 // Client-side image component with error handling for WordPress images
 function BlogImage({ src, alt }: { src?: string; alt: string }) {
   const [imgError, setImgError] = useState(false);
-  
+
   if (!src || imgError) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#f0f9f6] to-[#e8f5f1]">
@@ -23,7 +23,7 @@ function BlogImage({ src, alt }: { src?: string; alt: string }) {
       </div>
     );
   }
-  
+
   // Use regular img tag for external WordPress images for better compatibility
   if (src.startsWith('http://') || src.startsWith('https://')) {
     return (
@@ -36,7 +36,7 @@ function BlogImage({ src, alt }: { src?: string; alt: string }) {
       />
     );
   }
-  
+
   // Use Next.js Image for local images
   return (
     <Image
@@ -72,37 +72,37 @@ export default function BlogPage() {
     blogPosts.length > 0
       ? blogPosts
       : [
-          {
-            id: 1,
-            title: 'How Smart Investors Build Long Term Wealth in a Changing Market',
-            excerpt:
-              'Building long term wealth today is not about reacting to market trends or chasing quick returns. Successful investors focus on discipline, clarity, and consistency.',
-            date: 'Jan 15, 2026',
-            readTime: '6 min read',
-            category: 'Investing',
-            slug: 'how-smart-investors-build-long-term-wealth-changing-market',
-          },
-          {
-            id: 2,
-            title: 'Why Financial Planning Is More Important Than Ever',
-            excerpt:
-              "Financial planning is no longer optional. In today's fast-changing economic environment, structured financial planning is essential for achieving long-term financial goals.",
-            date: 'Jan 10, 2026',
-            readTime: '5 min read',
-            category: 'Financial Planning',
-            slug: 'why-financial-planning-more-important-than-ever',
-          },
-          {
-            id: 3,
-            title: 'Investing in 2026: Rupee Movements, Global Markets, and How First-Time Investors Should Prepare',
-            excerpt:
-              'Understanding currency movements, global trends, and risk dynamics to make informed investment decisions that support long-term financial growth.',
-            date: 'Jan 5, 2026',
-            readTime: '8 min read',
-            category: 'Investing',
-            slug: 'investing-2026-rupee-movements-global-markets-first-time-investors',
-          },
-        ] as BlogPost[];
+        {
+          id: 1,
+          title: 'How Smart Investors Build Long Term Wealth in a Changing Market',
+          excerpt:
+            'Building long term wealth today is not about reacting to market trends or chasing quick returns. Successful investors focus on discipline, clarity, and consistency.',
+          date: 'Jan 15, 2026',
+          readTime: '6 min read',
+          category: 'Investing',
+          slug: 'how-smart-investors-build-long-term-wealth-changing-market',
+        },
+        {
+          id: 2,
+          title: 'Why Financial Planning Is More Important Than Ever',
+          excerpt:
+            "Financial planning is no longer optional. In today's fast-changing economic environment, structured financial planning is essential for achieving long-term financial goals.",
+          date: 'Jan 10, 2026',
+          readTime: '5 min read',
+          category: 'Financial Planning',
+          slug: 'why-financial-planning-more-important-than-ever',
+        },
+        {
+          id: 3,
+          title: 'Investing in 2026: Rupee Movements, Global Markets, and How First-Time Investors Should Prepare',
+          excerpt:
+            'Understanding currency movements, global trends, and risk dynamics to make informed investment decisions that support long-term financial growth.',
+          date: 'Jan 5, 2026',
+          readTime: '8 min read',
+          category: 'Investing',
+          slug: 'investing-2026-rupee-movements-global-markets-first-time-investors',
+        },
+      ] as BlogPost[];
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,17 +122,12 @@ export default function BlogPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="mb-12 xl:mb-16">
-              <Badge variant="secondary" className="mb-6 xl:mb-8">
-                <span className="text-white text-sm xl:text-base">Latest Insights</span>
-              </Badge>
-              <h1 className="text-white mb-6 xl:mb-8 text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
-                Financial Insights & Resources
-              </h1>
-              <p className="text-white/90 max-w-3xl mx-auto text-lg xl:text-xl">
-                Stay informed with our latest articles on wealth management, investment strategies, and financial planning.
-              </p>
-            </div>
+            <SectionHeader
+              badge="Latest Insights"
+              title="Financial Insights & Resources"
+              description="Stay informed with our latest articles on wealth management, investment strategies, and financial planning."
+              className="[&_h2]:text-white [&_p]:text-white/90 [&_span]:text-white [&_.bg-\[#68c0ae\]\/20]:bg-white/10 [&_.border-\[#68c0ae\]\/30]:border-white/20"
+            />
           </motion.div>
         </Container>
       </Section>

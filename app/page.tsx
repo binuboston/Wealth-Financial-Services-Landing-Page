@@ -64,7 +64,6 @@ export default async function HomePage() {
       <FAQ />
       <Testimonials />
       <Blog initialPosts={homepagePosts} />
-      {/* <GoogleReviews /> */}
       <AppDownload />
       <ContactInstagram />
       <Footer />

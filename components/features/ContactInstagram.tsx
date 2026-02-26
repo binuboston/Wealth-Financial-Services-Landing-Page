@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { ContactForm } from './ContactForm';
 import { ImageWithFallback } from '../shared/figma/ImageWithFallback';
 import { siteConfig } from '@/lib/config';
-import { SectionBadge } from '../ui/section-badge';
+import { SectionHeader } from '../ui/section-header';
+import { Container } from '../ui/container';
 
 interface InstagramPost {
   id: string;
@@ -98,23 +99,12 @@ export function ContactInstagram() {
 
   return (
     <section id="contact" className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <SectionBadge animate>Get in Touch</SectionBadge>
-          <h2 className="text-[#003448] mb-6">
-            Let&apos;s Build Stronger Futures
-          </h2>
-          <p className="text-[#003448]/70 max-w-2xl mx-auto">
-            Ready to design your financial growth? Connect with us for personalized guidance and follow our journey on Instagram for daily insights.
-          </p>
-        </motion.div>
+      <Container size="wide">
+        <SectionHeader
+          badge="Get in Touch"
+          title="Let's Build Stronger Futures"
+          description="Ready to design your financial growth? Connect with us for personalized guidance and follow our journey on Instagram for daily insights."
+        />
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Contact Form */}
@@ -241,7 +231,7 @@ export function ContactInstagram() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
